@@ -2,6 +2,7 @@ package com.yahait.app.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,10 +123,11 @@ public class YahaitController {
 		String Signupname = jsonObj.get("name").toString();
 		String Signupmail = jsonObj.get("mail").toString();
 		String Signupgender = jsonObj.get("gender").toString();
+        String SignupbirthDate = jsonObj.get("birthDate").toString();
 		//클라이언트측에서 날라온 JSON데이터를 서버측에서 받은 데이터 확인
 		System.out.println("서버측 받은 데이터 ");
-		System.out.println("ID:"+Signupid+"PW:"+Signuppassword+"NAME:"+Signupname+"MAIL:"+Signupmail+
-				"PHONE:"+Signupphone+"GENDER:"+Signupgender);
+		System.out.println("ID:"+Signupid+" PW:"+Signuppassword+" NAME:"+Signupname+" MAIL:"+Signupmail+
+				" PHONE:"+Signupphone+" GENDER:"+Signupgender+" birthDate:"+SignupbirthDate);
 		
 		return "EX";
 	}

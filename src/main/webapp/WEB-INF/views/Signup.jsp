@@ -3,48 +3,85 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Sign up</title>
 </head>
 <body>
-	
-		<table align=center width=600 cellpading=0 cellpacting=0>
-			<tr>
-			<td>휴대폰번호</td>
-			<td><input type="text" name="cellPhone" id="cellPhone" placeholder="핸드폰 번호 입력" maxlength="13" /></td>
-			</tr>
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" id="id" placeholder="아이디 "></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" id="pw" placeholder="패스워드"></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="password" id="pw_check" placeholder="패스워드 (확인)"></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="name" placeholder="이름"></td>
-			</tr>
-			
-			<tr>
-				<td>성별</td>
-				<td><input type="radio" id="gender" value="MAN">남자
-					<input type="radio" id="gender" value="WOMAN">여자</td>
-			</tr>	
-			<tr>
-				<td>이메일</td>
-				<td><input type="text" id="mail_id"> @ <input type="text" id="mail_domain"></td>
-			</tr>
-			<tr>
-				<td><button onclick="signcehck()">가입</button></td>
-				<td><button history.back()>취소</button></td>
-			</tr>
-		</table>
+<div class="container">
+            <form class="form-horizontal">
+                <h2>회원가입</h2>
+      
+                <div class="form-group">
+                    <label for="lastName" class="col-sm-3 control-label">아이디</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="id" placeholder="아이디" class="form-control" autofocus>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">비밀번호*</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="pw" placeholder="비밀번호" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">비밀번호 재확인*</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="pw_check" placeholder="비밀번호 재확인" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate" class="col-sm-3 control-label">생년월일</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="birthDate" class="form-control">
+                    </div>
+                </div>
+                       <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">이메일</label>
+                    <div class="col-sm-9">
+                        <input type="email" id="mail_id" placeholder="이메일주소" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">이름*</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="name" placeholder="이름" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" class="col-sm-3 control-label">휴대폰 번호</label>
+                    <div class="col-sm-9">
+                        <input type="phoneNumber" id="cellPhone" placeholder="휴대폰 번호" class="form-control">
+                        <span class="help-block">인증에 필요합니다. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">성별</label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="Woman">여자 
+                                </label>
+                                <label class="radio-inline">    
+                                    <input type="radio" name="gender" value="Man">남자
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <span class="help-block">*필수 기입</span>
+                    </div>
+                </div>
+                </form>
+                <button class="btn btn-primary btn-block" onclick="signcehck()">회원가입</button>
+            
+        </div> 
 </body>
 
 <script>
@@ -52,13 +89,15 @@ function signcehck() {
 	
 	if (check() == false) return;
 		//입력폼 JSON형태로 변환하여 객체생성
+		var date = new Date($('#birthDate').val())
     	var signinfo = {
     		"id": $("#id").val().trim(),
     		"name": $("#name").val().trim(),
     		"pass": $("#pw").val().trim(),
-    		"mail": $("#mail_id").val().trim() + "@" + $("#mail_domain").val().trim(),
+    		"mail": $("#mail_id").val().trim(),
     		"cellPhone": $("#cellPhone").val().trim(),
-    		"gender": $("#gender").val().trim()
+    		"gender": $('input[name="gender"]').val().trim(),
+    		"birthDate":date.getFullYear()+"/"+date.getMonth()+"/"+date.getDate()
     	};
     	
     	$.ajax({

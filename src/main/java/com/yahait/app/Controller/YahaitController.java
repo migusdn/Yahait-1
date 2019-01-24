@@ -121,11 +121,11 @@ public class YahaitController {
 		String Signupphone = jsonObj.get("cellPhone").toString();
 		String Signupname = jsonObj.get("name").toString();
 		String Signupmail = jsonObj.get("mail").toString();
-		
+		String Signupgender = jsonObj.get("gender").toString();
 		//클라이언트측에서 날라온 JSON데이터를 서버측에서 받은 데이터 확인
 		System.out.println("서버측 받은 데이터 ");
 		System.out.println("ID:"+Signupid+"PW:"+Signuppassword+"NAME:"+Signupname+"MAIL:"+Signupmail+
-				"PHONE:"+Signupphone);
+				"PHONE:"+Signupphone+"GENDER:"+Signupgender);
 		
 		return "EX";
 	}

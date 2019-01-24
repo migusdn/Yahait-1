@@ -33,6 +33,11 @@
 			
 			<tr>
 				<td>이메일</td>
+				<td><input type="radio" id="gender" value="MAN">남자
+					<input type="radio" id="gender" value="WOMAN">여자</td>
+			</tr>	
+			<tr>
+				<td>이메일</td>
 				<td><input type="text" id="mail_id"> @ <input type="text" id="mail_domain"></td>
 			</tr>
 			<tr>
@@ -40,29 +45,29 @@
 				<td><button history.back()>취소</button></td>
 			</tr>
 		</table>
-	</form>
 </body>
 
 <script>
 function signcehck() {
 	
 	if (check() == false) return;
-	
+		//입력폼 JSON형태로 변환하여 객체생성
     	var signinfo = {
     		"id": $("#id").val().trim(),
     		"name": $("#name").val().trim(),
     		"pass": $("#pw").val().trim(),
     		"mail": $("#mail_id").val().trim() + "@" + $("#mail_domain").val().trim(),
-    		"cellPhone": $("#cellPhone").val().trim()
+    		"cellPhone": $("#cellPhone").val().trim(),
+    		"gender": $("#gender").val().trim()
     	};
     	
     	$.ajax({
-    		url : 'SignupCheck', //내가 보내는 서버주소(컨트롤러)
-    		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
-    		type : 'POST', 
+    		url : 'SignupCheck', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
+    		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
+    		type : 'POST', //post 일경부 rquestbody 안으로들어감
     		contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
-    		data : JSON.stringify(signinfo), //내가 서버로 보내는 데이터
-    		success: function (data) { 
+    		data : JSON.stringify(signinfo), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
+    		success: function (data) {  //data는 서버측에서 날라온 데이터를 다시 받아서 ajax 처리
     			if (data == "EX") {
     				alert("이미 가입된 아이디입니다.");
     			

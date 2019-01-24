@@ -32,7 +32,7 @@
 			</tr>
 			
 			<tr>
-				<td>이메일</td>
+				<td>성별</td>
 				<td><input type="radio" id="gender" value="MAN">남자
 					<input type="radio" id="gender" value="WOMAN">여자</td>
 			</tr>	

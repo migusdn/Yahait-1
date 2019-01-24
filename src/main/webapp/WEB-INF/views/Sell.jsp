@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="Sell-body">
-		<form name="Sell" method="post" action="SellAct.jsp">
+		<form name="Sell" method="post" action="SellAct">
 			<div class="form-group">
 				<div class="form-category">
 					<label>카테고리</label> <select>

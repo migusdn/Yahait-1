@@ -21,5 +21,12 @@ public class MemberDao implements IDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public ArrayList<MemberDto> logincehck(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

@@ -1,13 +1,22 @@
 package com.yahait.app.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
- 
+
 import com.yahait.app.Dao.IDao;
 import com.yahait.app.Dao.MemberDao;
 import com.yahait.app.Dto.MemberDto;
@@ -39,6 +48,50 @@ public class YahaitController {
 		// Login.jsp을 불러옴
 		return "Login";
 		
+	}
+	
+	@RequestMapping("/LoginAct")
+	public String LoginAct(HttpServletRequest request , HttpServletResponse response) throws IOException {
+	
+		String userid = request.getParameter("id").toString();
+		String userpassword = request.getParameter("password").toString();
+		
+		System.out.println(userid+"===="+userpassword);
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		ArrayList<MemberDto> logincehck = dao.logincehck(userid);
+		
+		if(logincehck.isEmpty()) {
+		System.out.println("Noid");
+		response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('ID정보를 를 확인해주세요.'); history.go(-1);</script>");
+        out.flush();
+        
+		}
+		
+		else{
+		System.out.println("입력결과 DB에 아이디존재");
+		System.out.println("입력결과 DB에 아이디존재");
+        MemberDto passwordcheck = dao.logincehck(userid).get(0);
+        
+        System.out.println("로그인입력 패스워드:"+userpassword);
+        System.out.println("DB저장된 패스워드:"+passwordcheck.getPassword().trim());
+
+        if(passwordcheck.getPassword().trim().equals(userpassword)){
+        	System.out.println("완벽한로그인");
+        	return "Login";
+        }else{
+        	System.out.println("nopassword");
+    		response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('비밀번호를 확인해주세요.'); history.go(-1);</script>");
+            out.flush();
+        }
+        
+		}
+		
+		return "Login";
 	}
 	
 	@RequestMapping("/Main")
@@ -84,6 +137,11 @@ public class YahaitController {
 	@RequestMapping("/Sinup")
 	public String Sinup(Model model){
 		return "Sinup";
+	}
+	
+	@RequestMapping("/SellAct")
+	public String SellAct(Model model){
+		return "SellAct";
 	}
 	
 }

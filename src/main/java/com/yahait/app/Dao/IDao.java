@@ -8,6 +8,6 @@ import com.yahait.app.Dto.MemberDto;
 public interface IDao {
 
 	public ArrayList<MemberDto> loigndate();
-	
+	public ArrayList<MemberDto> logincehck(String id);
 	
 } 

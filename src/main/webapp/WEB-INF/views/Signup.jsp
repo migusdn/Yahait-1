@@ -4,56 +4,145 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Sign up</title>
 </head>
 <body>
-	<form name="Signup" method="post" action="SignupAct.jsp">
+	
 		<table align=center width=600 cellpading=0 cellpacting=0>
 			<tr>
+			<td>휴대폰번호</td>
+			<td><input type="text" name="cellPhone" id="cellPhone" placeholder="핸드폰 번호 입력" maxlength="13" /></td>
+			</tr>
+			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="id"></td>
+				<td><input type="text" id="id" placeholder="아이디 "></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="pw"></td>
+				<td><input type="password" id="pw" placeholder="패스워드"></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인</td>
-				<td><input type="password" name="pw_check"></td>
+				<td><input type="password" id="pw_check" placeholder="패스워드 (확인)"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" id="name" placeholder="이름"></td>
 			</tr>
-			<tr>
-				<td>주민등록번호</td>
-				<td><input type="text" name="birth"> - <input
-					type="text" name="gender" size="1">******</td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td><input type="text" name="addr">
-					<button>주소찾기</button></td>
-			</tr>
+			
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" name="mail_id">@ <input
-					type=text name="mail_domain"></td>
+				<td><input type="text" id="mail_id"> @ <input type="text" id="mail_domain"></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td><select name="mail_domain">
-						<option value="naver.com">naver.com</option>
-						<option value="hanmail.net">hanmail.net</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="abc">직접입력</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td><input type="submit"></td>
-				<td><button>취소</button></td>
+				<td><button onclick="signcehck()">가입</button></td>
+				<td><button history.back()>취소</button></td>
 			</tr>
 		</table>
 	</form>
 </body>
+
+<script>
+function signcehck() {
+	
+	if (check() == false) return;
+	
+    	var signinfo = {
+    		"id": $("#id").val().trim(),
+    		"name": $("#name").val().trim(),
+    		"pass": $("#pw").val().trim(),
+    		"mail": $("#mail_id").val().trim() + "@" + $("#mail_domain").val().trim(),
+    		"cellPhone": $("#cellPhone").val().trim()
+    	};
+    	
+    	$.ajax({
+    		url : 'SignupCheck', //내가 보내는 서버주소(컨트롤러)
+    		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
+    		type : 'POST', 
+    		contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
+    		data : JSON.stringify(signinfo), //내가 서버로 보내는 데이터
+    		success: function (data) { 
+    			if (data == "EX") {
+    				alert("이미 가입된 아이디입니다.");
+    			
+    			}
+    			else if (data == "OK") {
+    				alert("회원 가입이 완료되었습니다.");
+    				window.location.href = "login";
+    			        }
+    			     }
+    		
+    	});
+    	
+   	}
+
+function autoHypenPhone(str){
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if( str.length < 4){
+        return str;
+    }else if(str.length < 7){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3);
+        return tmp;
+    }else if(str.length < 11){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 3);
+        tmp += '-';
+        tmp += str.substr(6);
+        return tmp;
+    }else{              
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 4);
+        tmp += '-';
+        tmp += str.substr(7);
+        return tmp;
+    }
+    return str;
+}
+
+var cellPhone = document.getElementById('cellPhone');
+cellPhone.onkeyup = function(event){
+event = event || window.event;
+var _val = this.value.trim();
+this.value = autoHypenPhone(_val) ;
+}
+
+function check() {
+	var name = $("#name").val().trim();
+	if (name == "") {
+		alert("이름을 입력해주세요.");
+		return false;
+	}
+
+	var id = $("#id").val().trim();
+	if (id == "") {
+		alert("아이디를 입력해주세요.");
+		return false;
+	}
+	var id = $("#cellPhone").val().trim();
+	if (id == "") {
+		alert("휴대폰 번호를 입력해주세요.");
+		return false;
+	}
+	var pass = $("#pw").val().trim();
+	if (pass == "") {
+		alert("패스워드를 입력해주세요.");
+		return false;
+	}
+
+	var pass2 = $("#pw_check").val().trim();
+	if (pass != pass2) {
+		alert("입력된 두개의 패스워드가 일치하지 않습니다.");
+		return false;
+	}
+	return true;
+}
+
+</script>
+
 </html>

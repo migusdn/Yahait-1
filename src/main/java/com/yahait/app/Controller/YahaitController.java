@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
@@ -56,13 +57,13 @@ public class YahaitController {
 		String userid = request.getParameter("id").toString();
 		String userpassword = request.getParameter("password").toString();
 		
-		System.out.println(userid+"===="+userpassword);
+		System.out.println("view에서받아온ID"+userid+"===="+"view에서받아온PW"+userpassword);
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		ArrayList<MemberDto> logincehck = dao.logincehck(userid);
 		
 		if(logincehck.isEmpty()) {
-		System.out.println("Noid");
+		System.out.println("아이디가 없습니다");
 		response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<script>alert('ID정보를 를 확인해주세요.'); history.go(-1);</script>");
@@ -82,7 +83,7 @@ public class YahaitController {
         	System.out.println("완벽한로그인");
         	return "Login";
         }else{
-        	System.out.println("nopassword");
+        	System.out.println("패스워드가 맞지 않습니다.");
     		response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('비밀번호를 확인해주세요.'); history.go(-1);</script>");
@@ -128,6 +129,31 @@ public class YahaitController {
 	public String Signup(Model model){
 		return "Signup";
 	}
+	
+	@RequestMapping("/SignupCheck")
+	public String SignupCheck(Model model,HttpSession session, @RequestBody String paramData) throws IOException, ParseException{
+		
+		System.out.println("회원가입 컨트롤러 접속");
+	
+	    System.out.println("클라이언트전송데이터(JSON):"+paramData);
+	    
+	    JSONParser parser = new JSONParser(); //–JSON Parser 생성
+	    JSONObject jsonObj = (JSONObject)parser.parse(paramData); //– 넘어온 문자열을 JSON 객체로 변환
+		
+		String Signupid = jsonObj.get("id").toString();
+		String Signuppassword = jsonObj.get("pass").toString();
+		String Signupphone = jsonObj.get("cellPhone").toString();
+		String Signupname = jsonObj.get("name").toString();
+		String Signupmail = jsonObj.get("mail").toString();
+		
+		System.out.println("서버측 받은 데이터 ");
+		System.out.println("ID:"+Signupid+"PW:"+Signuppassword+"NAME:"+Signupname+"MAIL:"+Signupmail+
+				"PHONE:"+Signupphone);
+		
+		return "EX";
+	}
+	
+	
 	
 	@RequestMapping("/FindPW")
 	public String FindPW(Model model){

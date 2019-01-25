@@ -30,61 +30,61 @@
                     <div class="col-sm-9">
                         <input type="password" name="password" placeholder="비밀번호" required="required" class="form-control">
                     </div>
-                    
                 </div>
-		
 			<input type="submit" class="btn btn-primary btn-block" value="Login">
 		</form>
 		</div>
+		
+		
 		<center>
 		<div class="sns">
-			<div id="naverIdLogin">
-				<script type="text/javascript">
-	var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "q4HUZwPH_Ov0K9t4moiE",
-			callbackUrl: "http://localhost:8080/test/callback.jsp",
-			isPopup: false, /* 팝업을 통한 연동처리 여부 */
-			loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
-		}
-	);
-	
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
-	/* (4) Callback의처리. 정상적으로Callback 처리가완료될경우main page로redirect(또는Popup close) */
-	window.addEventListener('load', function () {
-	naverLogin.getLoginStatus(function (status) {
-	if (status) {
-	/* (5) 필수적으로받아야하는프로필정보가있다면callback처리시점에체크*/
-	var email = naverLogin.user.getEmail();
-	var nickname = naverLogin.user.getNickName();
-	var id = naverLogin.user.getId();
-	if( email == undefined || email == null) {
-	alert("이메일은필수정보입니다. 정보제공을동의해주세요.");
-	/* (5-1) 사용자정보재동의를위하여다시네아로동의페이지로이동함*/
-	naverLogin.reprompt();
-	return
-	}
-	document.form2.id.value = id;
-	     document.form2.email.value = email;
-	     document.form2.nickname.value = nickname; 
-	     
-	     document.form2.submit(); //submit버튼없이수행가능
-
-	} else {
-	console.log("callback 처리에실패하였습니다.");
-	}
-	});
-	});
-			
-</script>
+			<div id="naverIdLogin" style="margin: 10px 10px">
 				</div>
-			</div>
-			<div class=kakaoIdLogin>
+			<div class=kakaoIdLogin style="margin: 10px 10px">
 			<a id="custom-login-btn" href="javascript:loginWithKakao()">
-<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
-</a>
-            	<script type='text/javascript'>
+			<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a>
+			</div>
+			<script type='text/javascript'>
+//네이버로그인
+var naverLogin = new naver.LoginWithNaverId(
+	{
+		clientId: "q4HUZwPH_Ov0K9t4moiE",
+		callbackUrl: "http://localhost:8080/test/callback.jsp",
+		isPopup: false, /* 팝업을 통한 연동처리 여부 */
+		loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+	}
+);
+
+/* 설정정보를 초기화하고 연동을 준비 */
+naverLogin.init();
+/* (4) Callback의처리. 정상적으로Callback 처리가완료될경우main page로redirect(또는Popup close) */
+window.addEventListener('load', function () {
+naverLogin.getLoginStatus(function (status) {
+if (status) {
+/* (5) 필수적으로받아야하는프로필정보가있다면callback처리시점에체크*/
+var email = naverLogin.user.getEmail();
+var nickname = naverLogin.user.getNickName();
+var id = naverLogin.user.getId();
+if( email == undefined || email == null) {
+alert("이메일은필수정보입니다. 정보제공을동의해주세요.");
+/* (5-1) 사용자정보재동의를위하여다시네아로동의페이지로이동함*/
+naverLogin.reprompt();
+return
+}
+document.form2.id.value = id;
+     document.form2.email.value = email;
+     document.form2.nickname.value = nickname; 
+     
+     document.form2.submit(); //submit버튼없이수행가능
+
+} else {
+console.log("callback 처리에실패하였습니다.");
+}
+});
+});
+
+            	
+            	
   //<![CDATA[
     // 사용할앱의JavaScript 키를설정해주세요.
     Kakao.init('29f368572184e58c307aadb9d48751ca');
@@ -120,6 +120,7 @@
       });
     };
   //]]>
+ 
 </script>		
 			</div>	
 		<div class="other">

@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">비밀번호*</label>
+                    <label for="password" class="col-sm-3 control-label">비밀번호</label>
                     <div class="col-sm-9">
                         <input type="password" name="password" placeholder="비밀번호" required="required" class="form-control">
                     </div>

@@ -15,7 +15,7 @@
                 <h2>회원가입</h2>
       
                 <div class="form-group">
-                    <label for="lastName" class="col-sm-3 control-label">아이디</label>
+                    <label for="lastName" class="col-sm-3 control-label">아이디*</label>
                     <div class="col-sm-9">
                         <input type="text" id="id" placeholder="아이디" class="form-control" autofocus>
                     </div>
@@ -34,13 +34,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="birthDate" class="col-sm-3 control-label">생년월일</label>
+                    <label for="birthDate" class="col-sm-3 control-label">생년월일*</label>
                     <div class="col-sm-9">
                         <input type="date" id="birthDate" class="form-control">
                     </div>
                 </div>
                        <div class="form-group">
-                    <label for="email" class="col-sm-3 control-label">이메일</label>
+                    <label for="email" class="col-sm-3 control-label">이메일*</label>
                     <div class="col-sm-9">
                         <input type="email" id="mail_id" placeholder="이메일주소" class="form-control">
                     </div>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber" class="col-sm-3 control-label">휴대폰 번호</label>
+                    <label for="phoneNumber" class="col-sm-3 control-label">휴대폰 번호*</label>
                     <div class="col-sm-9">
                         <input type="phoneNumber" id="cellPhone" placeholder="휴대폰 번호" class="form-control">
                         <span class="help-block">인증에 필요합니다. </span>

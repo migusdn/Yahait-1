@@ -120,7 +120,7 @@ function signcehck() {
     	});
     	
    	}
-
+//핸드폰 번호폼 스크립트
 function autoHypenPhone(str){
     str = str.replace(/[^0-9]/g, '');
     var tmp = '';
@@ -148,14 +148,14 @@ function autoHypenPhone(str){
     }
     return str;
 }
-
+//핸드폰 번호폼 스크립트
 var cellPhone = document.getElementById('cellPhone');
 cellPhone.onkeyup = function(event){
 event = event || window.event;
 var _val = this.value.trim();
 this.value = autoHypenPhone(_val) ;
 }
-
+//입력값 체크
 function check() {
 	var name = $("#name").val().trim();
 	if (name == "") {

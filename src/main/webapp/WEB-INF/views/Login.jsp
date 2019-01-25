@@ -124,7 +124,7 @@ console.log("callback 처리에실패하였습니다.");
 </script>		
 			</div>	
 		<div class="other">
-			<a href="Signup">회원가입 </a> <a href="FindID.jsp">아이디 찾기</a> <a
+			<a href="Signup">회원가입 </a> <a href="FindID">아이디 찾기</a> <a
 				href="FindPW">비밀번호 찾기</a>
 		</div>
 		

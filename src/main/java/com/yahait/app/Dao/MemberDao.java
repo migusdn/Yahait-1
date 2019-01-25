@@ -1,6 +1,7 @@
 package com.yahait.app.Dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,6 +28,15 @@ public class MemberDao implements IDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<MemberDto> findID(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 	
 
 }

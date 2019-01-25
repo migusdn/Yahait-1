@@ -4,26 +4,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>아이디 찾기</h1>
-	<div class="FindID-body">
-		<form name="FindID" method="post" action="FindID2">
-			<div class="form-group">
-				<div class="form-findID">
-					<label>이름</label> <input type="text" name="ID">
-				</div>
-				<div class="form-birth">
-				<label>주민번호</label> 
-				<input type="text" name="birth">-<input type="text"
-					name="gender" size="1">****** 
-				</div>	
-					<input type="submit"
-					value="확인">
-				
-			</div>
+<div class="container">
+		<form class="form-horizontal" name="Login" method="post" action="FindIDAct">
+		<h2>아이디 찾기</h2>
+		
+     	<div class="form-group">
+                    <label for="lastName" class="col-sm-3 control-label">이름</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" placeholder="이름" required="required" class="form-control" autofocus>
+                    </div>
+                </div>
+                       <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">이메일</label>
+                    <div class="col-sm-9">
+                        <input type="email" name="mail" placeholder="이메일주소" class="form-control">
+                    </div>
+                </div>
+			<input type="submit" class="btn btn-primary btn-block" value="아이디 찾기">
 		</form>
-	</div>
+		</div>
+		
 </body>
 </html>

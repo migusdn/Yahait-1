@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -141,6 +143,37 @@ public class YahaitController {
 	public String FindID(Model model){
 		return "FindID";
 	}
+	
+	@RequestMapping("/FindIDAct")
+	public String FindID(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String name = request.getParameter("name").toString();
+		String mail = request.getParameter("mail").toString();
+		System.out.println("서버에 들어온 값 name:"+name+" mail:"+mail);
+		
+	    Map map = new HashMap();
+	    map.put("name", name);
+	    map.put("mail", mail);
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		ArrayList<MemberDto> findid = dao.findID(map);
+		
+		if(findid.isEmpty()){
+        	System.out.println("아이디가 존재하지 않습니다");
+    		response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('아이디가 존재하지 않습니다'); history.go(-1);</script>");
+            out.flush();
+		}else{
+			String finidactid = findid.get(0).getId();
+			System.out.println("찾은아이디" + finidactid);
+			model.addAttribute("usermail" ,mail);
+			model.addAttribute("username" ,name);
+			model.addAttribute("finidactid" ,finidactid);
+			return "FindID2";
+		}
+		return "FindID2";		
+	}
+
 	
 	@RequestMapping("/FindID2")
 	public String FindID2(Model model){

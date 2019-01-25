@@ -7,35 +7,36 @@
 <title>Login</title>
 <!-- kakao_API -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <!-- naver_API -->
 <script
 	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
 	charset="utf-8"></script>
 </head>
 <body>
-	<div class="login-body">
-		<form name="Login" method="post" action="LoginAct">
-			<div class="form-login">
-				<div class="form-Id">
-					<input type="text" name="id" placeholder="ID를 입력해주세요"
-						required="required" autofocus="autofocus">
-				</div>
-				<div class="form-Pwd">
-					<input type="password" name="password" placeholder="Password"
-						required="required">
-				</div>
-			</div>
-			<div class="form-login">
-				<div class="checkbox">
-					<label> <input type="checkbox" value="remember-me">
-						비밀번호 기억
-					</label>
-				</div>
-			</div>
-			<input type="submit" value="Login">
-		</form>
+	<div class="container">
+		<form class="form-horizontal" name="Login" method="post" action="LoginAct">
+		<h2>로그인</h2>
 		
+     	<div class="form-group">
+                    <label for="lastName" class="col-sm-3 control-label">아이디</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="id" placeholder="아이디" required="required" class="form-control" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">비밀번호*</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password" placeholder="비밀번호" required="required" class="form-control">
+                    </div>
+                    
+                </div>
+		
+			<input type="submit" class="btn btn-primary btn-block" value="Login">
+		</form>
+		</div>
+		<center>
 		<div class="sns">
 			<div id="naverIdLogin">
 				<script type="text/javascript">
@@ -75,8 +76,9 @@
 	}
 	});
 	});
-	
+			
 </script>
+				</div>
 			</div>
 			<div class=kakaoIdLogin>
 			<a id="custom-login-btn" href="javascript:loginWithKakao()">
@@ -118,14 +120,15 @@
       });
     };
   //]]>
-</script>
-			</div>
-		</div>
+</script>		
+			</div>	
 		<div class="other">
-			<a href="Signup.jsp">회원가입 </a> <a href="FindID.jsp">아이디 찾기</a> <a
-				href="FindPW.jsp">비밀번호 찾기</a>
+			<a href="Signup">회원가입 </a> <a href="FindID.jsp">아이디 찾기</a> <a
+				href="FindPW">비밀번호 찾기</a>
 		</div>
+		
 	</div>
+	</center>
 
 </body>
 </html>

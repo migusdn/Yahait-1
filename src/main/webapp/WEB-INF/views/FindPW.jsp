@@ -4,34 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>비밀번호 찾기</h1>
-	<div class="FindID-body">
-		<form name="FindID" method="post" action="FindID2">
+	
+	<div class="container">
+		<form class="form-horizontal" name="Login" method="post" action="FindPWAct">
+		<h2>비밀번호 찾기</h1>
 			<div class="form-group">
-				<div class="form-findID">
-					<label>이름</label> <input type="text" name="ID">
+					<label for="lastName" class="col-sm-3 control-label">ID</label>
+					<div class="col-sm-9">
+                        <input type="text" name="id" id="id" placeholder="ID" required="required" class="form-control" autofocus>
+                    </div>
 				</div>
-				<div class="form-name">
-					<label>이름</label> 
-					<input type="text" name="name" id="name"
-						placeholder="이름을 입력해주세요" required="required">
+				<div class="form-group">
+					<label for="lastName" class="col-sm-3 control-label">이름</label>
+					<div class="col-sm-9">
+                        <input type="text" name="name" id="name" placeholder="NAME" required="required" class="form-control" >
+                    </div>
 				</div>
-				<div class="form-phone">
-					<label>전화번호</label> 
-					<input type="text" name="phone" id="phone"
-						placeholder="전화번호를 입력해주세요" required="required">
+				<div class="form-group">
+					<label for="lastName" class="col-sm-3 control-label">전화번호</label>
+					<div class="col-sm-9">
+                        <input type="text" name="phone" id="phone" placeholder="PHONE" required="required" class="form-control" >
+                    </div>
 				</div>
-				<div class="form-name">
-					<label>이름</label> 
-					<input type="text" name="verify" id="verify"
-						placeholder="인증번호를 입력해주세요" required="required">
-				</div>
-				<input type="submit" value="확인">
-
-			</div>
+				<input type="submit" class="btn btn-primary btn-block" value="비밀번호 찾기">
 		</form>
 	</div>
 </body>

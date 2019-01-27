@@ -15,46 +15,46 @@
                 <h2>회원가입</h2>
       
                 <div class="form-group">
-                    <label for="lastName" class="col-sm-3 control-label">아이디*</label>
+                    <label for="id" class="col-sm-3 control-label">아이디*</label>
                     <div class="col-sm-9">
-                        <input type="text" id="id" placeholder="아이디" class="form-control" autofocus>
+                        <input type="text" name="id" id="id" placeholder="아이디" class="form-control" autofocus>
                     </div>
                 </div>
     
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">비밀번호*</label>
                     <div class="col-sm-9">
-                        <input type="password" id="pw" placeholder="비밀번호" class="form-control">
+                        <input type="password" name="pw" id="pw" placeholder="비밀번호" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">비밀번호 재확인*</label>
                     <div class="col-sm-9">
-                        <input type="password" id="pw_check" placeholder="비밀번호 재확인" class="form-control">
+                        <input type="password" name="pw_check" id="pw_check" placeholder="비밀번호 재확인" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="birthDate" class="col-sm-3 control-label">생년월일*</label>
                     <div class="col-sm-9">
-                        <input type="date" id="birthDate" class="form-control">
+                        <input type="date" name="brithDate" id="birthDate" class="form-control">
                     </div>
                 </div>
                        <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">이메일*</label>
                     <div class="col-sm-9">
-                        <input type="email" id="mail_id" placeholder="이메일주소" class="form-control">
+                        <input type="email" name="mail_id" id="mail_id" placeholder="이메일주소" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">이름*</label>
+                    <label for="name" class="col-sm-3 control-label">이름*</label>
                     <div class="col-sm-9">
-                        <input type="text" id="name" placeholder="이름" class="form-control">
+                        <input type="text" name="name" id="name" placeholder="이름" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="col-sm-3 control-label">휴대폰 번호*</label>
                     <div class="col-sm-9">
-                        <input type="phoneNumber" id="cellPhone" placeholder="휴대폰 번호" class="form-control">
+                        <input type="phoneNumber" name="cellphone" id="cellPhone" placeholder="휴대폰 번호" class="form-control">
                         <span class="help-block">인증에 필요합니다. </span>
                     </div>
                 </div>

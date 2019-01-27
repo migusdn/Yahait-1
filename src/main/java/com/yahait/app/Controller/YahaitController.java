@@ -200,6 +200,10 @@ public class YahaitController {
 	public String FindPW(Model model){
 		return "FindPW";
 	}
+	@RequestMapping("/FindPWAct")
+	public String FindPWAct(Model model){
+		return "FindPW";
+	}
 	
 	@RequestMapping("/Sinup")
 	public String Sinup(Model model){
@@ -207,8 +211,24 @@ public class YahaitController {
 	}
 	
 	@RequestMapping("/SellAct")
-	public String SellAct(Model model){
-		return "SellAct";
+	public String SellAct(Model model,HttpSession session, @RequestBody String paramData) throws IOException, ParseException{
+		System.out.println("상품등록 컨트롤러 접속");
+		// 클라이언트측에서 날라온 데이터확인
+		System.out.println("클라이언트전송데이터(JSON):" + paramData);
+		// JSON객체를 생성하여 키&벨류 값으로 쪼개기
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환
+		// JSON데이값을 스트링 객체로 저장
+		String Selltitle = jsonObj.get("title").toString();
+		String Sellproduct = jsonObj.get("product").toString();
+		String Sellprice = jsonObj.get("price").toString();
+		String Sellexplanation = jsonObj.get("explanation").toString();
+		String category= jsonObj.get("category").toString();
+		// 클라이언트측에서 날라온 JSON데이터를 서버측에서 받은 데이터 확인
+		System.out.println("서버측 받은 데이터 ");
+		System.out.println("TITLE:" + Selltitle + " PRODUCT:" + Sellproduct + " PRICE:" + Sellprice + " EXPLANATION:" + Sellexplanation
+				+ " CATEGORY:" + category);
+
+		return "EX";
 	}
-	
 }

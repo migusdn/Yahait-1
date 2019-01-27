@@ -3,6 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
@@ -82,35 +88,53 @@ p {
 </head>
 <body>
 	<div class="container">
-		<div class="header">사 진</div>
-		<div class="shop_list">
-			<div class="shop">
-				만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
-					type="checkbox"> <span class="slider round"></span>
-				</label>
-				<p>OFF</p>
-				<p style="display: none;">ON</p>
+		<form class="form-horizontal">
+			<h2>Shop Manager</h2>
+			<div class="form-group">
+
+				<label for="id" class="col-sm-3 control-label">n번째 상점*</label>
+				<div class="col-sm-9">
+
+					만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
+						type="checkbox"> <span class="slider round"></span>
+					</label>
+					<p>OFF</p>
+					<p style="display: none;">ON</p>
+
+				</div>
+
 
 			</div>
-			<div class="shop">
-				만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
-					type="checkbox"> <span class="slider round"></span>
-				</label>
-				<p>OFF</p>
-				<p style="display: none;">ON</p>
+			<div class="form-group">
+
+				<label for="id" class="col-sm-3 control-label">n번째 상점*</label>
+				<div class="col-sm-9">
+
+					만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
+						type="checkbox"> <span class="slider round"></span>
+					</label>
+					<p>OFF</p>
+					<p style="display: none;">ON</p>
+
+				</div>
+
 
 			</div>
-			<div class="shop">
-				만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
-					type="checkbox"> <span class="slider round"></span>
-				</label>
-				<p>OFF</p>
-				<p style="display: none;">ON</p>
+			<div class="form-group">
+
+				<label for="id" class="col-sm-3 control-label">n번째 상점*</label>
+				<div class="col-sm-9">
+
+					만물은 얼음이 있을 뿐~~~~~~~~~~~~ <label class="switch"> <input
+						type="checkbox"> <span class="slider round"></span>
+					</label>
+					<p>OFF</p>
+					<p style="display: none;">ON</p>
+
+				</div>
+
 
 			</div>
-
-		</div>
-
 	</div>
 </body>
 </html>

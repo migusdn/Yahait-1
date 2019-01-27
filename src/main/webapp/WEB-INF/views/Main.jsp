@@ -176,17 +176,23 @@
   ResultSet rs = null;
 
   Class.forName("com.mysql.jdbc.Driver");
-  String url = "jdbc:mysql://localhost:3306/yahait";
+  String url = "jdbc:mysql://localhost:3306/yahait?serverTimezone=UTC";
   conn = DriverManager.getConnection(url, "root", "1111");
   int i = 3;
   int j;
   String Query = "select * from list limit " + i;
   pst = conn.prepareStatement(Query);
+  
+  
   rs = pst.executeQuery();
-
+  if(rs!=null){
   while(rs.next()){
     String store = rs.getString("store");
     String product = rs.getString("product");
+    if(store==null)
+    	store="text";
+    if(product==null)
+    	product="product";
 %>
   <script>
     var store = "<%=store%>"
@@ -195,6 +201,10 @@
     $('#target').append('<div class="rec"><h1>'+store+'<br>메뉴:'+product+'</h1></div>');
   </script>
 <%
+  }
+  }else {
+	  String store="text";
+	  String product="abc";
   }
 %>
 

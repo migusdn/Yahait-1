@@ -17,4 +17,8 @@ SELECT id,password FROM member where id = #{id}
 select id FROM member where name = #{name} and mail = #{mail}
 </select>
 
+<select id="signup" parameterType="hashMap">
+INSERT INTO USER VALUES(?,?,?,?)
+</select>
+
 </mapper>

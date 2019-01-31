@@ -1,44 +1,74 @@
-<!--김민섭 1.9 -->
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="java.sql.*" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+      </head>
       <style>
         html, body{
           width : 100%;
           height: 100%;
         }
-        hr{
-          border-top: 3px solid black;
-        }
         /*슬라이드 css*/
-        #slide{
-          float:left;
-        }
-        .sd{
-          width: 80%; height: 100%;
-          margin: 0;
-          background-color: #DCD8D8;
-          display: none;
-        }
-        .rec1, .rec2, .rec3{
-          display: none;
-        }
+      body {
+        font-family: "Lato", sans-serif;
+        transition: background-color .5s;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+
+      #main {
+        transition: margin-left .5s;
+       padding: 16px;
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      
         /*상단바 css*/
         #ys{
           text-align: center;
           width: 100%;
-          background-color: white
         }
         .fixed{
           position: fixed;
@@ -81,28 +111,42 @@
           text-align: center;
           margin-bottom: 200px;
         }
+        
+        /*템플릿*/
+        a.list-group-item {
+    	height:auto;
+   		 min-height:220px;
+		}
+		a.list-group-item.active small {
+    	color:#fff;
+		}
+		.stars {
+		margin:20px auto 1px;    
+		}
       </style>
 
   </head>
   <body>
+  
+     <div id="main">
+     <!-- 슬라이드 버튼 -->
+     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;메뉴</span>
+     <!--  버튼부분 -->
     <div id="ys">
-      <button type="button" id="slide" class="btn btn-default" aria-label="Menu hamburger">
-        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-      </button>
-      <h1>YOUSELL</h1>
-    </div><hr>
-
-    <div class="sd">
-      <ul id="emilia-list">
-        <li><a href="#">판매하기</a></li>
-        <li><a href="#">판매정보</a></li>
-        <li><a href="#">내정보 수정</a></li>
-        <li><a href="#">문의</a></li>
-        <li><a href="#">환경설정</a></li>
-      </ul>
+    <h1>YOUSELL</h1>
     </div>
-
-    <h1>랭킹순위</h1>
+    
+    <!-- 슬라이드 부분 -->
+   <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+     <a href="#">내정보 수정</a>
+     <a href="#">판매하기</a>
+     <a href="#">판매</a>
+     <a href="#">문의</a>
+     <a href="loginout">로그아웃</a>
+   </div>
+   
+        <h1>랭킹순위</h1>
     <div id="carousel-example-generic" class="carousel slide" data-interval="false" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -114,21 +158,21 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="ps" src="img/중국관.jpg">
+          <img class="ps" src="images/짜장면.jpg">
           <div class="carousel-caption">
             <h1>중국관</h1>
             <h2>매해볶 5000원</h2>
           </div>
         </div>
         <div class="item">
-          <img class="ps" src="img/정안식당.jpg">
+          <img class="ps" src="images/치킨.jpg">
           <div class="carousel-caption">
             <h1>정안식당</h1>
             <h2>제육덮밥 5500원</h2>
           </div>
         </div>
         <div class="item">
-          <img class="ps" src="img/홍원.jpg">
+          <img class="ps" src="images/삽겹살.jpg">
           <div class="carousel-caption">
             <h1>홍원</h1>
             <h2>탕짬 6000원</h2>
@@ -145,12 +189,13 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div><hr>
+    </div>
+<div class="container">
+<div id="target">
 
-    <h1>근처상점</h1>
-    <div id="target"></div>
-    <!-- 더보기 버튼 <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">More View</button>-->
-    <div class="postLoader"></div>
+</div>
+<div class="postLoader"></div>
+</div>
 
     <div class="bottom">
       <div class="bMenu">
@@ -166,55 +211,24 @@
         <h2><a href="#">지도</a></h2>
       </div>
     </div>
+</div>
 
   </body>
 </html>
 
-<%
-  Connection conn = null;
-  PreparedStatement pst = null;
-  ResultSet rs = null;
-
-  Class.forName("com.mysql.jdbc.Driver");
-  String url = "jdbc:mysql://localhost:3306/yahait?serverTimezone=UTC";
-  conn = DriverManager.getConnection(url, "root", "1111");
-  int i = 3;
-  int j;
-  String Query = "select * from list limit " + i;
-  pst = conn.prepareStatement(Query);
-  
-  
-  rs = pst.executeQuery();
-  if(rs!=null){
-  while(rs.next()){
-    String store = rs.getString("store");
-    String product = rs.getString("product");
-    if(store==null)
-    	store="text";
-    if(product==null)
-    	product="product";
-%>
-  <script>
-    var store = "<%=store%>"
-    var product = "<%=product%>"
-
-    $('#target').append('<div class="rec"><h1>'+store+'<br>메뉴:'+product+'</h1></div>');
-  </script>
-<%
-  }
-  }else {
-	  String store="text";
-	  String product="abc";
-  }
-%>
-
 <script>
-  //김민섭 1.10슬라이드 메뉴
-  $('#slide').click(function(){
-    $('html').animate({scrollTop : 0}, 0); //맨위로 이동
-    $('.sd').toggle("slide", { direction: "left" }, 1000);
-  })
+//김민섭 1.10슬라이드 메뉴 -> 오경환 다시 수정
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
 
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+ 
   //김민섭 1.15 상단바 고정
   var ysOffset = $('#ys').offset();
   $(window).scroll(function(){
@@ -225,67 +239,54 @@
     }
   })
 
-  //김민섭 1.14 더보기 로딩 버튼 <-- 스크롤했을때 자동 로딩으로 바꿔야함 1.22
+	  var str = '<div class="row">';
+	  str += '<div class="well">';
+	  str += '<h1 class="text-center">Vote for your favorite</h1>'
+	  str += '<div class="list-group">'
+	  str += '<a href="#" class="list-group-item active">'
+	  str += '<div class="media col-md-3">'
+	  str += '<figure class="pull-left">'
+	  str += '<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >'
+	  str += '</figure></div>'
+	  str += '<div class="col-md-6">'
+	  str += '<h4 class="list-group-item-heading"> List group heading </h4>'
+	  str += '<p class="list-group-item-text"> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. </p></div>'
+	  str += '<div class="col-md-3 text-center">'
+	  str += '<h2> 14240 <small> votes </small></h2>'
+      str += '<button type="button" class="btn btn-default btn-lg btn-block"> Vote Now! </button>'
+      str += '<div class="stars">'
+      str += '<span class="glyphicon glyphicon-star"></span>'
+      str += '<span class="glyphicon glyphicon-star"></span>'
+      str += '<span class="glyphicon glyphicon-star"></span>'
+      str += '<span class="glyphicon glyphicon-star"></span>'
+      str += '<span class="glyphicon glyphicon-star-empty"></span></div>'
+      str += '<p> Average 4.5 <small> / </small> 5 </p>'
+      str += '</div>'
+      str +=   '</a>'
+      str += '</div>'
+      str +='</div>'
+      str +='</div>'
+      str +='</div>'
+      
+  
+  
+  //김민섭 1.14 더보기 로딩 버튼 <-- 스크롤했을때 자동 로딩으로 바꿔야함 1.22 완성
   function postFunc(){
-    $('.postLoader').html('<img class="loader" src="img/loader.gif">');
+    $('.postLoader').html('<img class="loader" src="images/loading.gif">');
   }
   var processScroll = true;
   $(window).scroll(function() {
       if (processScroll  && $(window).scrollTop() > $(document).height() - $(window).height() - 100) {
           processScroll = false;
-          if($('.postLoader').html() != '<img class="loader" src="img/loader.gif">');
-          postFunc();
-          setTimeout(function(){
-              $('.postLoader').empty();
-              <%
-              j = i;
-              i = i + 3;
-              Query = "select * from list limit " + j + ", " + i;
-              pst = conn.prepareStatement(Query);
-              rs = pst.executeQuery();
-
-              while(rs.next()){
-                String store = rs.getString("store");
-                String product = rs.getString("product");
-              %>
-              var store = "<%=store%>"
-              var product = "<%=product%>"
-
-              $('#target').append('<div class="rec"><h1>'+store+'<br>메뉴:'+product+'</h1></div>');
-
-              <%
-                }
-              %>
-
-          }, 1000);
-          processScroll = true;
-        }
-      })
-  /*$('#myButton').click(function(){
-    var btn = $(this).button('loading');
-
-    setTimeout(function(){
-        btn.button('reset');
-        <%
-        j = i;
-        i = i + 3;
-        Query = "select * from list limit " + j + ", " + i;
-        pst = conn.prepareStatement(Query);
-        rs = pst.executeQuery();
-
-        while(rs.next()){
-          String store = rs.getString("store");
-          String product = rs.getString("product");
-        %>
-        var store = "<%=store%>"
-        var product = "<%=product%>"
-
-        $('#target').append('<div class="rec"><h1>'+store+'<br>메뉴:'+product+'</h1></div>');
-
-        <%
-          }
-        %>
-
-    }, 1000);
-  })*/
+          if($('.postLoader').html() != '<img class="loader" src="images/loading.gif">');
+            postFunc();
+            setTimeout(function(){
+            $('.postLoader').empty();
+            $('#target').append(str);
+      }, 2000);
+      processScroll = true;
+    }
+  })
+  
+  
 </script>

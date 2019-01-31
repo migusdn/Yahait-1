@@ -16,41 +16,41 @@
 		<form class="form-horizontal">
 			<h2>SELL</h2>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="id" class="col-sm-3 control-label">카테고리*</label>
 				<div class="col-sm-9">
 					<input type="text" name="id" id="category" placeholder="아이디"
 						class="form-control" autofocus>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="form-group">
 				<label for="password" class="col-sm-3 control-label">상점이름*</label>
 				<div class="col-sm-9">
-					<input type="text" name="title" id="title" placeholder="비밀번호"
+					<input type="text" name="title" id="title" placeholder="상점이름"
 						class="form-control">
 				</div>
 			</div>
 			<hr>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="id" class="col-sm-3 control-label">상품명*</label>
 				<div class="col-sm-9">
 					<input type="text" name="product" id="product" class="form-control"
 						placeholder="판매 상품의 이름을 입력해주세요" required="required">
 				</div>
-			</div>
+			</div> -->
 			<div class="form-group">
-				<label for="id" class="col-sm-3 control-label">판매가격*</label>
+				<label for="id" class="col-sm-3 control-label">카테고리 1</label>
 				<div class="col-sm-9">
-					<input type="text" name="price" id="price" class="form-control"
-						placeholder="상품의 가격을 입력해주세요" required="required">
+					<input type="text" name="category1" id="category1" class="form-control"
+						placeholder="카테고리 1" required="required">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="id" class="col-sm-3 control-label">상품 설명</label>
+				<label for="id" class="col-sm-3 control-label">카테고리 2</label>
 				<div class="col-sm-9">
-					<input type="text" name="explanation" id="explanation"
-						class="form-control" placeholder="상품에 대한 설명을 입력해주세요"
+					<input type="text" name="category2" id="category2"
+						class="form-control" placeholder="카테고리2"
 						required="required">
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</form>
-		<button class="btn btn-primary btn-block" onclick="sellact()">회원가입</button>
+		<button class="btn btn-primary btn-block" onclick="sellact()">개설</button>
 
 	</div>
 </body>
@@ -68,15 +68,12 @@
 <script>
 	function sellact() {
 
-		if (check() == false) return;
+		//if (check() == false) return;
 		//입력폼 JSON형태로 변환하여 객체생성
-		var date = new Date($('#birthDate').val())
 		var sellinfo = {
-			"category" : $("#category").val().trim(),
-			"product" : $("#product").val().trim(),
 			"title" : $("#title").val().trim(),
-			"price" : $("#price").val().trim(),
-			"explanation" : $("#explanation").val().trim()
+			"category1" : $("#category1").val().trim(),
+			"category2" : $("#category2").val().trim()
 		};
 
 		$.ajax({
@@ -84,48 +81,35 @@
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
 			type : 'POST', //post 일경부 rquestbody 안으로들어감
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
-			data : JSON.stringify(sellinfo), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
+			data : JSON.stringify(sellinfo), //내가 서버로 보내는 데이터(sellinfo 제이슨 객체)를 보냄
 			success : function(data) { //data는 서버측에서 날라온 데이터를 다시 받아서 ajax 처리
-				if (data == "EX") {
-					alert("이미 가입된 아이디입니다.");
+				if (data == "ERROR") {
+					alert("SQL 에러");
 
 				} else if (data == "OK") {
-					alert("회원 가입이 완료되었습니다.");
-					window.location.href = "login";
+					alert("상점 개설이 완료되었습니다.");
+					window.location.href = "Manager";
 				}
 			}
 
 		});
 
 	}
-	//핸드폰 번호폼 스크립트
-	var cellPhone = document.getElementById('cellPhone');
-	cellPhone.onkeyup = function(event) {
-		event = event || window.event;
-		var _val = this.value.trim();
-		this.value = autoHypenPhone(_val);
-	}
-	//입력값 체크
 	function check() {
-		var name = $("#category").val().trim();
+		var name = $("#category1").val().trim();
 		if (name == "") {
-			alert("카테고리를 입력해주세요.");
+			alert("카테고리1를 입력해주세요.");
+			return false;
+		}
+		var name = $("#category1").val().trim();
+		if (name == "") {
+			alert("카테고리2를 입력해주세요.");
 			return false;
 		}
 
 		var id = $("#title").val().trim();
 		if (id == "") {
-			alert("상품명을 입력해주세요.");
-			return false;
-		}
-		var id = $("#price").val().trim();
-		if (id == "") {
-			alert("가격을 입력해주세요.");
-			return false;
-		}
-		var id = $("#explanation").val().trim();
-		if (id == "") {
-			alert("설명을 입력해주세요.");
+			alert("상점이름을 입력해주세요.");
 			return false;
 		}
 		return true;

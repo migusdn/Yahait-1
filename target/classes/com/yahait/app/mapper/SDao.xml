@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yahait.app.Dao.SDao">
+	<select id="Shop_info" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
+	SELECT * FROM shop WHERE shop_num =#{shop_num}
+	</select>
+	<select id="Shop_admin" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
+	SELECT member_num FROM member WHERE member_id=#{member_id}
+	</select>
+	<insert id="Shop_add" parameterType="map">
+	INSERT INTO shop (member_num,shop_name, category_name1, category_name2,state)
+	VALUES(#{member_num},#{shop_name},#{category1},#{category2},1)
+	</insert>
+	<select id="Shop_list" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
+	SELECT * FROM shop WHERE member_num=#{member_num}
+	</select>
+	<update id="StateUpdate" parameterType="map">
+	UPDATE shop SET state = #{state} WHERE shop_name =#{shop_name}
+	</update>
+</mapper>

@@ -2,67 +2,79 @@ package com.yahait.app.Dto;
 
 public class MemberDto {
 	
-    private String id;
-	private String password;
+    private String member_id;
+	private String member_password;
     private String name;
     private String gender;
     private String mail;
-    private String phone;
+    private String phone1;
  
     public MemberDto(){
     
     }
     
-	public MemberDto(String id, String password) {
-        this.id = id;
-		this.password = password;
+	public MemberDto(String member_id, String member_password) {
+        this.member_id = member_id;
+		this.member_password = member_password;
 	    
 	}
 	
-	public MemberDto(String id, String password, String name) {
-        this.id = id;
-		this.password = password;
-		this.name = name;
+	public MemberDto(String member_id, String member_password, String member_name) {
+        this.member_id = member_id;
+		this.member_password = member_password;
+		this.name = member_name;
 	    
+	}
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+	public String getMember_password() {
+		return member_password;
+	}
+
+	public void setMember_password(String member_password) {
+		this.member_password = member_password;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPhone1() {
+		return phone1;
+	}
+
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
 	}
 	
 	
     
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getMail() {
-		return mail;
-	}
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 
 }

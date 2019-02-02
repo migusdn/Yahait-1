@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.yahait.app.Dao.IDao;
+import com.yahait.app.Dao.MDao;
 import com.yahait.app.Dao.MemberDao;
 import com.yahait.app.Dao.SDao;
 import com.yahait.app.Dto.MemberDto;
@@ -45,7 +46,7 @@ public class YahaitController {
 	@RequestMapping("/Login")
 	public String Login(Model model) {
 /*
-		IDao dao = sqlSession.getMapper(IDao.class);
+		MDao dao = sqlSession.getMapper(MDao.class);
 		ArrayList<MemberDto> loigndate = dao.loigndate();
 		// dao 인터페이스에 정의된 logindate SQL문을 불러와 리스트에 결과값을 담음
 		System.out.println(loigndate.get(0));
@@ -72,7 +73,7 @@ public class YahaitController {
 		System.out.println("view에서받아온ID" + userid + "====" + "view에서받아온PW" + userpassword);
 
 		// SQL문 불러오기
-		IDao dao = sqlSession.getMapper(IDao.class);
+		MDao dao = sqlSession.getMapper(MDao.class);
 		ArrayList<MemberDto> logincehck = dao.logincehck(userid);
 		// 경고창 response 객체를 이용하여 PrintWriter 하여 쏴주기
 		if (logincehck.isEmpty()) {
@@ -168,7 +169,7 @@ public class YahaitController {
 			return "BirthError";
 		}
 		//ID 중복확인
-		IDao dao = sqlSession.getMapper(IDao.class);
+		MDao dao = sqlSession.getMapper(MDao.class);
 		MemberDto duplication_check = dao.id_duplication_check(jsonObj.get("id").toString());
 		if(duplication_check!=null)
 			return "duplicated_id";
@@ -207,7 +208,7 @@ public class YahaitController {
 		System.out.println("서버측 받은 데이터 ");
 		System.out.println("ID:" + map.get("id") + " PW:" + map.get("password") + " NAME:" + map.get("name") + " MAIL:" + map.get("mail1")+map.get("mail2")
 				+ " PHONE:" + map.get("phone1") + " GENDER:" + map.get("gender") + " birthDate:"+Year+Month+Day );
-			IDao dao1 = sqlSession.getMapper(IDao.class);
+			MDao dao1 = sqlSession.getMapper(MDao.class);
 			dao1.signup(map);
 	
 		
@@ -221,6 +222,54 @@ public class YahaitController {
 		return "Main";
 	}
 
+	
+	@RequestMapping(value="Mainfetch" ,produces="text/plain;charset=UTF-8")
+	public @ResponseBody String Mainfetch(Model model,  HttpSession session, @RequestBody String paramData	) throws ParseException{
+
+		System.out.println("메인 페치창 접속");
+		SDao dao = sqlSession.getMapper(SDao.class);
+		ArrayList<ShopDto> shoplist = dao.shop_show();
+		System.out.println("sql문 사이즈"+shoplist.size());
+		
+	    //최종 완성될 JSONObject 선언(전체)
+        JSONObject jsonObject = new JSONObject();
+        //person의 JSON정보를 담을 Array 선언
+        JSONArray shopArray = new JSONArray();
+        //shop의 한명 정보가 들어갈 JSONObject 선언
+        
+        
+		for(int i=0; i<shoplist.size(); i++){
+		JSONObject shopInfo = new JSONObject();
+		String shopname = shoplist.get(i).getShop_name();
+		String shoppic = shoplist.get(i).getShop_pic();
+		System.out.println("상점아이디("+i+"):" +shopname+"상점이미지경로("+i+"):"  +shoppic);
+		
+		shopInfo.put("shopname",shopname);
+		shopInfo.put("shoppic",shoppic);
+		shopArray.add(shopInfo);
+		jsonObject.put("shop", shopArray);
+		}
+		
+		String jsonInfo = jsonObject.toJSONString();
+		System.out.println(jsonInfo);
+		
+		
+		return jsonInfo;
+
+	    }
+	
+	@RequestMapping("/sessioncheck")
+	public @ResponseBody String sessioncheck(Model model, HttpSession session, HttpServletResponse response) throws IOException {
+		String logincheckstring = (String) session.getAttribute("iogincheck");
+		System.out.println("메인세션체크창-----:"+logincheckstring);
+		if (logincheckstring == null) {
+			return "NO";
+		} else {
+			return "OK";
+		}
+	}
+	
+	
 	@RequestMapping("/FindID")
 	public String FindID(Model model) {
 		return "FindID";
@@ -234,6 +283,14 @@ public class YahaitController {
 		// @를 기준으로 문자열을 추출할 것이다.
        
         
+		if(mail==null || mail==""){
+			System.out.println("이메일을 입력하세요!");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('이메일을 입력하세요!'); history.go(-1);</script>");
+			out.flush();
+			
+		}else{
         // 먼저 @ 의 인덱스를 찾는다 - 인덱스 값: 5
         int idx = mail.indexOf("@"); 
         
@@ -249,10 +306,10 @@ public class YahaitController {
 		map.put("name", name);
 		map.put("mail1", mail1);
 		map.put("mail2", mail2);
-
-		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		MDao dao = sqlSession.getMapper(MDao.class);
 		ArrayList<MemberDto> findid = dao.findID(map);
-
+		
 		if (findid.isEmpty()) {
 			System.out.println("아이디가 존재하지 않습니다");
 			response.setContentType("text/html; charset=UTF-8");
@@ -266,6 +323,7 @@ public class YahaitController {
 			model.addAttribute("username", name);
 			model.addAttribute("finidactid", finidactid);
 			return "FindID2";
+		}
 		}
 		return "FindID2";
 	}
@@ -290,9 +348,9 @@ public class YahaitController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", name);
 		map.put("id", id);
-		map.put("phone", phone);
+		map.put("phone1", phone);
 
-		IDao dao = sqlSession.getMapper(IDao.class);
+		MDao dao = sqlSession.getMapper(MDao.class);
 		ArrayList<MemberDto> findpw = dao.findPW(map);
 
 		if (findpw.isEmpty()) {

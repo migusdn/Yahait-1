@@ -7,7 +7,16 @@ public class ShopDto {
 	private String category_name1;
 	private String category_name2;
 	private int state;
+	private String shop_pic;
 	
+	public String getShop_pic() {
+		return shop_pic;
+	}
+
+	public void setShop_pic(String shop_pic) {
+		this.shop_pic = shop_pic;
+	}
+
 	public ShopDto() {
 		
 	}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Yahait(거리상점어플리케이션)
 
 ![1](https://user-images.githubusercontent.com/32234263/51357873-3dabd000-1b04-11e9-9d5e-ebb142ff5396.PNG)
@@ -7,3 +8,7 @@
 ![12](https://user-images.githubusercontent.com/32234263/51357951-90858780-1b04-11e9-9204-677522ceca71.PNG)
 
 ![13](https://user-images.githubusercontent.com/32234263/51357973-a98e3880-1b04-11e9-9ff5-68829602f229.PNG)
+=======
+"# test" 
+"# SpringMVCboard" 
+>>>>>>> 8642dec51ca24dcb2cd44b63282471d148f0f949

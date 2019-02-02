@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.yahait.app.Dto.MemberDto;
 
-public class MemberDao implements IDao {
+public class MemberDao implements MDao {
 
 	JdbcTemplate template;
 	
@@ -49,6 +49,18 @@ public class MemberDao implements IDao {
 
 	@Override
 	public MemberDto id_duplication_check(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<MemberDto> shop_show() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<MemberDto> member_num_info(String member_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

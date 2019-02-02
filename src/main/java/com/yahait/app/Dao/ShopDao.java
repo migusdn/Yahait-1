@@ -10,6 +10,12 @@ import com.yahait.app.Dto.ShopDto;
 
 public class ShopDao implements SDao {
 
+	@Override
+	public ArrayList<ShopDto> shop_show() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	JdbcTemplate template;
 
 	@Autowired

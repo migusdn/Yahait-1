@@ -12,4 +12,6 @@ public interface SDao {
 	public ShopDto Shop_admin(String member_id);
 	public ArrayList<ShopDto> Shop_list(String member_id);
 	public void StateUpdate(Map map);
+	public ArrayList<ShopDto> shop_show();
+	
 }

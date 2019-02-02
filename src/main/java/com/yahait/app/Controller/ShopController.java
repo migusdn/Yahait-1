@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.yahait.app.Dao.IDao;
+import com.yahait.app.Dao.MDao;
 import com.yahait.app.Dao.SDao;
 import com.yahait.app.Dto.MemberDto;
 import com.yahait.app.Dto.ShopDto;

@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yahait.app.Dao.IDao">
+<mapper namespace="com.yahait.app.Dao.MDao">
 
-	<select id="loigndate" resultType="com.yahait.app.Dto.MemberDto">
+	<select id="loigndate_show" resultType="com.yahait.app.Dto.MemberDto">
 		SELECT member_id,member_password,member_name FROM member
 	</select>
 
@@ -30,9 +30,10 @@
 
 	<select id="findPW" parameterType="hashMap"
 		resultType="com.yahait.app.Dto.MemberDto">
-		select member_password FROM member where member_id= #{id} and member_name =
-		#{name} and phone=#{phone}
+		select member_password FROM member where member_id= #{id} and member_name = #{name} and phone1=#{phone1}
+	</select>	
+	<select id="member_num_info" resultType="com.yahait.app.Dto.ShopDto">
+	select member_num from member where member_id = #{id}
 	</select>
-
 
 </mapper>

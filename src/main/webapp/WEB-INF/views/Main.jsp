@@ -140,8 +140,8 @@
    <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
      <a href="#">내정보 수정</a>
-     <a href="#">판매하기</a>
-     <a href="#">판매</a>
+     <a href="Sell">판매하기</a>
+     <a href="Manager">내 상점 관리</a>
      <a href="#">문의</a>
      <a href="loginout">로그아웃</a>
    </div>
@@ -190,6 +190,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+    
 <div class="container">
 <div id="target">
 
@@ -217,6 +218,63 @@
 </html>
 
 <script>
+$(document).ready(function() {
+	
+	var Mainfetch = null;
+	
+	
+	$.ajax({
+		url : 'sessioncheck', //내가 보내는 서버주소(컨트롤러)
+		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
+		type : 'POST', 
+		data : null, //내가 서버로 보내는 데이터
+		success: function (data) { 
+			if (data == "OK") {
+                console.log("세션값있음")
+            	$.ajax({
+            		url : "Mainfetch", //내가 보내는 서버주소(컨트롤러)
+            		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
+            		type : 'POST',
+            		data : null, //내가 서버로 보내는 데이터
+            		success: function (data) {
+            
+            			console.log(data);
+            			Mainfetch = JSON.parse(data);
+            			console.log(Mainfetch.shop.length);
+            			
+            			for(i=0; i<Mainfetch.shop.length; i++){
+            			console.log(i+"번째 jsob값"+Mainfetch.shop[i].shopname+"   "+Mainfetch.shop[i].shoppic);
+            			var shopname = Mainfetch.shop[i].shopname;
+            			var shoppic = Mainfetch.shop[i].shoppic;
+            			
+            			
+            			
+          			  	var str = '<div class="row">';
+          			  	str += '<div class="well">';
+          			  	str += '<h1 class="text-center">'+shopname+'</h1>'
+     					str += '<img src=images/'+shoppic+'>';
+          			  	str += '</div>';
+          		      	str += '</div>';
+          		      	$('#target').append(str);
+          		      	
+          		      	
+            			}
+            		}
+            	});
+			}	
+			else if (data == "NO") {
+				alert("로그인이 필요합니다.");
+				location.replace("Login");
+			}			
+		}
+	
+   });
+});
+
+function postFunc(){
+    $('.postLoader').html('<img class="loader" src="images/loading.gif">');
+  }
+
 //김민섭 1.10슬라이드 메뉴 -> 오경환 다시 수정
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
@@ -239,41 +297,11 @@ function closeNav() {
     }
   })
 
-	  var str = '<div class="row">';
-	  str += '<div class="well">';
-	  str += '<h1 class="text-center">Vote for your favorite</h1>'
-	  str += '<div class="list-group">'
-	  str += '<a href="#" class="list-group-item active">'
-	  str += '<div class="media col-md-3">'
-	  str += '<figure class="pull-left">'
-	  str += '<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >'
-	  str += '</figure></div>'
-	  str += '<div class="col-md-6">'
-	  str += '<h4 class="list-group-item-heading"> List group heading </h4>'
-	  str += '<p class="list-group-item-text"> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. </p></div>'
-	  str += '<div class="col-md-3 text-center">'
-	  str += '<h2> 14240 <small> votes </small></h2>'
-      str += '<button type="button" class="btn btn-default btn-lg btn-block"> Vote Now! </button>'
-      str += '<div class="stars">'
-      str += '<span class="glyphicon glyphicon-star"></span>'
-      str += '<span class="glyphicon glyphicon-star"></span>'
-      str += '<span class="glyphicon glyphicon-star"></span>'
-      str += '<span class="glyphicon glyphicon-star"></span>'
-      str += '<span class="glyphicon glyphicon-star-empty"></span></div>'
-      str += '<p> Average 4.5 <small> / </small> 5 </p>'
-      str += '</div>'
-      str +=   '</a>'
-      str += '</div>'
-      str +='</div>'
-      str +='</div>'
-      str +='</div>'
       
   
   
   //김민섭 1.14 더보기 로딩 버튼 <-- 스크롤했을때 자동 로딩으로 바꿔야함 1.22 완성
-  function postFunc(){
-    $('.postLoader').html('<img class="loader" src="images/loading.gif">');
-  }
+
   var processScroll = true;
   $(window).scroll(function() {
       if (processScroll  && $(window).scrollTop() > $(document).height() - $(window).height() - 100) {

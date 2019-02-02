@@ -228,7 +228,7 @@ public class YahaitController {
 
 		System.out.println("메인 페치창 접속");
 		SDao dao = sqlSession.getMapper(SDao.class);
-		ArrayList<ShopDto> shoplist = dao.shop_show();
+		ArrayList<ShopDto> shoplist = dao.Shop_show();
 		System.out.println("sql문 사이즈"+shoplist.size());
 		
 	    //최종 완성될 JSONObject 선언(전체)

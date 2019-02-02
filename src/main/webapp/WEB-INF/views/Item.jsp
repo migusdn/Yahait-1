@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.yahait.app.Dto.ShopDto"%>
+	pageEncoding="UTF-8" import="com.yahait.app.Dto.ItemDto"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -87,7 +87,7 @@ p {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%
-	ArrayList<ShopDto> shop_data = (ArrayList<ShopDto>) request.getAttribute("shop_data");
+	ArrayList<ItemDto> Item_list = (ArrayList<ItemDto>) request.getAttribute("Item_list");
 	String[] state = {" ", "checked"};
 %>
 </head>
@@ -96,26 +96,30 @@ p {
 		
 			<h2>Shop Manager</h2>
 			<%
-				for (int i = 0; i < shop_data.size(); i++) {
+				for (int i = 0; i < Item_list.size(); i++) {
 			%>
-			<form class="form-horizontal" id="<%=shop_data.get(i).getShop_num()%>" method="post" action="Item">
+			<form class="form-horizontal" name="<%=Item_list.get(i).getItem_num()%>" method="post" action="Item">
 			<div class="form-group">
 
-				<a href="javascript:{}" onclick="document.getElementById('<%=shop_data.get(i).getShop_num() %>').submit();"><label for="id" class="col-sm-3 control-label"><%=i%>번째 상점</label></a>
+				<a href="javascript:<%=Item_list.get(i).getShop_num()%>.submit();"><label for="id" class="col-sm-3 control-label"><%=i%>번째 상점</label></a>
 				<div class="col-sm-9">
-					<%=shop_data.get(i).getShop_name()%><label class="switch">
-						<input type="checkbox" class="update_state" id ="shop<%=i%>"data-id = "<%=shop_data.get(i).getShop_name()%>" 
-						<%=state[shop_data.get(i).getState()]%> state = "<%=shop_data.get(i).getState() %>"> <span
+					<%=Item_list.get(i).getItem_name()%><label class="switch">
+						<input type="checkbox" class="update_state" id ="shop<%=i%>"data-id = "<%=Item_list.get(i).getItem_num()%>" 
+						<%=state[Item_list.get(i).getItem_state()]%> state = "<%=Item_list.get(i).getItem_state() %>"> <span
 						class="slider round"></span>
-					</label>
-					<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
+					</label> 
+					<p>OFF</p>
+					<p style="display: none;">ON</p>
 				</div>
 			</div>
 			</form>
 			<%
 				}
 			%>
-
+			<form class="form-horizontal" method="post" action="Item_add">
+			<input type="hidden" name="shop_num" value="<%=request.getParameter("shop_num")%>">
+			<input type="submit" class="btn btn-primary btn-block" value="상품 추가">
+			</form>
 		
 	</div>
 </body>
@@ -130,12 +134,12 @@ p {
 				$(this).attr('state','0')
 			}
 		 var shop = {
-				"shop_name" : $(this).attr("data-id"),
-				"shop_state" : $(this).attr("state").trim()
+				"Item_num" : $(this).attr("data-id"),
+				"Item_state" : $(this).attr("state").trim()
 			};
 		
 		$.ajax({
-			url : 'StateUpdate', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
+			url : 'ItemStateUpdate', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
 			type : 'POST', //post 일경부 rquestbody 안으로들어감
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태

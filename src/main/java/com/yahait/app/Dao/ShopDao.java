@@ -6,15 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.yahait.app.Dto.ItemDto;
 import com.yahait.app.Dto.ShopDto;
 
 public class ShopDao implements SDao {
-
-	@Override
-	public ArrayList<ShopDto> shop_show() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	JdbcTemplate template;
 
@@ -26,6 +21,12 @@ public class ShopDao implements SDao {
 	@Override
 	public ArrayList<ShopDto> Shop_info(String shop) {
 
+		return null;
+	}
+
+	@Override
+	public ArrayList<ShopDto> Shop_show() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -51,6 +52,7 @@ public class ShopDao implements SDao {
 	public void StateUpdate(Map map) {
 		// TODO Auto-generated method stub
 		
-	}    
+	}
+
 
 }

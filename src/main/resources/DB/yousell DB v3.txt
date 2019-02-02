@@ -1,0 +1,132 @@
+﻿
+-- category Table Create SQL
+CREATE TABLE category
+(
+    `category_num`    INT            NOT NULL    AUTO_INCREMENT COMMENT '카테고리 번호', 
+    `category_name1`  VARCHAR(45)    NOT NULL    COMMENT '카테고리 이름1', 
+    `category_name2`  VARCHAR(45)    NOT NULL    COMMENT '카테고리 이름2', 
+    PRIMARY KEY (category_num)
+);
+
+ALTER TABLE category COMMENT '카테고리 정보';
+
+
+-- member Table Create SQL
+CREATE TABLE member
+(
+    `member_num`       INT            NOT NULL    AUTO_INCREMENT COMMENT '회원 번호', 
+    `member_id`        VARCHAR(45)    NOT NULL    COMMENT '회원 아이디', 
+    `member_password`  VARCHAR(45)    NOT NULL    COMMENT '회원 비밀번호', 
+    `member_name`      VARCHAR(15)    NOT NULL    COMMENT '회원 이름', 
+    `phone1`           INT            NOT NULL    COMMENT '핸드폰번호1', 
+    `gender`           VARCHAR(1)     NOT NULL    COMMENT '성별', 
+    `birth_y`          INT            NOT NULL    COMMENT '생년', 
+    `birth_m`          INT            NOT NULL    COMMENT '생월', 
+    `birth_d`          INT            NOT NULL    COMMENT '생일', 
+    `mail1`            VARCHAR(45)    NULL        COMMENT '이메일1', 
+    `mail2`            VARCHAR(45)    NULL        COMMENT '이메일2', 
+    PRIMARY KEY (member_num)
+);
+
+ALTER TABLE member COMMENT '회원정보';
+
+
+-- shop Table Create SQL
+CREATE TABLE shop
+(
+    `shop_num`        INT            NOT NULL    AUTO_INCREMENT COMMENT '상점번호', 
+    `member_num`      INT            NOT NULL    COMMENT '회원 번호', 
+    `shop_name`       VARCHAR(45)    NOT NULL    COMMENT '상점이름', 
+    `category_name1`  VARCHAR(45)    NOT NULL    COMMENT '카테고리 이름1', 
+    `category_name2`  VARCHAR(45)    NOT NULL    COMMENT '카테고리 이름2', 
+    `state`           BIT            NOT NULL    COMMENT 'on/off 상태', 
+    `shop_pic`       VARCHAR(45)   NOT NULL        COMMENT 상점 사진', 
+    `shop_x`    VARCHAR(45)    NOT NULL    COMMENT ' 상점x좌표',
+    `shop_y`    VARCHAR(45)    NOT NULL    COMMENT ' 상점y좌표' 
+    'shop_info' VARCHAR(500) 	COMMENT ' 상점정보' 
+    PRIMARY KEY (shop_num)
+);
+
+ALTER TABLE shop COMMENT '상점정보';
+
+ALTER TABLE shop ADD CONSTRAINT FK_shop_category_name1_category_category_name1 FOREIGN KEY (category_name1)
+ REFERENCES category (category_name1)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE shop ADD CONSTRAINT FK_shop_category_name2_category_category_name2 FOREIGN KEY (category_name2)
+ REFERENCES category (category_name2)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE shop ADD CONSTRAINT FK_shop_member_num_member_member_num FOREIGN KEY (member_num)
+ REFERENCES member (member_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- member_certificate Table Create SQL
+CREATE TABLE member_certificate
+(
+    `cer_num`  INT            NOT NULL    AUTO_INCREMENT COMMENT '사업자등록증 번호', 
+    `cer`      VARCHAR(45)    NULL        COMMENT '사업자등록증', 
+    PRIMARY KEY (cer_num)
+);
+
+
+-- member_detail Table Create SQL
+CREATE TABLE member_detail
+(
+    `member_num`  INT    NOT NULL    COMMENT '회원 번호', 
+    `shop_num`    INT    NULL        COMMENT '상점번호', 
+    `cer_num`     INT    NULL        COMMENT '사업자등록증 번호', 
+    PRIMARY KEY (member_num)
+);
+
+ALTER TABLE member_detail COMMENT '회원상세정보';
+
+ALTER TABLE member_detail ADD CONSTRAINT FK_member_detail_member_num_member_member_num FOREIGN KEY (member_num)
+ REFERENCES member (member_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE member_detail ADD CONSTRAINT FK_member_detail_shop_num_shop_shop_num FOREIGN KEY (shop_num)
+ REFERENCES shop (shop_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE member_detail ADD CONSTRAINT FK_member_detail_cer_num_member_certificate_cer_num FOREIGN KEY (cer_num)
+ REFERENCES member_certificate (cer_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- member_gps Table Create SQL
+CREATE TABLE member_gps
+(
+    `member_num`  INT            NOT NULL    COMMENT '회원 번호', 
+    PRIMARY KEY (member_num)
+);
+
+ALTER TABLE member_gps COMMENT 'GPS정보';
+
+ALTER TABLE member_gps ADD CONSTRAINT FK_member_gps_member_num_member_member_num FOREIGN KEY (member_num)
+ REFERENCES member (member_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- item Table Create SQL
+CREATE TABLE item
+(
+    `item_num`       INT            NOT NULL    AUTO_INCREMENT COMMENT '상품 번호', 
+    `shop_num`       INT            NOT NULL    COMMENT '상점 번호', 
+    `item_name`      VARCHAR(45)    NULL        COMMENT '상품 이름', 
+    `item_contents`  TEXT           NULL        COMMENT '상품 내용', 
+    `item_price`     int            NOT NULL    COMMENT '상품 가격', 
+    `item_pic`       VARCHAR(45)    NULL        COMMENT '상품 사진', 
+    'itme_state'    INT                   NULL       
+    PRIMARY KEY (item_num, shop_num)
+);
+
+ALTER TABLE item COMMENT '상품정보';
+
+ALTER TABLE item ADD CONSTRAINT FK_item_shop_num_shop_shop_num FOREIGN KEY (shop_num)
+ REFERENCES shop (shop_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- shop_gps Table Create SQL
+CREATE TABLE shop_gps
+(
+    `shop_num`  INT    NOT NULL    COMMENT '상점 번호', 
+    `shop_x`    INT    NOT NULL    COMMENT '상점 x좌표', 
+    `shop_y`    INT    NOT NULL    COMMENT '상점 y좌표', 
+    PRIMARY KEY (shop_num)
+);
+
+ALTER TABLE shop_gps ADD CONSTRAINT FK_shop_gps_shop_num_shop_shop_num FOREIGN KEY (shop_num)
+ REFERENCES shop (shop_num)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+

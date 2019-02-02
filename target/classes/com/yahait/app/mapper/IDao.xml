@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yahait.app.Dao.IDao">
+		<select id="Item_list" parameterType="String" resultType="com.yahait.app.Dto.ItemDto">
+	SELECT * FROM item WHERE shop_num=#{shop_num}
+	</select>
+	<update id="StateUpdate" parameterType="map">
+	UPDATE item SET item_state = #{state} WHERE item_num =#{item_num}
+	</update>
+	<insert id="Item_add" parameterType="map">
+	INSERT INTO item (shop_num, item_name, item_price, item_contents, item_pic)
+	VALUES(#{shop_num}, #{item_name}, #{item_price}, #{item_contents}, #{item_pic})
+	</insert>
+	<select id="item_duplication_check" parameterType="String"
+		resultType="com.yahait.app.Dto.ItemDto">
+		SELECT item_name FROM item where item_name = #{item_name}
+	</select>
+</mapper>

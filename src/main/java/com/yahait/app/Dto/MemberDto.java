@@ -5,7 +5,7 @@ public class MemberDto {
 	private String member_num; 
     private String member_id;
 	private String member_password;
-    private String name;
+    private String member_name;
     private String gender;
     private String mail1;
     private String mail2;
@@ -38,12 +38,12 @@ public class MemberDto {
 		this.member_password = member_password;
 	}
 
-	public String getName() {
-		return name;
+	public String getmember_name() {
+		return member_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setmember_name(String member_name) {
+		this.member_name = member_name;
 	}
 
 	public String getGender() {

@@ -16,5 +16,5 @@ public interface MDao {
 	public MemberDto id_duplication_check(String member_id);
 	public ArrayList<MemberDto> shop_show();
 	public ArrayList<MemberDto> member_num_info(String member_id);
-	
+	public ArrayList<MemberDto> Show_member_info(String member_id);
 } 

@@ -123,9 +123,6 @@ public class YahaitController {
 		
         System.out.println("메인창세션값확인-----:"+(String)session.getAttribute("iogincheck"));
         session.invalidate();
-        if(((HttpServletRequest) session).getSession(false)==null){
-        	System.out.println("세션삭제완료");
-        }
 		return "redirect:/Login";
 	}
 	
@@ -373,5 +370,28 @@ public class YahaitController {
 		return "Sinup";
 	}
 
+	
+	@RequestMapping("MemberinfoUpdata")
+	public String MemberinfoUpdata(Model model, HttpSession session) {
+		String logincheckstring = (String) session.getAttribute("iogincheck");
+		System.out.println("세션체크창-----:"+logincheckstring);
+		MDao dao = sqlSession.getMapper(MDao.class);
+		ArrayList<MemberDto> memberinfo = dao.Show_member_info(logincheckstring);
+		String mail1 = memberinfo.get(0).getMail1();
+		String mail2 = memberinfo.get(0).getMail2();
+		String mailinfo = mail1+"@"+mail2;
+		String phone = memberinfo.get(0).getPhone1();
+		String name = memberinfo.get(0).getmember_name();
+		
+		model.addAttribute("mailinfo", mailinfo);
+		model.addAttribute("phone", phone);
+		model.addAttribute("name", name);
+		return "MemberinfoUpdata";
+	}
+	
+	@RequestMapping("MemberinfoUpdataAct")
+	public String MemberinfoUpdataAct(Model model) {
+		return "MemberinfoUpdataAct";
+	}
 	
 }

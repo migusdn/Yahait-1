@@ -32,8 +32,14 @@
 		resultType="com.yahait.app.Dto.MemberDto">
 		select member_password FROM member where member_id= #{id} and member_name = #{name} and phone1=#{phone1}
 	</select>	
-	<select id="member_num_info" resultType="com.yahait.app.Dto.ShopDto">
+	<select id="member_num_info" resultType="com.yahait.app.Dto.MemberDto">
 	select member_num from member where member_id = #{id}
 	</select>
+	
+	<select id="Show_member_info" resultType="com.yahait.app.Dto.MemberDto">
+	select member_id, member_password, member_name, gender, mail1,
+		mail2, phone1,birth_y,birth_m,birth_d from member where member_id = #{id}	
+	</select>
+	
 
 </mapper>

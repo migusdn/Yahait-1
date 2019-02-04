@@ -108,6 +108,7 @@ p {
 						<%=state[shop_data.get(i).getState()]%> state = "<%=shop_data.get(i).getState() %>"> <span
 						class="slider round"></span>
 					</label>
+					<button class="btn btn-primary btn-block" onclick="modify()">수정하기</button>
 					<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
 				</div>
 			</div>

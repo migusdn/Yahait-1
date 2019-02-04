@@ -166,7 +166,7 @@ public class ItemController {
 			map.put("item_contents", (String) request.getParameter("item_contents").trim());
 			map.put("item_pic",uploadedFileName);
 			IDao item_check = sqlSession.getMapper(IDao.class);
-			ItemDto check = item_check.item_duplication_check((String)request.getParameter("item_name"));
+			ItemDto check = item_check.item_duplication_check(map);
 			if(check != null) {
 				System.out.println("중복된 상품명");
 				return "NAME";

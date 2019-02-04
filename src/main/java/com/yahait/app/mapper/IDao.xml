@@ -14,8 +14,8 @@
 	INSERT INTO item (shop_num, item_name, item_price, item_contents, item_pic)
 	VALUES(#{shop_num}, #{item_name}, #{item_price}, #{item_contents}, #{item_pic})
 	</insert>
-	<select id="item_duplication_check" parameterType="String"
+	<select id="item_duplication_check" parameterType="map"
 		resultType="com.yahait.app.Dto.ItemDto">
-		SELECT item_name FROM item where item_name = #{item_name}
+		SELECT item_name FROM item where item_name = #{item_name} and shop_num=#{shop_num}
 	</select>
 </mapper>

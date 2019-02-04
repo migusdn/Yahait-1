@@ -14,5 +14,7 @@ public interface SDao {
 	public ArrayList<ShopDto> Shop_list(String member_id);
 	public void StateUpdate(Map map);
 	public ArrayList<ShopDto> Shop_show();
+
+	public ShopDto name_duplication_check(String parameter);
 	
 }

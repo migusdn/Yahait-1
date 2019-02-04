@@ -26,7 +26,7 @@ public class ItemDao implements IDao {
 	}
 
 	@Override
-	public ItemDto item_duplication_check(String item_name) {
+	public ItemDto item_duplication_check(Map map) {
 		// TODO Auto-generated method stub
 		return null;
 	}

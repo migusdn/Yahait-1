@@ -15,5 +15,5 @@ public interface IDao {
 	
 	public void Item_add(Map map);
 	
-	public ItemDto item_duplication_check(String item_name);
+	public ItemDto item_duplication_check(Map map);
 } 

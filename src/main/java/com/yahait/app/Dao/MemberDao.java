@@ -65,7 +65,13 @@ public class MemberDao implements MDao {
 		return null;
 	}
 
+	@Override
+	public ArrayList<MemberDto> member_mail_info(String member_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	
 	
 	
 

@@ -150,7 +150,7 @@ public class ItemController {
 			// 업로드 파일명을 변경후 저장
 			String uploadedFileName = System.currentTimeMillis() + UUID.randomUUID().toString()
 					+ fileName.substring(fileName.lastIndexOf("."));
-			Path p = Paths.get("C:\\Users\\KyungHwan\\Desktop\\Yahait\\src\\main\\webapp\\resources");
+			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
 			String uploadPath = p.toString();
 			
 			

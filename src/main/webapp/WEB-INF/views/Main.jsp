@@ -96,16 +96,17 @@
           background-image: none;
         }
         /*하단 고정 메뉴바*/
-        .bottom{
+        .page-footer{
+        
           position:fixed;
-          left:0px;
+          
           bottom:0px;
+          
           width:100%;
           background-color: white;
-        }
-        .bMenu{
-          float:left;
-        }
+          text-align: center;
+          }
+          
         /*로딩*/
         .postLoader{
           text-align: center;
@@ -113,28 +114,32 @@
         }
         
         /*템플릿*/
-        a.list-group-item {
-    	height:auto;
-   		 min-height:220px;
-		}
-		a.list-group-item.active small {
-    	color:#fff;
-		}
-		.stars {
-		margin:20px auto 1px;    
-		}
-      </style>
+      	.media {
+
+	  	background-color: #fffafa;
+      	border-style: solid;
+      	border-color: #dcdcdc 	;
+
+      	}
+
+      	.media-object{
+
+      	margin: 20px;
+ 
+      	}
+      	</style>
 
   </head>
   <body>
   
-     <div id="main">
+<div id="main">
      <!-- 슬라이드 버튼 -->
      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;메뉴</span>
      <!--  버튼부분 -->
     <div id="ys">
     <h1>YOUSELL</h1>
-    </div>
+</div>
+
     
     <!-- 슬라이드 부분 -->
    <div id="mySidenav" class="sidenav">
@@ -189,31 +194,50 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
+      <h1>
+      
+      </h1>
     </div>
     
-<div class="container">
-<div id="target">
-
+<div class="target">
 </div>
-<div class="postLoader"></div>
+<div class="postLoader">
 </div>
 
-    <div class="bottom">
-      <div class="bMenu">
-        <h2><a href="#">홈</a></h2>
-      </div>
-      <div class="bMenu">
-        <h2><a href="#">즐겨찾기</a></h2>
-      </div>
-      <div class="bMenu">
-        <h2><a href="#">주문알림</a></h2>
-      </div>
-      <div class="bMenu">
-        <h2><a href="#">지도</a></h2>
-      </div>
-    </div>
-</div>
 
+	    <footer class="page-footer font-small indigo">
+	        <div class="container">
+	     	<div class="row text-center text-xs-center text-sm-left text-md-left">
+	       <div class="col-xs-12 col-sm-3 col-md-3">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>홈</h2></a>
+          		</h6>
+        	</div>
+        	
+	         <div class="col-xs-12 col-sm-3 col-md-3">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>즐겨찾기</h2><a>
+          	</h6>
+        	</div>
+        	
+	       <div class="col-xs-12 col-sm-3 col-md-3">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>주문알림</h2></a>
+          		</h6>
+        	</div>
+        	
+	       <div class="col-xs-12 col-sm-3 col-md-3">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>지도</h2></a>
+          		</h6>
+        	</div>
+        	</div>
+     
+     </div>
+   		 </footer>
+
+    
+</div>
   </body>
 </html>
 
@@ -247,15 +271,23 @@ $(document).ready(function() {
             			var shopname = Mainfetch.shop[i].shopname;
             			var shoppic = Mainfetch.shop[i].shoppic;
             			
-            			
-            			
-          			  	var str = '<div class="row">';
-          			  	str += '<div class="well">';
-          			  	str += '<h1 class="text-center">'+shopname+'</h1>'
-     					str += '<img src=images/'+shoppic+'>';
-          			  	str += '</div>';
-          		      	str += '</div>';
-          		      	$('#target').append(str);
+            			var str =  '<div class="media">'
+            			    str += '<div class="media-left">'
+            				str += '<a href="#"><img class="media-object" src="images/'+shoppic+ '" alt="test"></a></div>'
+            				str += '<div class="media-body">'
+            				str += '<p><a href="#" class="btn btn-primary" role="button">상점바로가기</a>' 
+            				str += '<a href="#" class="btn btn-default" role="button">상점위치찾기</a></p>'
+            				str += '<div class="col-xs-12 col-md-3 text-center">'
+            				str += '<h1 class="rating-num">4.0</h1>'
+            				str += '<div class="rating">'
+            				str += '<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
+            				str += '</span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
+            			    str += '</span><span class="glyphicon glyphicon-star-empty"></span></div>'
+            			    str += '<div><span class="glyphicon glyphicon-user"></span>1,050,008 total</div></div>'
+            			    str += ' <h4 class="media-heading">'+shopname+'</h4>'
+            			    str += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pin</div>'
+            			    str += '</div>'
+          		      	    $('.target').append(str);
           		      	
           		      	
             			}
@@ -310,7 +342,7 @@ function closeNav() {
             postFunc();
             setTimeout(function(){
             $('.postLoader').empty();
-            $('#target').append(str);
+            $('.target').append("<div><h1>테스트창</h1></div>");
       }, 2000);
       processScroll = true;
     }

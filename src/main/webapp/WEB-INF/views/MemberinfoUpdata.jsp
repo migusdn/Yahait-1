@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">아이디*</label>
 				<div class="col-sm-9">
-					<input type="text" name="id" id="id" placeholder=${iogincheck}
+					<input type="text" name="id" id="id" placeholder="${iogincheck}"
 						class="form-control" disabled autofocus>
 				</div>
 			</div>
@@ -49,15 +49,14 @@
 			<div class="form-group">
 				<label for="email" class="col-sm-3 control-label">이메일*</label>
 				<div class="col-sm-9">
-					<input type="email" name="mail_id" id="mail_id" placeholder=${mailinfo}
+					<input type="email" name="mail_id" id="mail_id" placeholder="${mailinfo}"
 						class="form-control" disabled>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">이름*</label>
 				<div class="col-sm-9">
-					<input type="text" name="name" id="name" placeholder="이름"
-						class="form-control">
+					<input type="text" name="name" id="name" placeholder="${name}" class="form-control" disabled>
 				</div>
 			</div>
 			<div class="form-group">
@@ -65,8 +64,8 @@
 					번호*</label>
 				<div class="col-sm-9">
 					<input type="phoneNumber" name="cellphone" id="cellPhone"
-						placeholder="휴대폰 번호" class="form-control"> <span
-						class="help-block">인증에 필요합니다. </span>
+						placeholder="${phone}" class="form-control" disabled> <span
+						class="help-block" >인증에 필요합니다. </span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -89,18 +88,18 @@
 				</div>
 			</div>
 		</form>
-		<button class="btn btn-primary btn-block" onclick="signcehck()">회원정보 수정</button>
+		<button class="btn btn-primary btn-block" onclick="memberinfoupdata()">회원정보 수정</button>
 
 	</div>
 </body>
 
 <script>
-	function signcehck() {
+	function MemberinfoUpdataAct() {
 
 		if (check() == false)
 			return;
 		//입력폼 JSON형태로 변환하여 객체생성
-		var date = new Date($('#MemberinfoUpdataAct').val())
+		var date = new Date($('#MemberinfoUpdataAct').val());
 		var signinfo = 
 			"name" : $("#name").val().trim(),
 			"pass" : $("#pw").val().trim(),

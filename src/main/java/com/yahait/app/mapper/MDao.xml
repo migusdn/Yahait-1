@@ -36,8 +36,9 @@
 	select member_num from member where member_id = #{id}
 	</select>
 	
-	<select id="member_mail_info" resultType="com.yahait.app.Dto.MemberDto">
-	select mail1 , mail2 from member where member_id = #{id}	
+	<select id="Show_member_info" resultType="com.yahait.app.Dto.MemberDto">
+	select member_id, member_password, member_name, gender, mail1,
+		mail2, phone1,birth_y,birth_m,birth_d from member where member_id = #{id}	
 	</select>
 	
 

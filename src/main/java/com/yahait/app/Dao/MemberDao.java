@@ -66,7 +66,7 @@ public class MemberDao implements MDao {
 	}
 
 	@Override
-	public ArrayList<MemberDto> member_mail_info(String member_id) {
+	public ArrayList<MemberDto> Show_member_info(String member_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

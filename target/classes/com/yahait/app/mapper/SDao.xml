@@ -11,8 +11,8 @@
 	SELECT member_num FROM member WHERE member_id=#{member_id}
 	</select>
 	<insert id="Shop_add" parameterType="map">
-	INSERT INTO shop (member_num,shop_name, category_name1, category_name2,state, shop_info, shop_pic)
-	VALUES(#{member_num},#{shop_name},#{category_name1},#{category_name2},1, #{shop_info}, #{shop_pic})
+	INSERT INTO shop (member_num,shop_name, category_name1, category_name2,state, shop_info, shop_pic,point)
+	VALUES(#{member_num},#{shop_name},#{category_name1},#{category_name2},1, #{shop_info}, #{shop_pic}, POINT(#{gps_y}, #{gps_x}))
 	</insert>
 	<select id="Shop_list" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
 	SELECT * FROM shop WHERE member_num=#{member_num}

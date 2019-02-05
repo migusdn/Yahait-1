@@ -90,7 +90,7 @@ public class ShopController {
 	}
 
 	@RequestMapping("/SellAct")
-	
+	@ResponseBody
 	public String SellAct(MultipartHttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
 		
 		
@@ -119,7 +119,6 @@ public class ShopController {
 		MultipartFile mf = request.getFile("shop_pic");
 		Map map = new HashMap();
 		if (mf != null) {
-			System.out.println("adsf");
 			String name = mf.getName(); // 필드 이름 얻기
 			String fileName = mf.getOriginalFilename(); // 파일명 얻기
 			String contentType = mf.getContentType(); // 컨텐츠 타입 얻기
@@ -129,8 +128,6 @@ public class ShopController {
 					+ fileName.substring(fileName.lastIndexOf("."));
 			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
 			String uploadPath = p.toString();
-			
-			
 			// 지정한주소에 파일 저장
 			if (mf.getSize() != 0) {
 				mf.transferTo(new File(uploadPath + "/" + uploadedFileName));
@@ -146,6 +143,8 @@ public class ShopController {
 			map.put("category_name2", (String) request.getParameter("category_name2").trim());
 			map.put("shop_info", (String) request.getParameter("shop_info").trim());
 			map.put("shop_pic",uploadedFileName);
+			map.put("gps_x", (String) request.getParameter("gps_x").trim());
+			map.put("gps_y", (String) request.getParameter("gps_y").trim());
 			SDao name_check = sqlSession.getMapper(SDao.class);
 			ShopDto check = name_check.name_duplication_check((String)map.get("shop_name"));
 			if(check != null) {
@@ -166,6 +165,9 @@ public class ShopController {
 			System.out.println("상점 카테고리: "+map.get("category_name1"));
 			System.out.println("상점 카테고리: "+map.get("category_name2"));
 			System.out.println("상점 설명: "+map.get("shop_info"));
+			System.out.println("상점 X 좌표: "+map.get("gps_x"));
+			System.out.println("상점 Y 좌표: "+map.get("gps_y"));
+			
 			
 		
 			}

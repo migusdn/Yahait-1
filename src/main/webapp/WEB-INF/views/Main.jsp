@@ -56,7 +56,7 @@
       }
 
       #main {
-        transition: margin-left .5s;
+       transition: margin-left .5s;
        padding: 16px;
       }
 
@@ -70,25 +70,31 @@
           text-align: center;
           width: 100%;
         }
+        #ys h1{
+        font-family: Catamaran;
+        line-height: 50px;
+        }
         .fixed{
           position: fixed;
           top: 0px;
         }
-        .rec{
+        .rec{	
           border: 1px solid black;
           margin: 20px;
         }
         /* 포토슬라이드 css */
         .ps{
           display: block;
-          margin: 0px auto;
+          margin: 50px auto;
         }
         .slide{
-          height: 20%;
+          height: 30%;
         }
         .carousel-inner, .item{
           height: 100%;
+          background-color: #fffafa;
         }
+ 
         .carousel-caption{
           color: black;
         }
@@ -97,11 +103,8 @@
         }
         /*하단 고정 메뉴바*/
         .page-footer{
-        
           position:fixed;
-          
           bottom:0px;
-          
           width:100%;
           background-color: white;
           text-align: center;

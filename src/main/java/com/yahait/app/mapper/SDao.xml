@@ -20,6 +20,10 @@
 	<update id="StateUpdate" parameterType="map">
 	UPDATE shop SET state = #{state} WHERE shop_name =#{shop_name}
 	</update>
+	<update id="Shop_info_Update" parameterType="map">
+	UPDATE shop SET shop_name = #{shop_name}, category_name1 = #{category_name1}, category_name2=#{category_name2}, shop_info = #{shop_info}, shop_pic = #{shop_pic}
+	WHERE shop_num =#{shop_num}
+	</update>
 	<select id="Shop_show" resultType="com.yahait.app.Dto.ShopDto">
 	select shop_name , shop_pic from shop
 	</select>

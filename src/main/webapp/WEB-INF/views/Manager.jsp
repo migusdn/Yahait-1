@@ -108,9 +108,15 @@ p {
 						<%=state[shop_data.get(i).getState()]%> state = "<%=shop_data.get(i).getState() %>"> <span
 						class="slider round"></span>
 					</label>
-					<button class="btn btn-primary btn-block" onclick="modify()">수정하기</button>
+					
 					<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
 				</div>
+			</div>
+			</form>
+			<form class="form-horizontal" name="update_<%=shop_data.get(i).getShop_num() %>" method="post" action="ShopinfoUpdate">
+			<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
+			<div class="form-group">
+			<input type="submit" class="btn btn-primary btn-block" value="수정하기">
 			</div>
 			</form>
 			<%

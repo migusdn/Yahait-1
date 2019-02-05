@@ -61,4 +61,12 @@ public class ShopDao implements SDao {
 	}
 
 
+
+	@Override
+	public void Shop_info_Update(Map map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

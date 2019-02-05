@@ -53,9 +53,7 @@ public class YahaitController {
 		String Name = loigndate.get(0).getName();
 		String password = loigndate.get(0).getPassword();
 		String id = loigndate.get(0).getId();
-
 		System.out.println("데이터베이스 회원정보 데이터값 이름:" + Name + " 패스워드:" + password + " ID:" + id);
-
 		// Login.jsp을 불러옴
 		*/
 		return "Login";
@@ -409,7 +407,7 @@ public class YahaitController {
 		
 		Map map = new HashMap();
 		map.put("member_password", jsonObj.get("pass").toString());
-		map.put("member_id", member_num.get(0).getMember_num());
+		map.put("member_id", logincheckstring);
 		
 		try {
 		dao.member_info_Update(map);

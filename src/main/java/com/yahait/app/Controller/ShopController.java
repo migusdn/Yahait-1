@@ -295,5 +295,99 @@ public class ShopController {
 		}
 		return "EX";
 	}
-	
+	@RequestMapping("/ShopinfoUpdate")
+	public String ShopinfoUpdate(Model model, HttpServletRequest request) {
+		String shop_num = (String)request.getParameter("shop_num");
+		SDao dao = sqlSession.getMapper(SDao.class);
+		ArrayList<ShopDto> shop_info = dao.Shop_info(shop_num);
+		Map map = new HashMap();
+		map.put("shop_num", shop_num);
+		map.put("shop_name", shop_info.get(0).getShop_name());
+		map.put("category_name1", shop_info.get(0).getCategory_name1());
+		map.put("category_name2", shop_info.get(0).getCategory_name2());
+		map.put("shop_info", shop_info.get(0).getShop_info());
+		map.put("shop_pic", shop_info.get(0).getShop_pic());
+		model.addAllAttributes(map);
+		
+		return "ShopinfoUpdate";
+	}
+	@RequestMapping("/ShopinfoUpdateAct")
+	public String ShopinfoUpdateAct(MultipartHttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
+		
+		
+		System.out.println("상점 정보 수정 컨트롤러 접속");   
+		System.out.println("------------------------------");
+		// 클라이언트측에서 날라온 데이터확인
+		String logincheckstring = (String) session.getAttribute("iogincheck");
+		if (logincheckstring == null) {
+			System.out.println("로그인세션 없음");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근'); window.location.href = \"Login\";</script>");
+			out.flush();
+		} else {
+			System.out.println("세션ID :"+logincheckstring);
+		}
+
+		// Multipart 요청이 들어올때 내부적으로 원본 HttptServletRequest 대신 사용되는 인터페이스.
+		// MultipartHttpServletRequest 인터페이스는
+		// HttpServletRequest 인터페이스와 MultipartRequest인터페이스를 상속받고있다.
+		// 즉 웹 요청 정보를 구하기 위한 getParameter()와 같은 메서드와 Multipart관련 메서드를 모두 사용가능.
+
+		// 일반 양식은 이전에 사용하던 방식과 같이 데이터를 가져올수있음
+		
+		// 파일
+		MultipartFile mf = request.getFile("shop_pic");
+		Map map = new HashMap();
+		if (mf != null) {
+			String name = mf.getName(); // 필드 이름 얻기
+			String fileName = mf.getOriginalFilename(); // 파일명 얻기
+			String contentType = mf.getContentType(); // 컨텐츠 타입 얻기
+
+			// 업로드 파일명을 변경후 저장
+			String uploadedFileName = System.currentTimeMillis() + UUID.randomUUID().toString()
+					+ fileName.substring(fileName.lastIndexOf("."));
+			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
+			String uploadPath = p.toString();
+			// 지정한주소에 파일 저장
+			if (mf.getSize() != 0) {
+				mf.transferTo(new File(uploadPath + "/" + uploadedFileName));
+			}
+			// item 테이블에 들어갈 map객체 작성
+			map.put("shop_num", (String)request.getParameter("shop_num").trim());
+			map.put("shop_name", (String) request.getParameter("shop_name").trim());
+			map.put("category_name1", (String) request.getParameter("category_name1").trim());
+			map.put("category_name2", (String) request.getParameter("category_name2").trim());
+			map.put("shop_info", (String) request.getParameter("shop_info").trim());
+			map.put("shop_pic",uploadedFileName);
+			
+			//콘솔 출력
+			System.out.println("입력 파일정보\n");
+			System.out.println("파라미터이름:" + mf.getName());
+			System.out.println("파일명:" + mf.getOriginalFilename());
+			System.out.println("파일사이즈:" + mf.getSize());
+			System.out.println("업로드 파일명: "+uploadedFileName);
+			System.out.println("실제 파일 업로드 경로 : " + uploadPath);
+			System.out.println("------------------------------");
+			System.out.println("form이 전송한  데이터\n");
+			System.out.println("상점 이름: "+map.get("shop_name"));
+			System.out.println("상점 카테고리: "+map.get("category_name1"));
+			System.out.println("상점 카테고리: "+map.get("category_name2"));
+			System.out.println("상점 설명: "+map.get("shop_info"));
+			
+			
+		
+			
+		}
+		
+		try {
+			SDao dao = sqlSession.getMapper(SDao.class);
+			dao.Shop_info_Update(map);
+		}catch(Exception e) {
+			System.out.println("SQL 에러");
+		}
+
+
+		return "OK";
+	}
 }

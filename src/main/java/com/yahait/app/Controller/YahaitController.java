@@ -235,10 +235,11 @@ public class YahaitController {
         
 		for(int i=0; i<shoplist.size(); i++){
 		JSONObject shopInfo = new JSONObject();
+		String shop_num = shoplist.get(i).getShop_num();
 		String shopname = shoplist.get(i).getShop_name();
 		String shoppic = shoplist.get(i).getShop_pic();
 		System.out.println("상점아이디("+i+"):" +shopname+"상점이미지경로("+i+"):"  +shoppic);
-		
+		shopInfo.put("shop_num", shop_num );
 		shopInfo.put("shopname",shopname);
 		shopInfo.put("shoppic",shoppic);
 		shopArray.add(shopInfo);

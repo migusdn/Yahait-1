@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yahait.app.Dao.MDao">
+
+	<select id="loigndate_show" resultType="com.yahait.app.Dto.MemberDto">
+		SELECT member_id,member_password,member_name FROM member
+	</select>
+
+	<select id="logincehck" resultType="com.yahait.app.Dto.MemberDto">
+		SELECT member_id,member_password FROM member where member_id = #{id}
+	</select>
+	<select id="id_duplication_check"
+		resultType="com.yahait.app.Dto.MemberDto">
+		SELECT member_id FROM member where member_id = #{id}
+	</select>
+	<select id="findID" parameterType="hashMap"
+		resultType="com.yahait.app.Dto.MemberDto">
+		select member_id FROM member where member_name = #{name} and mail1 = #{mail1} and mail2 = #{mail2}
+	</select>
+
+	<insert id="signup" parameterType="hashMap">
+		INSERT INTO member (member_id, member_password, member_name, gender, mail1,
+		mail2, phone1,birth_y,birth_m,birth_d)
+		VALUES
+		(#{id},#{password},#{name},#{gender},#{mail1},#{mail2},#{phone1},#{birth_y},#{birth_m},#{birth_d})
+	</insert>
+
+	<select id="findPW" parameterType="hashMap"
+		resultType="com.yahait.app.Dto.MemberDto">
+		select member_password FROM member where member_id= #{id} and member_name = #{name} and phone1=#{phone1}
+	</select>	
+	<select id="member_num_info" resultType="com.yahait.app.Dto.MemberDto">
+	select member_num from member where member_id = #{id}
+	</select>
+	
+	<select id="Show_member_info" resultType="com.yahait.app.Dto.MemberDto">
+	select member_id, member_password, member_name, gender, mail1,
+		mail2, phone1,birth_y,birth_m,birth_d from member where member_id = #{id}	
+	</select>
+	<update id="member_info_Update" parameterType="map">
+	UPDATE member SET member_password = #{member_password} WHERE member_id =#{member_id}
+	</update>
+	
+
+</mapper>

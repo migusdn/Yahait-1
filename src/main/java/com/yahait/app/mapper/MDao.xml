@@ -40,6 +40,9 @@
 	select member_id, member_password, member_name, gender, mail1,
 		mail2, phone1,birth_y,birth_m,birth_d from member where member_id = #{id}	
 	</select>
+	<update id="member_info_Update" parameterType="map">
+	UPDATE member SET member_password = #{member_password} WHERE member_id =#{member_id}
+	</update>
 	
 
 </mapper>

@@ -118,14 +118,14 @@
 
 	  	background-color: #fffafa;
       	border-style: solid;
-      	border-color: #dcdcdc 	;
-
+      	border-color: #dcdcdc;
+		
       	}
 
       	.media-object{
-
+		
       	margin: 20px;
- 
+ 		
       	}
       	</style>
 
@@ -274,7 +274,7 @@ $(document).ready(function() {
             			var str =  '<div class="media">'
             			    str += '<div class="media-left">'
             				str += '<a href="#"><img class="media-object" src="images/'+shoppic+ '" alt="test"></a></div>'
-            				str += '<div class="media-body">'
+            				str += '<div class="media-body" style="opacity: 0.8;">'
             				str += '<p><a href="#" class="btn btn-primary" role="button">상점바로가기</a>' 
             				str += '<a href="#" class="btn btn-default" role="button">상점위치찾기</a></p>'
             				str += '<div class="col-xs-12 col-md-3 text-center">'

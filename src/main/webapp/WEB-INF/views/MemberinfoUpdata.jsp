@@ -94,41 +94,28 @@
 </body>
 
 <script>
-	function MemberinfoUpdataAct() {
-
-		if (check() == false)
-			return;
+	function memberinfoupdata() {
 		//입력폼 JSON형태로 변환하여 객체생성
-		var date = new Date($('#MemberinfoUpdataAct').val());
-		var signinfo = 
-			"name" : $("#name").val().trim(),
+		var signinfo = {
 			"pass" : $("#pw").val().trim(),
-			"mail" : $("#mail_id").val().trim(),
-			"cellPhone" : $("#cellPhone").val().trim(),
-			"gender" : $('[name="gender"]:checked').val().trim(),
-			"birthDate" : date.getFullYear() + "-" + date.getMonth() + "-"
-					+ date.getDate()
 		};
 
 		$.ajax({
-			url : 'SignupCheck', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
+			url : 'MemberinfoUpdataAct', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
 			type : 'POST', //post 일경부 rquestbody 안으로들어감
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
 			data : JSON.stringify(signinfo), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
 			success : function(data) { //data는 서버측에서 날라온 데이터를 다시 받아서 ajax 처리
 
-				if (data == "duplicated_id") {
-					alert("이미 가입된 아이디입니다.");
+				if (data == "SQL") {
+					alert("공백으로 두지 마십시오");
 
 				} else if (data == "OK") {
-					alert("회원 가입이 완료되었습니다.");
-					window.location.href = "Login";
-				} else if (data == "BirthError") {
-					alert("생년월일을 정확히 입력해주십시오.")
-				}
+					alert("회원 정보 수정이 완료 되었습니다.");
+					window.location.href = "Main";
 			}
-
+		}
 		});
 
 	}

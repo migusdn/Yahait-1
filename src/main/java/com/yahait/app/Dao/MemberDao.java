@@ -71,6 +71,12 @@ public class MemberDao implements MDao {
 		return null;
 	}
 
+	@Override
+	public void member_info_Update(Map map) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	

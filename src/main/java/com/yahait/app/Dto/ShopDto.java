@@ -9,7 +9,25 @@ public class ShopDto {
 	private int state;
 	private String shop_pic;
 	private String shop_info;
+	private String gps_x;
+	private String gps_y;
 	
+	public String getGps_x() {
+		return gps_x;
+	}
+
+	public void setGps_x(String gps_x) {
+		this.gps_x = gps_x;
+	}
+
+	public String getGps_y() {
+		return gps_y;
+	}
+
+	public void setGps_y(String gps_y) {
+		this.gps_y = gps_y;
+	}
+
 	public String getShop_info() {
 		return shop_info;
 	}

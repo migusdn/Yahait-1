@@ -390,8 +390,36 @@ public class YahaitController {
 	}
 	
 	@RequestMapping("MemberinfoUpdataAct")
-	public String MemberinfoUpdataAct(Model model) {
-		return "MemberinfoUpdataAct";
+	@ResponseBody
+	public String MemberinfoUpdataAct(Model model, HttpSession session, @RequestBody String paramData)
+			throws IOException, ParseException {
+		String logincheckstring = (String) session.getAttribute("iogincheck");
+		System.out.println("회원정보 수정  컨트롤러 접속");
+		System.out.println("-------------------------");
+		System.out.println("Session_ID :"+logincheckstring);
+		// 클라이언트측에서 날라온 데이터확인
+		System.out.println("클라이언트전송데이터(JSON):" + paramData);
+		// JSON객체를 생성하여 키&벨류 값으로 쪼개기
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환
+		// JSON데이값을 스트링 객체로 저장
+		
+		MDao dao = sqlSession.getMapper(MDao.class);
+		ArrayList<MemberDto> member_num = dao.member_num_info(logincheckstring);
+		
+		Map map = new HashMap();
+		map.put("member_password", jsonObj.get("pass").toString());
+		map.put("member_id", member_num.get(0).getMember_num());
+		
+		try {
+		dao.member_info_Update(map);
+		}catch(Exception e) {
+			System.out.println("SQL 에러");
+			return "SQL";
+		} System.out.println(member_num.get(0).getMember_id());
+		
+		
+		return "OK";
 	}
 	
 }

@@ -94,24 +94,17 @@
 </body>
 
 <script>
-	function MemberinfoUpdataAct() {
+	function memberinfoupdata() {
 
-		if (check() == false)
-			return;
+		//if (check() == false)
+		//	return;
 		//입력폼 JSON형태로 변환하여 객체생성
-		var date = new Date($('#MemberinfoUpdataAct').val());
-		var signinfo = 
-			"name" : $("#name").val().trim(),
-			"pass" : $("#pw").val().trim(),
-			"mail" : $("#mail_id").val().trim(),
-			"cellPhone" : $("#cellPhone").val().trim(),
-			"gender" : $('[name="gender"]:checked').val().trim(),
-			"birthDate" : date.getFullYear() + "-" + date.getMonth() + "-"
-					+ date.getDate()
+		var signinfo = {
+			"pass" : $("#pw").val().trim()
 		};
 
 		$.ajax({
-			url : 'SignupCheck', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
+			url : 'MemberinfoUpdataAct', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
 			type : 'POST', //post 일경부 rquestbody 안으로들어감
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태

@@ -68,7 +68,6 @@
 </body>
 
 <script>
-
  $(function(){
 	    
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  
@@ -98,26 +97,6 @@
 	       }                               
 		});
 	});
-	
-/* 	function check() {
-		var name = $("#category1").val().trim();
-		if (name == "") {
-			alert("카테고리1를 입력해주세요.");
-			return false;
-		}
-		var name = $("#category1").val().trim();
-		if (name == "") {
-			alert("카테고리2를 입력해주세요.");
-			return false;
-		}
-
-		var id = $("#title").val().trim();
-		if (id == "") {
-			alert("상점이름을 입력해주세요.");
-			return false;
-		}
-		return true;
-	} */
 </script>
 
 </html>

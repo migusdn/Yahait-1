@@ -131,7 +131,7 @@
     <!-- 슬라이드 부분 -->
    <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-     <a href="#">내정보 수정</a>
+     <a href="MemberinfoUpdata">내정보 수정</a>
      <a href="Sell">판매하기</a>
      <a href="Manager">내 상점 관리</a>
      <a href="#">문의</a>

@@ -1,5 +1,8 @@
 <!--김민섭 1.9 -->
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.yahait.app.Dto.ItemDto"%>
+<%@ page import="java.util.ArrayList"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -27,38 +30,32 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=999f0565c619323f15dd9635ee4d4962"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=999f0565c619323f15dd9635ee4d4962"></script>
 <style>
 html, body {
 	width: 100%;
 	height: 100%;
 }
-
 .store {
 	text-align: center;
 }
-
 .menu {
 	border: 1px solid black;
 	text-align: center;
 	margin: 20px;
 }
-
 .review {
 	border: 1px solid black;
 	margin: 20px;
 }
-
 .order {
 	float: left;
 	padding: 20px
 }
-
 .shoplist {
 	float: right;
 	padding: 20px;
 }
-
 .bottom {
 	position: fixed;
 	left: 0px;
@@ -66,16 +63,13 @@ html, body {
 	width: 100%;
 	background-color: white
 }
-
 li {
 	float: left;
 	width: 33%;
 }
-
 a {
 	text-align: center;
 }
-
 .lbtn {
 	background-color: white;
 	width: 100%;
@@ -108,49 +102,39 @@ a {
 		</ul>
 		<form action="test.jsp" name="test" method="post">
 			<div class="tab-content">
+
 				<div role="tabpanel" class="tab-pane fade in active" id="menu">
+					<%
+						ArrayList<ItemDto> item_list = (ArrayList<ItemDto>) request.getAttribute("item_list");
+						for (int i = 0; i < item_list.size(); i++) {
+					%>
 					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
 						<label class="btn btn-info btn-lg btn-block"> <input
 							type="checkbox" name="a" class="check" autocomplete="off">
-						<h2>제육덮밥</h2>
+							<h2><%=item_list.get(i).getItem_name()%></h2>
 						</label>
 					</div>
-					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
-						<label class="btn btn-info btn-lg btn-block"> <input
-							type="checkbox" autocomplete="off">
-						<h2>돈까스</h2>
-						</label>
-					</div>
-					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
-						<label class="btn btn-info btn-lg btn-block"> <input
-							type="checkbox" autocomplete="off">
-						<h2>뚝불</h2>
-						</label>
-					</div>
-					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
-						<label class="btn btn-info btn-lg btn-block"> <input
-							type="checkbox" autocomplete="off">
-						<h2>매운등갈비찜</h2>
-						</label>
-					</div>
+					<%
+						}
+					%>
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="information">
 					<div class="information">
-						<h2>삼육대학교 정안</h2>
-						<h3>031)1234-1234</h3>
+						<h2>${shop_name }</h2>
+						<h3>${shop_info }</h3>
 					</div>
-					<div class="map">
+					<!-- <div class="map">
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<script>
 					var mapContainer = document.getElementById('map'), mapOption = {
 				            center : new daum.maps.LatLng(33.450701, 126.570667),
 				            level : 3
 				         };
-
 				         var map = new daum.maps.Map(mapContainer, mapOption);
 				         </script>
 					</div>
-					</div>
+ -->
+				</div>
 				<div role="tabpanel" class="tab-pane fade" id="review">
 					<div class="review">
 						<h2>JMT</h2>
@@ -178,16 +162,13 @@ a {
 			e.preventDefault();
 			$(this).tab('show');
 		})
-
 		//김민섭 1.15 ~  주문버튼 테스트 중
 		$('.btn1').click(function() {
 			//document.test.action="practice.html";
 			document.test.action = "a.jsp";
 			document.test.method = "post";
-
 			var a = $('.check').val();
 			request.setAttribute("test", a);
-
 			document.test.submit();
 		})
 	</script>

@@ -54,5 +54,19 @@ public class ShopDao implements SDao {
 		
 	}
 
+	@Override
+	public ShopDto name_duplication_check(String parameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void Shop_info_Update(Map map) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

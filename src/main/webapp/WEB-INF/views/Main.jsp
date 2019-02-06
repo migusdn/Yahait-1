@@ -20,7 +20,6 @@
         font-family: "Lato", sans-serif;
         transition: background-color .5s;
       }
-
       .sidenav {
         height: 100%;
         width: 0;
@@ -33,7 +32,6 @@
         transition: 0.5s;
         padding-top: 60px;
       }
-
       .sidenav a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
@@ -42,11 +40,9 @@
         display: block;
         transition: 0.3s;
       }
-
       .sidenav a:hover {
         color: #f1f1f1;
       }
-
       .sidenav .closebtn {
         position: absolute;
         top: 0;
@@ -54,12 +50,10 @@
         font-size: 36px;
         margin-left: 50px;
       }
-
       #main {
-       transition: margin-left .5s;
+        transition: margin-left .5s;
        padding: 16px;
       }
-
       @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
@@ -70,31 +64,25 @@
           text-align: center;
           width: 100%;
         }
-        #ys h1{
-        font-family: Catamaran;
-        line-height: 50px;
-        }
         .fixed{
           position: fixed;
           top: 0px;
         }
-        .rec{	
+        .rec{
           border: 1px solid black;
           margin: 20px;
         }
         /* 포토슬라이드 css */
         .ps{
           display: block;
-          margin: 50px auto;
+          margin: 0px auto;
         }
         .slide{
-          height: 30%;
+          height: 20%;
         }
         .carousel-inner, .item{
           height: 100%;
-          background-color: #fffafa;
         }
- 
         .carousel-caption{
           color: black;
         }
@@ -102,7 +90,7 @@
           background-image: none;
         }
         /*하단 고정 메뉴바*/
-        .page-footer{
+        .bottom{
           position:fixed;
           bottom:0px;
           width:100%;
@@ -118,17 +106,13 @@
         
         /*템플릿*/
       	.media {
-
 	  	background-color: #fffafa;
       	border-style: solid;
-      	border-color: #dcdcdc;
-		
+      	border-color: #dcdcdc 	;
       	}
-
       	.media-object{
-		
       	margin: 20px;
- 		
+ 
       	}
       	</style>
 
@@ -147,7 +131,7 @@
     <!-- 슬라이드 부분 -->
    <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-     <a href="MemberinfoUpdata">내정보 수정</a>
+     <a href="#">내정보 수정</a>
      <a href="Sell">판매하기</a>
      <a href="Manager">내 상점 관리</a>
      <a href="#">문의</a>
@@ -204,47 +188,48 @@
     
 <div class="target">
 </div>
+
+
 <div class="postLoader">
 </div>
 
 
-	    <footer class="page-footer font-small indigo">
-	        <div class="container">
-	     	<div class="row text-center text-xs-center text-sm-left text-md-left">
-	       <div class="col-xs-12 col-sm-3 col-md-3">
+    <div class="bottom text-center d-flex justify-content-center pt-5 mb-3">
+	    <footer class="page-footer font-small indigo"  >
+
+	       <div class="col-md-2">
           	<h6 class="text-uppercase font-weight-bold">
             <a href="#"><h2>홈</h2></a>
           		</h6>
         	</div>
         	
-	         <div class="col-xs-12 col-sm-3 col-md-3">
+	         <div class="col-md-2">
           	<h6 class="text-uppercase font-weight-bold">
             <a href="#"><h2>즐겨찾기</h2><a>
           	</h6>
         	</div>
         	
-	       <div class="col-xs-12 col-sm-3 col-md-3">
+	       <div class="col-md-2">
           	<h6 class="text-uppercase font-weight-bold">
             <a href="#"><h2>주문알림</h2></a>
           		</h6>
         	</div>
         	
-	       <div class="col-xs-12 col-sm-3 col-md-3">
+	       <div class="col-md-2">
           	<h6 class="text-uppercase font-weight-bold">
             <a href="#"><h2>지도</h2></a>
           		</h6>
         	</div>
-        	</div>
      
-     </div>
    		 </footer>
-
+    </div>
     
 </div>
   </body>
 </html>
 
 <script>
+
 $(document).ready(function() {
 	
 	var Mainfetch = null;
@@ -273,12 +258,16 @@ $(document).ready(function() {
             			console.log(i+"번째 jsob값"+Mainfetch.shop[i].shopname+"   "+Mainfetch.shop[i].shoppic);
             			var shopname = Mainfetch.shop[i].shopname;
             			var shoppic = Mainfetch.shop[i].shoppic;
+            			var shop_num = Mainfetch.shop[i].shop_num;
             			
             			var str =  '<div class="media">'
             			    str += '<div class="media-left">'
-            				str += '<a href="#"><img class="media-object" src="images/'+shoppic+ '" alt="test"></a></div>'
-            				str += '<div class="media-body" style="opacity: 0.8;">'
-            				str += '<p><a href="#" class="btn btn-primary" role="button">상점바로가기</a>' 
+            				str += '<a href="#"><img class="media-object" src="resources/images/'+shoppic+ '" alt="test" width="100" height = "100"></a></div>'
+            				str += '<div class="media-body">'
+            				str += '<form method="post" action="Shop">'
+            				str += '<input type="hidden" name="shop_num", value="'+shop_num+'">'
+            				str += '<p><input type="submit" class="btn btn-primary" value="상점 바로가기">'
+            				str += '</form>'
             				str += '<a href="#" class="btn btn-default" role="button">상점위치찾기</a></p>'
             				str += '<div class="col-xs-12 col-md-3 text-center">'
             				str += '<h1 class="rating-num">4.0</h1>'
@@ -350,6 +339,9 @@ function closeNav() {
       processScroll = true;
     }
   })
+  
+  
+
   
   
 </script>

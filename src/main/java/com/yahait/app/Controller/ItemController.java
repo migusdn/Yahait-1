@@ -150,7 +150,7 @@ public class ItemController {
 			// 업로드 파일명을 변경후 저장
 			String uploadedFileName = System.currentTimeMillis() + UUID.randomUUID().toString()
 					+ fileName.substring(fileName.lastIndexOf("."));
-			Path p = Paths.get("C:\\Users\\KyungHwan\\Desktop\\Yahait\\src\\main\\webapp\\resources\\images");
+			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
 			String uploadPath = p.toString();
 			
 			
@@ -166,7 +166,7 @@ public class ItemController {
 			map.put("item_contents", (String) request.getParameter("item_contents").trim());
 			map.put("item_pic",uploadedFileName);
 			IDao item_check = sqlSession.getMapper(IDao.class);
-			ItemDto check = item_check.item_duplication_check((String)request.getParameter("item_name"));
+			ItemDto check = item_check.item_duplication_check(map);
 			if(check != null) {
 				System.out.println("중복된 상품명");
 				return "NAME";

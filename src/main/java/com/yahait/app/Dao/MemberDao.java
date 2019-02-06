@@ -66,15 +66,15 @@ public class MemberDao implements MDao {
 	}
 
 	@Override
-	public void member_info_Update(Map map) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public ArrayList<MemberDto> Show_member_info(String member_id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void member_info_Update(Map map) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -69,7 +69,6 @@
 
 <script>
 	$(function() {
-
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  
 		$('#multiform').ajaxForm({ 
 			cache : false,
@@ -101,13 +100,11 @@
 	</script>
 	<script>
 	function shop_delete() {
-
 		//입력폼 JSON형태로 변환하여 객체생성
 		var delete_info = {
 			"shop_num" : ${shop_num}
 		
 		};
-
 		$.ajax({
 			url : 'Shop_delete', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
@@ -115,18 +112,15 @@
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
 			data : JSON.stringify(delete_info), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
 			success : function(data) { //data는 서버측에서 날라온 데이터를 다시 받아서 ajax 처리
-
 				if (data == "OK") {
 					alert("삭제에 성공하였습니다");
 					window.location.href = "Manager";
-
 				} else {
 					alert("삭제에 실패 하였습니다");
 				}
 				
 			}
 		
-
 		});
 	}
 	

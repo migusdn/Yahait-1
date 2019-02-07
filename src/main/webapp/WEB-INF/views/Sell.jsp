@@ -73,15 +73,13 @@
 			<input type="hidden" name="gps_y" value="">
 			<input type="submit" class="btn btn-primary btn-block" value="개설">
 		</form>
-			<button onclick="getLocation2()">gdgd</button>
+
 
 	</div>
 </body>
 <script>
-function getLocation2(){
     var gps_x;
 	var gps_y; 
-	alert('hi');
 	function getLocation() {
 		if (navigator.geolocation) { // GPS를 지원하면
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -103,11 +101,8 @@ function getLocation2(){
 			alert('GPS를 지원하지 않습니다');
 		}
 	}
-	
 	getLocation();
-}
 	$(function() {
-
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  
 		$('#multiform').ajaxForm({
 			cache : false,
@@ -146,7 +141,6 @@ function getLocation2(){
 			alert("카테고리2를 입력해주세요.");
 			return false;
 		}
-
 		var id = $("#title").val().trim();
 		if (id == "") {
 			alert("상점이름을 입력해주세요.");

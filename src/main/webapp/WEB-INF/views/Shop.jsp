@@ -36,32 +36,26 @@ html, body {
 	width: 100%;
 	height: 100%;
 }
-
 .store {
 	text-align: center;
 }
-
 .menu {
 	border: 1px solid black;
 	text-align: center;
 	margin: 20px;
 }
-
 .review {
 	border: 1px solid black;
 	margin: 20px;
 }
-
 .order {
 	float: left;
 	padding: 20px
 }
-
 .shoplist {
 	float: right;
 	padding: 20px;
 }
-
 .bottom {
 	position: fixed;
 	left: 0px;
@@ -69,16 +63,13 @@ html, body {
 	width: 100%;
 	background-color: white
 }
-
 li {
 	float: left;
 	width: 33%;
 }
-
 a {
 	text-align: center;
 }
-
 .lbtn {
 	background-color: white;
 	width: 100%;
@@ -115,7 +106,6 @@ a {
 				<div role="tabpanel" class="tab-pane fade in active" id="menu">
 					<%
 						ArrayList<ItemDto> item_list = (ArrayList<ItemDto>) request.getAttribute("item_list");
-
 						for (int i = 0; i < item_list.size(); i++) {
 					%>
 					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
@@ -141,7 +131,6 @@ a {
 				            center : locPosition,
 				            level : 3
 				         };
-
 				         var map = new daum.maps.Map(mapContainer, mapOption);
 				         
 				         var marker = new daum.maps.Marker({
@@ -180,16 +169,13 @@ a {
 			e.preventDefault();
 			$(this).tab('show');
 		})
-
 		//김민섭 1.15 ~  주문버튼 테스트 중
 		$('.btn1').click(function() {
 			//document.test.action="practice.html";
 			document.test.action = "a.jsp";
 			document.test.method = "post";
-
 			var a = $('.check').val();
 			request.setAttribute("test", a);
-
 			document.test.submit();
 		})
 	</script>

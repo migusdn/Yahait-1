@@ -20,7 +20,6 @@
         font-family: "Lato", sans-serif;
         transition: background-color .5s;
       }
-
       .sidenav {
         height: 100%;
         width: 0;
@@ -33,7 +32,6 @@
         transition: 0.5s;
         padding-top: 60px;
       }
-
       .sidenav a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
@@ -42,11 +40,9 @@
         display: block;
         transition: 0.3s;
       }
-
       .sidenav a:hover {
         color: #f1f1f1;
       }
-
       .sidenav .closebtn {
         position: absolute;
         top: 0;
@@ -54,12 +50,10 @@
         font-size: 36px;
         margin-left: 50px;
       }
-
       #main {
         transition: margin-left .5s;
        padding: 16px;
       }
-
       @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
@@ -112,15 +106,11 @@
         
         /*템플릿*/
       	.media {
-
 	  	background-color: #fffafa;
       	border-style: solid;
       	border-color: #dcdcdc 	;
-
       	}
-
       	.media-object{
-
       	margin: 20px;
  
       	}
@@ -141,7 +131,7 @@
     <!-- 슬라이드 부분 -->
    <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-     <a href="#">내정보 수정</a>
+     <a href="MemberinfoUpdata">내정보 수정</a>
      <a href="Sell">판매하기</a>
      <a href="Manager">내 상점 관리</a>
      <a href="#">문의</a>
@@ -239,6 +229,7 @@
 </html>
 
 <script>
+
 $(document).ready(function() {
 	
 	var Mainfetch = null;
@@ -267,12 +258,16 @@ $(document).ready(function() {
             			console.log(i+"번째 jsob값"+Mainfetch.shop[i].shopname+"   "+Mainfetch.shop[i].shoppic);
             			var shopname = Mainfetch.shop[i].shopname;
             			var shoppic = Mainfetch.shop[i].shoppic;
+            			var shop_num = Mainfetch.shop[i].shop_num;
             			
             			var str =  '<div class="media">'
             			    str += '<div class="media-left">'
-            				str += '<a href="#"><img class="media-object" src="images/'+shoppic+ '" alt="test"></a></div>'
+            				str += '<a href="#"><img class="media-object" src="resources/images/'+shoppic+ '" alt="test" width="100" height = "100"></a></div>'
             				str += '<div class="media-body">'
-            				str += '<p><a href="#" class="btn btn-primary" role="button">상점바로가기</a>' 
+            				str += '<form method="post" action="Shop">'
+            				str += '<input type="hidden" name="shop_num", value="'+shop_num+'">'
+            				str += '<p><input type="submit" class="btn btn-primary" value="상점 바로가기">'
+            				str += '</form>'
             				str += '<a href="#" class="btn btn-default" role="button">상점위치찾기</a></p>'
             				str += '<div class="col-xs-12 col-md-3 text-center">'
             				str += '<h1 class="rating-num">4.0</h1>'
@@ -344,6 +339,9 @@ function closeNav() {
       processScroll = true;
     }
   })
+  
+  
+
   
   
 </script>

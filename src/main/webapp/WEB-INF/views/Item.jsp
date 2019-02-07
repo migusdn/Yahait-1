@@ -20,12 +20,10 @@
 	height: 34px;
 	vertical-align: middle;
 }
-
 /* Hide default HTML checkbox */
 .switch input {
 	display: none;
 }
-
 /* The slider */
 .slider {
 	position: absolute;
@@ -38,7 +36,6 @@
 	-webkit-transition: .4s;
 	transition: .4s;
 }
-
 .slider:before {
 	position: absolute;
 	content: "";
@@ -50,30 +47,24 @@
 	-webkit-transition: .4s;
 	transition: .4s;
 }
-
 input:checked+.slider {
 	background-color: #2196F3;
 }
-
 input:focus+.slider {
 	box-shadow: 0 0 1px #2196F3;
 }
-
 input:checked+.slider:before {
 	-webkit-transform: translateX(26px);
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
 }
-
 /* Rounded sliders */
 .slider.round {
 	border-radius: 34px;
 }
-
 .slider.round:before {
 	border-radius: 50%;
 }
-
 p {
 	margin: 0px;
 	display: inline-block;
@@ -133,7 +124,6 @@ p {
 	</div>
 </body>
 <script type="text/javascript">
-
 	 $(".update_state").click(function() {
 		
 		 if($(this).attr('state').trim() == 0){
@@ -154,10 +144,8 @@ p {
 			contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
 			data : JSON.stringify(shop), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
 			success : function(data) { //data는 서버측에서 날라온 데이터를 다시 받아서 ajax 처리
-
 				if (data == "duplicated_id") {
 					alert("이미 가입된 아이디입니다.");
-
 				} else if (data == "OK") {
 					alert("회원 가입이 완료되었습니다.");
 					window.location.href = "Login";

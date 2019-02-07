@@ -53,7 +53,9 @@ public class YahaitController {
 		String Name = loigndate.get(0).getName();
 		String password = loigndate.get(0).getPassword();
 		String id = loigndate.get(0).getId();
+
 		System.out.println("데이터베이스 회원정보 데이터값 이름:" + Name + " 패스워드:" + password + " ID:" + id);
+
 		// Login.jsp을 불러옴
 		*/
 		return "Login";
@@ -234,16 +236,16 @@ public class YahaitController {
         
         
 		for(int i=0; i<shoplist.size(); i++){
-		JSONObject shopInfo = new JSONObject();
-		String shop_num = shoplist.get(i).getShop_num();
-		String shopname = shoplist.get(i).getShop_name();
-		String shoppic = shoplist.get(i).getShop_pic();
-		System.out.println("상점아이디("+i+"):" +shopname+"상점이미지경로("+i+"):"  +shoppic);
-		shopInfo.put("shop_num", shop_num );
-		shopInfo.put("shopname",shopname);
-		shopInfo.put("shoppic",shoppic);
-		shopArray.add(shopInfo);
-		jsonObject.put("shop", shopArray);
+			JSONObject shopInfo = new JSONObject();
+			String shop_num = shoplist.get(i).getShop_num();
+			String shopname = shoplist.get(i).getShop_name();
+			String shoppic = shoplist.get(i).getShop_pic();
+			System.out.println("상점아이디("+i+"):" +shopname+"상점이미지경로("+i+"):"  +shoppic);
+			shopInfo.put("shop_num", shop_num );
+			shopInfo.put("shopname",shopname);
+			shopInfo.put("shoppic",shoppic);
+			shopArray.add(shopInfo);
+			jsonObject.put("shop", shopArray);
 		}
 		
 		String jsonInfo = jsonObject.toJSONString();

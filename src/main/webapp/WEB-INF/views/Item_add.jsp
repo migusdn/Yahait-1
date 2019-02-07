@@ -68,7 +68,6 @@
 </body>
 
 <script>
-
  $(function(){
 	    
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  

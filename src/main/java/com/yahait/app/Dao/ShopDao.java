@@ -11,12 +11,9 @@ import com.yahait.app.Dto.ShopDto;
 
 public class ShopDao implements SDao {
 
-	JdbcTemplate template;
 
-	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-	}
+
+	JdbcTemplate template;
 
 	@Override
 	public ArrayList<ShopDto> Shop_info(String shop) {
@@ -68,5 +65,16 @@ public class ShopDao implements SDao {
 		
 	}
 
+	@Override
+	public void Shop_delete(String shop_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ShopDto point(String shop_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

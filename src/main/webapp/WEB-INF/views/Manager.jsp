@@ -84,53 +84,66 @@ p {
 </head>
 <body>
 	<div class="container">
-		
-			<h2>Shop Manager</h2>
-			<%
-				for (int i = 0; i < shop_data.size(); i++) {
-			%>
-			<form class="form-horizontal" id="<%=shop_data.get(i).getShop_num()%>" method="post" action="Item">
-			<div class="form-group">
 
-				<a href="javascript:{}" onclick="document.getElementById('<%=shop_data.get(i).getShop_num() %>').submit();"><label for="id" class="col-sm-3 control-label"><%=i%>번째 상점</label></a>
+		<h2>Shop Manager</h2>
+		
+		<%
+			if(shop_data.size()==0){
+		%>
+		<h3>개설된 상점이 없습니다.</h3>
+		<%		
+			}
+			for (int i = 0; i < shop_data.size(); i++) {
+		%>
+		<form class="form-horizontal" id="<%=shop_data.get(i).getShop_num()%>"
+			method="post" action="Item">
+			<div class="form-group">
+				<a href="javascript:{}"
+					onclick="document.getElementById('<%=shop_data.get(i).getShop_num()%>').submit();"><h3 class="col-sm-9"><%=i%>번째 상점
+				</h3></a>
+				<img width="80" heigth="80"
+					src="resources/images/<%=shop_data.get(i).getShop_pic()%>"
+					class="col-sm-9"><label
+					for="id" class="col-sm-3 control-label"></label>
 				<div class="col-sm-9">
 					<%=shop_data.get(i).getShop_name()%><label class="switch">
-						<input type="checkbox" class="update_state" id ="shop<%=i%>"data-id = "<%=shop_data.get(i).getShop_name()%>" 
-						<%=state[shop_data.get(i).getState()]%> state = "<%=shop_data.get(i).getState() %>"> <span
+						<input type="checkbox" class="update_state" id="shop<%=i%>"
+						data-id="<%=shop_data.get(i).getShop_name()%>"
+						<%=state[shop_data.get(i).getState()]%>
+						state="<%=shop_data.get(i).getState()%>"> <span
 						class="slider round"></span>
-					</label>
-					
-					<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
+					</label> <input type="hidden" name="shop_num"
+						value="<%=shop_data.get(i).getShop_num()%>">
 				</div>
 			</div>
-			</form>
-			<form class="form-horizontal" name="update_<%=shop_data.get(i).getShop_num() %>" method="post" action="ShopinfoUpdate">
-			<input type="hidden" name="shop_num" value="<%=shop_data.get(i).getShop_num() %>">
+		</form>
+		<form class="form-horizontal"
+			name="update_<%=shop_data.get(i).getShop_num()%>" method="post"
+			action="ShopinfoUpdate">
+			<input type="hidden" name="shop_num"
+				value="<%=shop_data.get(i).getShop_num()%>">
 			<div class="form-group">
-			<input type="submit" class="btn btn-primary btn-block" value="수정하기">
+				<input type="submit" class="btn btn-primary btn-block" value="수정하기">
 			</div>
-			</form>
-			<%
-				}
-			%>
+		</form>
+		<%
+			}
+		%>
 
-		
+
 	</div>
 </body>
 <script type="text/javascript">
-	 $(".update_state").click(function() {
-		
-		 if($(this).attr('state').trim() == 0){
-			 $(this).attr('state','1')
-			} 
-			else{	
-				$(this).attr('state','0')
-			}
-		 var shop = {
-				"shop_name" : $(this).attr("data-id"),
-				"shop_state" : $(this).attr("state").trim()
-			};
-		
+	$(".update_state").click(function() {
+		if ($(this).attr('state').trim() == 0) {
+			$(this).attr('state', '1')
+		} else {
+			$(this).attr('state', '0')
+		}
+		var shop = {
+			"shop_name" : $(this).attr("data-id"),
+			"shop_state" : $(this).attr("state").trim()
+		};
 		$.ajax({
 			url : 'StateUpdate', //내가 보내는 서버주소(컨트롤러 매핑: @RequestMapping("/SignupCheck"))
 			dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
@@ -148,6 +161,6 @@ p {
 				}
 			}
 		});
-	}); 
+	});
 </script>
 </html>

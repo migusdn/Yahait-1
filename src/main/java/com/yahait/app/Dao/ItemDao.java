@@ -31,4 +31,10 @@ public class ItemDao implements IDao {
 		return null;
 	}
 
+	@Override
+	public void item_delete(String item_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

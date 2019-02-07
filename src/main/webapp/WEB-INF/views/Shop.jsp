@@ -123,18 +123,25 @@ a {
 						<h2>${shop_name }</h2>
 						<h3>${shop_info }</h3>
 					</div>
-					<!-- <div class="map">
+					
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<script>
+					var locPosition = new daum.maps.LatLng(${gps_x}, ${gps_y});
 					var mapContainer = document.getElementById('map'), mapOption = {
-				            center : new daum.maps.LatLng(33.450701, 126.570667),
+				            center : locPosition,
 				            level : 3
 				         };
 				         var map = new daum.maps.Map(mapContainer, mapOption);
+				         
+				         var marker = new daum.maps.Marker({
+		                     map: map,
+		                     position: locPosition
+		                  });
+				         marker.setMap(map);
 				         </script>
 					</div>
- -->
-				</div>
+ 
+				
 				<div role="tabpanel" class="tab-pane fade" id="review">
 					<div class="review">
 						<h2>JMT</h2>

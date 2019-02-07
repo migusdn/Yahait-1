@@ -199,4 +199,26 @@ public class ItemController {
 
 		return "OK";
 	}
+	
+	@RequestMapping("/item_delete")
+	@ResponseBody
+	public String Shop_delete(@RequestBody String paramData) throws ParseException{
+		System.out.println("상품 삭제 컨트롤러 접속");
+		System.out.println("----------------------");
+		// 클라이언트측에서 날라온 데이터확인
+		System.out.println("클라이언트전송데이터(JSON):" + paramData);
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환
+		String item_num = jsonObj.get("item_num").toString().trim();
+		System.out.println("Delete_target_num: "+item_num);
+		try {
+		IDao dao = sqlSession.getMapper(IDao.class);
+		dao.item_delete(item_num);
+		}catch(Exception e) {
+			System.out.println("삭제에 실패하였습니다");
+			return "fail";
+			
+		}
+		return "OK";
+	}
 }

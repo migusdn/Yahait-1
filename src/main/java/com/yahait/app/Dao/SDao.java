@@ -17,4 +17,6 @@ public interface SDao {
 
 	public ShopDto name_duplication_check(String parameter);
 	public void Shop_info_Update(Map map);
+	public void Shop_delete(String shop_num);
+	public ShopDto point(String shop_num);
 }

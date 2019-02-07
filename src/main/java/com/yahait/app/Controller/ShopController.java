@@ -68,7 +68,7 @@ public class ShopController {
 	@RequestMapping("/Shop")
 	public String Shop(Model model, HttpSession session, @RequestBody String paramData, ServletRequest request)
 			throws IOException, ParseException {
-
+		
 		System.out.println("상점 컨트롤러 접속");
 		// 클라이언트측에서 날라온 데이터확인
 		System.out.println("클라이언트전송데이터(JSON):" + paramData);
@@ -77,6 +77,7 @@ public class ShopController {
 		System.out.println(shop_num);
 		SDao dao = sqlSession.getMapper(SDao.class);
 		ArrayList<ShopDto> Shop_info = dao.Shop_info(shop_num);
+		
 		IDao idao = sqlSession.getMapper(IDao.class);
 		ArrayList<ItemDto> item_list = idao.Item_list(shop_num);
 		try {
@@ -85,6 +86,8 @@ public class ShopController {
 		String category_name1 = Shop_info.get(0).getCategory_name1();
 		String category_name2 = Shop_info.get(0).getCategory_name2();
 		String shop_info = Shop_info.get(0).getShop_info();
+		String gps_x = Shop_info.get(0).getGps_x();
+		String gps_y = Shop_info.get(0).getGps_y();
 		int state = Shop_info.get(0).getState();
 		Map map = new HashMap();
 		System.out.println("상점 이름 :" + shop_name + " member_num :" + member_num);
@@ -92,6 +95,8 @@ public class ShopController {
 		map.put("member_num", member_num);
 		map.put("category_name1", category_name1);
 		map.put("category_name2", category_name2);
+		map.put("gps_x", gps_x);
+		map.put("gps_y", gps_y);
 		model.addAllAttributes(map);
 		model.addAttribute("item_list", item_list);
 		}catch (Exception e) {
@@ -138,7 +143,6 @@ public class ShopController {
 			String uploadedFileName = System.currentTimeMillis() + UUID.randomUUID().toString()
 					+ fileName.substring(fileName.lastIndexOf("."));
 			String rootPath = request.getSession().getServletContext().getRealPath("/") ;
-			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
 			
 			String uploadPath = rootPath + "resources/images/" ;
 			// 지정한주소에 파일 저장
@@ -385,4 +389,26 @@ public class ShopController {
 
 		return "OK";
 	}
+	@RequestMapping("/Shop_delete")
+	@ResponseBody
+	public String Shop_delete(@RequestBody String paramData) throws ParseException{
+		System.out.println("상점 삭제 컨트롤러 접속");
+		System.out.println("----------------------");
+		// 클라이언트측에서 날라온 데이터확인
+		System.out.println("클라이언트전송데이터(JSON):" + paramData);
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환
+		String shop_num = jsonObj.get("shop_num").toString().trim();
+		System.out.println("Delete_target_num: "+shop_num);
+		try {
+		SDao dao = sqlSession.getMapper(SDao.class);
+		dao.Shop_delete(shop_num);
+		}catch(Exception e) {
+			System.out.println("삭제에 실패하였습니다");
+			return "fail";
+			
+		}
+		return "OK";
+	}
+	
 }

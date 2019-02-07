@@ -85,7 +85,7 @@
 	       success: function(data){
 	    	   if(data=="OK"){
 	    	   alert("전송성공!!");
-	    	   history.go(-1);
+	    	   window.location.href = "Item?shop_num=<%=request.getParameter("shop_num") %>";
 	    	   }
 	    	   if(data=="NAME"){
 	    		   alert("이미 생성된 상품명 입니다. 다른 상품명을 입력해주세요");

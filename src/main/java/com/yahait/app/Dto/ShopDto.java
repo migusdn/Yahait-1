@@ -1,5 +1,7 @@
 package com.yahait.app.Dto;
 
+
+
 public class ShopDto {
 	private String shop_num;
 	private String member_num;
@@ -12,21 +14,6 @@ public class ShopDto {
 	private String gps_x;
 	private String gps_y;
 	
-	public String getGps_x() {
-		return gps_x;
-	}
-
-	public void setGps_x(String gps_x) {
-		this.gps_x = gps_x;
-	}
-
-	public String getGps_y() {
-		return gps_y;
-	}
-
-	public void setGps_y(String gps_y) {
-		this.gps_y = gps_y;
-	}
 
 	public String getShop_info() {
 		return shop_info;
@@ -87,4 +74,22 @@ public class ShopDto {
 	public void setState(int state) {
 		this.state = state;
 	}
+
+	public String getGps_x() {
+		return gps_x;
+	}
+
+	public void setGps_x(String gps_x) {
+		this.gps_x = gps_x;
+	}
+
+	public String getGps_y() {
+		return gps_y;
+	}
+
+	public void setGps_y(String gps_y) {
+		this.gps_y = gps_y;
+	}
+
+	
 }

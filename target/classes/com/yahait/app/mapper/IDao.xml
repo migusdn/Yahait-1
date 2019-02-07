@@ -21,4 +21,7 @@
 		SELECT item_name FROM item where item_name = #{item_name}
 		and shop_num=#{shop_num}
 	</select>
+	<delete id="item_delete" parameterType="String">
+		DELETE FROM item WHERE item_num=#{item_num}
+	</delete>
 </mapper>

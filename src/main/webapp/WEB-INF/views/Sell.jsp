@@ -73,13 +73,15 @@
 			<input type="hidden" name="gps_y" value="">
 			<input type="submit" class="btn btn-primary btn-block" value="개설">
 		</form>
-
+			<button onclick="getLocation2()">gdgd</button>
 
 	</div>
 </body>
 <script>
+function getLocation2(){
     var gps_x;
 	var gps_y; 
+	alert('hi');
 	function getLocation() {
 		if (navigator.geolocation) { // GPS를 지원하면
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -101,7 +103,9 @@
 			alert('GPS를 지원하지 않습니다');
 		}
 	}
+	
 	getLocation();
+}
 	$(function() {
 
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  

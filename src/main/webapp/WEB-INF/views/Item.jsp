@@ -113,6 +113,15 @@ p {
 				</div>
 			</div>
 			</form>
+			<form class="form-horizontal"
+			name="update_<%=Item_list.get(i).getItem_num()%>" method="post"
+			action="IteminfoUpdate">
+			<input type="hidden" name="shop_num"
+				value="<%=Item_list.get(i).getItem_num()%>">
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary btn-block" value="수정하기">
+			</div>
+		</form>
 			<%
 				}
 			%>

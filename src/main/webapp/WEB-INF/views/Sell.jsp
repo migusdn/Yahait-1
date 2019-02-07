@@ -18,7 +18,7 @@
 		<form class="form-horizontal" name="multiform" id="multiform"
 			action="SellAct" method="POST" enctype="multipart/form-data">
 			<h2>SELL</h2>
-
+ 
 			<!-- <div class="form-group">
 				<label for="id" class="col-sm-3 control-label">카테고리*</label>
 				<div class="col-sm-9">

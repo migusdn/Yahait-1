@@ -24,4 +24,7 @@
 	<delete id="item_delete" parameterType="String">
 		DELETE FROM item WHERE item_num=#{item_num}
 	</delete>
+	<select id="item_show" parameterType="String" resultType="com.yahait.app.Dto.ItemDto">
+		SELECT * FROM item WHERE item_num = #{item_num}
+	</select>
 </mapper>

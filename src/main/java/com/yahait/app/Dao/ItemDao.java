@@ -37,4 +37,10 @@ public class ItemDao implements IDao {
 		
 	}
 
+	@Override
+	public ItemDto item_show(String item_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

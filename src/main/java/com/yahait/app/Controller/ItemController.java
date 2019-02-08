@@ -150,10 +150,9 @@ public class ItemController {
 			// 업로드 파일명을 변경후 저장
 			String uploadedFileName = System.currentTimeMillis() + UUID.randomUUID().toString()
 					+ fileName.substring(fileName.lastIndexOf("."));
-			Path p = Paths.get("C:\\Yahait\\src\\main\\webapp\\resources\\images");
-			String uploadPath = p.toString();
+			String rootPath = request.getSession().getServletContext().getRealPath("/") ;
 			
-			
+			String uploadPath = rootPath + "resources/images/" ;
 			// 지정한주소에 파일 저장
 			if (mf.getSize() != 0) {
 				mf.transferTo(new File(uploadPath + "/" + uploadedFileName));

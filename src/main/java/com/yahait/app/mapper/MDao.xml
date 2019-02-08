@@ -23,9 +23,9 @@
 
 	<insert id="signup" parameterType="hashMap">
 		INSERT INTO member (member_id, member_password, member_name, gender, mail1,
-		mail2, phone1,birth_y,birth_m,birth_d)
+		mail2, phone1,birth_y,birth_m,birth_d,sns_id)
 		VALUES
-		(#{id},#{password},#{name},#{gender},#{mail1},#{mail2},#{phone1},#{birth_y},#{birth_m},#{birth_d})
+		(#{id},#{password},#{name},#{gender},#{mail1},#{mail2},#{phone1},#{birth_y},#{birth_m},#{birth_d},#{sns_id})
 	</insert>
 
 	<select id="findPW" parameterType="hashMap"
@@ -43,6 +43,8 @@
 	<update id="member_info_Update" parameterType="map">
 	UPDATE member SET member_password = #{member_password} WHERE member_id =#{member_id}
 	</update>
-	
+	<select id="Sns_Login" parameterType="HashMap" resultType="String">
+	SELECT member_id FROM member WHERE sns_id = #{id}
+	</select>
 
 </mapper>

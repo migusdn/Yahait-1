@@ -18,4 +18,6 @@ public interface IDao {
 	public ItemDto item_duplication_check(Map map);
 	
 	public void item_delete(String item_num);
+	
+	public ItemDto item_show(String item_num);
 } 

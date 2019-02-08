@@ -45,10 +45,6 @@ public class ShopController {
 	@Autowired
 	private SqlSession sqlSession;
 
-	@RequestMapping("/Order")
-	public String Order(Model model) {
-		return "Order";
-	}
 
 	@RequestMapping("/Sell")
 	public String Sell(Model model, HttpSession session, HttpServletResponse response) throws IOException {

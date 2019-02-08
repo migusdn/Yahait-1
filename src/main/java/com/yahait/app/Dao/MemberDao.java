@@ -77,6 +77,12 @@ public class MemberDao implements MDao {
 		
 	}
 
+	@Override
+	public String Sns_Login(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	

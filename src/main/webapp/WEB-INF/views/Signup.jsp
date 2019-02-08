@@ -10,12 +10,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Sign up</title>
+<script>
+</script>
+
+
+
+
 </head>
 <body>
 	<div class="container">
 		<form class="form-horizontal">
 			<h2>회원가입</h2>
-
+			<input type="hidden" name="sns_id" id="sns_id" value="${id}">
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">아이디*</label>
 				<div class="col-sm-9">
@@ -42,14 +48,14 @@
 			<div class="form-group">
 				<label for="birthDate" class="col-sm-3 control-label">생년월일*</label>
 				<div class="col-sm-9">
-					<input type="date" name="brithDate" id="birthDate"
+					<input type="date" name="brithDate" id="birthDate" value="2019-${birth}"
 						class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="email" class="col-sm-3 control-label">이메일*</label>
 				<div class="col-sm-9">
-					<input type="email" name="mail_id" id="mail_id" placeholder="이메일주소"
+					<input type="email" name="mail_id" id="mail_id" value="${mail}"placeholder="이메일주소"
 						class="form-control">
 				</div>
 			</div>
@@ -95,6 +101,8 @@
 </body>
 
 <script>
+	
+
 	function signcehck() {
 
 		if (check() == false)
@@ -102,6 +110,7 @@
 		//입력폼 JSON형태로 변환하여 객체생성
 		var date = new Date($('#birthDate').val())
 		var signinfo = {
+			"sns_id" : $("#sns_id").val().trim(),
 			"id" : $("#id").val().trim(),
 			"name" : $("#name").val().trim(),
 			"pass" : $("#pw").val().trim(),

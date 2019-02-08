@@ -8,8 +8,8 @@
 	rel="stylesheet" id="bootstrap-css">
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://malsup.github.com/jquery.form.js "></script>
 <title>Sell</title>
 
 </head>
@@ -18,7 +18,7 @@
 		<form class="form-horizontal" name="multiform" id="multiform"
 			action="SellAct" method="POST" enctype="multipart/form-data">
 			<h2>SELL</h2>
- 
+
 			<!-- <div class="form-group">
 				<label for="id" class="col-sm-3 control-label">카테고리*</label>
 				<div class="col-sm-9">
@@ -39,15 +39,22 @@
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">카테고리 1</label>
 				<div class="col-sm-9">
-					<input type="text" name="category_name1" id="category_name1"
-						class="form-control" placeholder="카테고리 1" required="required">
+				<select name="category_name1" id="category_name1" class="form-control" required="required">
+					<option value="푸드트럭">푸드트럭</option>
+					<option value="플리마켓">플리마켓</option>
+				
+				</select>
+				
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">카테고리 2</label>
 				<div class="col-sm-9">
-					<input type="text" name="category_name2" id="category_name2"
-						class="form-control" placeholder="카테고리2" required="required">
+					<select name="category_name2" id="category_name2" class="form-control" required="required">
+					<option value="푸드트럭">푸드트럭</option>
+					<option value="플리마켓">플리마켓</option>
+				
+				</select>
 				</div>
 			</div>
 			<div class="form-group">

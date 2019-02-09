@@ -16,7 +16,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="container" id ="container">
 			<h2>Order_detail</h2>
 
 			<!-- <div class="form-group">
@@ -30,9 +30,15 @@
 			<div class="form-group">
 				<label for="password" class="col-sm-3 control-label">주문번호</label>
 				<div class="col-sm-9">
-					${ordered_num }
+					<label>${ordered_num }</label>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-3 control-label">상점번호</label>
+				<div class="col-sm-9">
+					<label>${shop_num }</label>
+				</div>
+			</div> 
 			<hr>
 			<%
 			ArrayList<OrderDto> list = (ArrayList<OrderDto>)request.getAttribute("detail_list");
@@ -40,12 +46,14 @@
 			for(int i=0; i<list.size();i++){
 				total = list.get(i).getItem_price()*list.get(i).getItem_count();			
 			%>
+			
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">상품명 : <%=list.get(i).getItem_name() %></label>
 				<div class="col-sm-9">
-					가격 :<%=list.get(i).getItem_price() %> 수량 : <%=list.get(i).getItem_count() %>
+					<label>가격 :<%=list.get(i).getItem_price() %> 수량 : <%=list.get(i).getItem_count() %></label>
 				</div>
 			</div>
+			
 			<%} %>
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">총 가격 </label>

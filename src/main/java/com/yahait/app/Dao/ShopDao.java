@@ -22,7 +22,7 @@ public class ShopDao implements SDao {
 	}
 
 	@Override
-	public ArrayList<ShopDto> Shop_show() {
+	public ArrayList<ShopDto> Shop_show(Map map) {
 		// TODO Auto-generated method stub
 		return null;
 	}

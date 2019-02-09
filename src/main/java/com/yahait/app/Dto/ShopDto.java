@@ -11,7 +11,7 @@ public class ShopDto {
 	private String shop_info;
 	private String gps_x;
 	private String gps_y;
-	
+	private String dist;
 	public String getGps_x() {
 		return gps_x;
 	}
@@ -86,5 +86,13 @@ public class ShopDto {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public String getDist() {
+		return dist;
+	}
+
+	public void setDist(String dist) {
+		this.dist = dist;
 	}
 }

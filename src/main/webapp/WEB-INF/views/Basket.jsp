@@ -73,7 +73,7 @@
 </style>
 </head>
 <body>
-   <div id="container">
+   <div class="container" id="container" style="margin-bottom = 0px;">
 	<div id="ys">YouSell</div>
 	<div class="target">
 		<%
@@ -121,13 +121,13 @@
 		%>
 
 	</div>
-	<div class="bottom">
+	<div>
 		<div><h3>총 주문금액 : </h3><h3 id="total"><%=session.getAttribute("total") %></h3></div>
 		<a href="OrderAct"><button type="button" class="order">주문하기</button></a>
 	</div>
 	</div>
 </body>
-</html>
+
 
 <script>
 	//수량 추가
@@ -241,3 +241,4 @@
 	
 	
 </script>
+</html>

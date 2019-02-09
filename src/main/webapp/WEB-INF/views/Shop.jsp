@@ -1,6 +1,6 @@
 <!--김민섭 1.9 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="com.yahait.app.Dto.ItemDto"%>
 <%@ page import="java.util.ArrayList"%>
 
@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=2, user-scalable=no">
@@ -36,6 +37,10 @@
 html, body {
 	width: 100%;
 	height: 100%;
+}
+
+.container {
+	marginBottom: 0;
 }
 
 .store {
@@ -68,8 +73,7 @@ html, body {
 	left: 0px;
 	bottom: 0px;
 	width: 100%;
-	background-color: white
-	margin : 30px
+	background-color: white margin: 30px
 }
 
 li {
@@ -97,102 +101,94 @@ a {
 </style>
 </head>
 <body>
-<div id="container">
-	<div class="store">
-		<h1>${shop_name}</h1>
-	</div>
-	<hr>
+	<div id="container">
+		<div class="store">
+			<h1>${shop_name}</h1>
+		</div>
+		<hr>
 
-	<div role="tabpanel">
-		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="#menu"
-				aria-controls="menu" role="tab" data-toggle="tab">메뉴</a></li>
-			<li role="presentation"><a href="#information"
-				aria-controls="information" role="tab" data-toggle="tab">정보</a></li>
-			<li role="presentation"><a href="#review" aria-controls="review"
-				role="tab" data-toggle="tab">리뷰</a></li>
-		</ul>
+		<div role="tabpanel">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#menu"
+					aria-controls="menu" role="tab" data-toggle="tab">메뉴</a></li>
+				<li role="presentation"><a id="info" href="#information"
+					aria-controls="information" role="tab" data-toggle="tab">정보</a></li>
+				<li role="presentation"><a href="#review"
+					aria-controls="review" role="tab" data-toggle="tab">리뷰</a></li>
+			</ul>
 
-		<div class="tab-content">
+			<div class="tab-content">
 
-			<div role="tabpanel" class="tab-pane fade in active" id="menu">
-				<%
-					ArrayList<ItemDto> item_list = (ArrayList<ItemDto>) request.getAttribute("item_list");
-					for (int i = 0; i < item_list.size(); i++) {
-				%>
-				<form action="Order" name="<%=item_list.get(i).getItem_num()%>"
-					method="post">
-					<input type="hidden" name="item_num" value="<%=item_list.get(i).getItem_num() %>">
-					<div class="btn-group btn-lg btn-block" data-toggle="buttons">
-						
-						<button class="btn btn-info btn-lg btn-block" onclick="submit()";><h2><%=item_list.get(i).getItem_name() %></h2></button>
+				<div role="tabpanel" class="tab-pane fade in active" id="menu">
+					<%
+						ArrayList<ItemDto> item_list = (ArrayList<ItemDto>) request.getAttribute("item_list");
+						for (int i = 0; i < item_list.size(); i++) {
+					%>
+					<form action="Order" name="<%=item_list.get(i).getItem_num()%>"
+						method="post">
+						<input type="hidden" name="item_num"
+							value="<%=item_list.get(i).getItem_num()%>">
+						<div class="btn-group btn-lg btn-block" data-toggle="buttons">
+
+							<button class="btn btn-info btn-lg btn-block" onclick="submit()";>
+								<h2><%=item_list.get(i).getItem_name()%></h2>
+							</button>
+						</div>
+					</form>
+					<%
+						}
+					%>
+				</div>
+				<div role="tabpanel" class="tab-pane fade in active"
+					id="information">
+					<div class="information">
+						<h2>${shop_name }</h2>
+						<h3>${shop_info }</h3>
 					</div>
-				</form>
-				<%
-					}
-				%>
-			</div>
-			<div role="tabpanel" class="tab-pane fade" id="information">
-				<div class="information">
-					<h2>${shop_name }</h2>
-					<h3>${shop_info }</h3>
+					<div id="map_container" style="margin: 20px">
+						<div id="map" style="width: 100%; height: 400px;"></div>
+					</div>
+
 				</div>
 
-				<div id="map" style="width: 100%; height: 400px;"></div>
-				<script>
-					var locPosition = new daum.maps.LatLng(${gps_x}, ${gps_y});
-					var mapContainer = document.getElementById('map'), mapOption = {
-				            center : locPosition,
-				            level : 3
-				         };
-				         var map = new daum.maps.Map(mapContainer, mapOption);
-				         
-				         var marker = new daum.maps.Marker({
-		                     map: map,
-		                     position: locPosition
-		                  });
-				         marker.setMap(map);
-				         </script>
-			</div>
 
-
-			<div role="tabpanel" class="tab-pane fade" id="review">
-				<div class="review">
-					<h2>JMT</h2>
-				</div>
-				<div class="review">
-					<h2>즘트</h2>
+				<div role="tabpanel" class="tab-pane fade" id="review">
+					<div class="review">
+						<h2>JMT</h2>
+					</div>
+					<div class="review">
+						<h2>즘트</h2>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<hr>
+		<hr>
 
-	<div class="bottom">
-		<div class="order">
-			<a href="Basket"><button class="btn btn">aaa</button></a>
+		<div class="bottom">
+			<div class="order">
+				<a href="Basket"><button class="btn btn">aaa</button></a>
+			</div>
+			<div class="shoplist">
+				<a href="Basket"><button class="btn btn">장바구니</button></a>
+			</div>
 		</div>
-		<div class="shoplist">
-			<a href="Basket"><button class="btn btn">장바구니</button></a>
-		</div>
-	</div>
-
-	<script>
-		//김민섭 1.13 탭
-		$('#myTab a').click(function(e) {
-			e.preventDefault();
-			$(this).tab('show');
-		})
-		//김민섭 1.15 ~  주문버튼 테스트 중
-		$('.btn1').click(function() {
-			//document.test.action="practice.html";
-			document.test.action = "a.jsp";
-			document.test.method = "post";
-			var a = $('.check').val();
-			request.setAttribute("test", a);
-			document.test.submit();
-		})
-	</script>
 	</div>
 </body>
+<script>
+var container = document.getElementById('map');
+				var options = {
+					center: new daum.maps.LatLng(${gps_x}, ${gps_y}),
+					level: 3
+				};
+
+				var map = new daum.maps.Map(container, options);
+				var markerPosition  = new daum.maps.LatLng(${gps_x}, ${gps_y});
+				
+				var marker = new daum.maps.Marker({
+				    position: markerPosition
+				});
+				marker.setMap(map);
+				document.getElementById("information").className = "tab-pane fade";
+
+</script>
 </html>

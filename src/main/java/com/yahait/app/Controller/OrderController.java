@@ -211,7 +211,7 @@ public class OrderController {
 				Order_list.get(i).setOrdered_num(ordered_num);
 				dao.ordered_detail_add(Order_list.get(i));
 			}
-			session.removeAttribute("Order_list");
+			session.removeAttribute("basket");
 			System.out.println("장바구니 세션 삭제 완료");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -241,6 +241,7 @@ public class OrderController {
 		
 		ArrayList<OrderDto> dto = dao.ordered_detail_show(ordered_num);
 		model.addAttribute("detail_list",dto);
+		model.addAttribute("shop_num",dto.get(0).getShop_num());
 		
 		
 		

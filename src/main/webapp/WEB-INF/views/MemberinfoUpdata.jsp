@@ -12,14 +12,14 @@
 <title>Sign up</title>
 </head>
 <body>
-	<div class="container">
+	<div id = "container" class="container">
 		<form class="form-horizontal">
 			<h2>회원정보수정</h2>
 
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">아이디*</label>
 				<div class="col-sm-9">
-					<input type="text" name="id" id="id" placeholder="${iogincheck}"
+					<input type="text" name="id" id="id" placeholder="${member_id}"
 						class="form-control" disabled autofocus>
 				</div>
 			</div>
@@ -42,21 +42,21 @@
 			<div class="form-group">
 				<label for="birthDate" class="col-sm-3 control-label">생년월일*</label>
 				<div class="col-sm-9">
-					<input type="date" name="brithDate" id="birthDate"
-						class="form-control">
+					<input type="text" name="brithDate" id="birthDate" placeholder="${birth_y }-${birth_m}-${birth_d}"
+						class="form-control"  disabled>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="email" class="col-sm-3 control-label">이메일*</label>
 				<div class="col-sm-9">
-					<input type="email" name="mail_id" id="mail_id" placeholder="${mailinfo}"
+					<input type="email" name="mail_id" id="mail_id" placeholder="${mail1}@${mail2}"+
 						class="form-control" disabled>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">이름*</label>
 				<div class="col-sm-9">
-					<input type="text" name="name" id="name" placeholder="${name}" class="form-control" disabled>
+					<input type="text" name="name" id="name" placeholder="${member_name}" class="form-control" disabled>
 				</div>
 			</div>
 			<div class="form-group">

@@ -13,7 +13,7 @@ public interface IDao {
 
 	public void StateUpdate(Map map);
 	
-	public void Item_add(Map map);
+	public void Item_add(ItemDto dto);
 	
 	public ItemDto item_duplication_check(Map map);
 	

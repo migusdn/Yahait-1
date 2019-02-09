@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -169,7 +170,12 @@
       
       </h1>
     </div>
+    <script>
     
+    </script>
+<input type="hidden" id="wlat" value="">
+<input type="hidden" id="wlong" value="">
+<input type="hidden" id="request_ctn" value="0">
 <div class="target">
 </div>
 
@@ -182,15 +188,34 @@
     
 </div>
   </body>
-
-
 <script>
 
-$(document).ready(function() {
-	
-	var Mainfetch = null;
-	
-	
+  function getLocation() {
+  	if (navigator.geolocation) { // GPS를 지원하면
+  		navigator.geolocation.getCurrentPosition(function(position) {
+  			gps_x = position.coords.latitude;
+  			gps_y = position.coords.longitude;
+  			$("#wlat").val(gps_x);
+  			$("#wlong").val(gps_y);
+  			main();
+  		}, function(error) {
+  			console.error(error);
+  		}, {
+  			enableHighAccuracy : true,
+  			maximumAge : 0,
+  			timeout : Infinity
+  		});
+  	} else {
+  		alert('GPS를 지원하지 않습니다');
+  		main();
+  	}
+  	
+  }
+  getLocation();
+  </script>
+
+<script>
+function main() {
 	$.ajax({
 		url : 'sessioncheck', //내가 보내는 서버주소(컨트롤러)
 		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
@@ -199,48 +224,7 @@ $(document).ready(function() {
 		success: function (data) { 
 			if (data == "OK") {
                 console.log("세션값있음")
-            	$.ajax({
-            		url : "Mainfetch", //내가 보내는 서버주소(컨트롤러)
-            		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태
-            		type : 'POST',
-            		data : null, //내가 서버로 보내는 데이터
-            		success: function (data) {
-            
-            			console.log(data);
-            			Mainfetch = JSON.parse(data);
-            			console.log(Mainfetch.shop.length);
-            			
-            			for(i=0; i<Mainfetch.shop.length; i++){
-            			console.log(i+"번째 jsob값"+Mainfetch.shop[i].shopname+"   "+Mainfetch.shop[i].shoppic);
-            			var shopname = Mainfetch.shop[i].shopname;
-            			var shoppic = Mainfetch.shop[i].shoppic;
-            			var shop_num = Mainfetch.shop[i].shop_num;
-            			
-            			var str =  '<div class="media">'
-            			    str += '<div class="media-left">'
-            				str += '<a href="#"><img class="media-object" src="resources/images/'+shoppic+ '" alt="test" width="100" height = "100"></a></div>'
-            				str += '<div class="media-body">'
-            				str += '<form method="post" action="Shop">'
-            				str += '<input type="hidden" name="shop_num", value="'+shop_num+'">'
-            				str += '<p><input type="submit" class="btn btn-primary" value="상점 바로가기">'
-            				str += '</form>'
-            				str += '<a href="#" class="btn btn-default" role="button">상점위치찾기</a></p>'
-            				str += '<div class="col-xs-12 col-md-3 text-center">'
-            				str += '<h1 class="rating-num">4.0</h1>'
-            				str += '<div class="rating">'
-            				str += '<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
-            				str += '</span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
-            			    str += '</span><span class="glyphicon glyphicon-star-empty"></span></div>'
-            			    str += '<div><span class="glyphicon glyphicon-user"></span>1,050,008 total</div></div>'
-            			    str += ' <h4 class="media-heading">'+shopname+'</h4>'
-            			    str += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pin</div>'
-            			    str += '</div>'
-          		      	    $('.target').append(str);
-          		      	
-          		      	
-            			}
-            		}
-            	});
+            	load_shop(); // shop_data load
 			}	
 			else if (data == "NO") {
 				alert("로그인이 필요합니다.");
@@ -249,8 +233,66 @@ $(document).ready(function() {
 		}
 	
    });
-});
-
+}
+function load_shop(){
+	var ctn = $("#request_ctn").val().trim();
+	var Mainfetch = null;
+	var load_info = {
+			"gps_x" : $("#wlat").val().trim(),
+			"gps_y" : $("#wlong").val().trim(),
+			"request_ctn" : ""+ctn+""
+	};
+	ctn++;
+	$("#request_ctn").val(ctn);
+	
+	$.ajax({
+		url : "Mainfetch", //내가 보내는 서버주소(컨트롤러)
+		dataType : 'text', //내가 서버로 부터 리턴받는 데이터 형태 
+		type : 'POST', //post 일경부 rquestbody 안으로들어감
+		contentType : 'application/json; charset=UTF-8', //보내는 데이터 형태
+		data : JSON.stringify(load_info), //내가 서버로 보내는 데이터(signinfo 제이슨 객체)를 보냄
+		success: function (data) {
+			if(data != "end"){
+			console.log(data);
+			Mainfetch = JSON.parse(data);
+			console.log(Mainfetch.shop.length);
+			
+			for(i=0; i<Mainfetch.shop.length; i++){
+			console.log(i+"번째 jsob값"+Mainfetch.shop[i].shopname+"   "+Mainfetch.shop[i].shoppic);
+			var shopname = Mainfetch.shop[i].shopname;
+			var shoppic = Mainfetch.shop[i].shoppic;
+			var shop_num = Mainfetch.shop[i].shop_num;
+			var shopgps_x = Mainfetch.shop[i].shopgps_x;
+			var shopgps_y = Mainfetch.shop[i].shopgps_y;
+			var shopdist = Mainfetch.shop[i].dist;
+			
+			var str =  '<div class="media">'
+			    str += '<div class="media-left">'
+				str += '<a href="#"><img class="media-object" src="resources/images/'+shoppic+ '" alt="test" width="100" height = "100"></a></div>'
+				str += '<div class="media-body">'
+				str += '<form method="post" action="Shop">'
+				str += '<input type="hidden" name="shop_num", value="'+shop_num+'">'
+				str += '<p><input type="submit" class="btn btn-primary" value="상점 바로가기">'
+				str += '</form>'
+				str += '<a href="http://map.daum.net/link/map/'+shopname+','+shopgps_x+','+shopgps_y+'" class="btn btn-default" role="button">상점위치찾기</a></p>'
+				str += '<div class="col-xs-12 col-md-3 text-center">'
+				str += '<h1 class="rating-num">'+shopname +'</h1>'
+				str += '<div class="rating">'
+				str += '<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
+				str += '</span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">'
+			    str += '</span><span class="glyphicon glyphicon-star-empty"></span></div>'
+			    str += '<div><span class="glyphicon glyphicon-user"></span>1,050,008 total</div></div>'
+			    str += ' <h4 class="media-heading">현 위치로 부터'+shopdist+'m</h4>'
+			    str += 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pin</div>'
+			    str += '</div>'
+		      	    $('.target').append(str);
+		      	
+		      	
+			}
+			}
+		}
+	});
+}
 function postFunc(){
     $('.postLoader').html('<img class="loader" src="images/loading.gif">');
   }
@@ -265,9 +307,10 @@ function postFunc(){
           processScroll = false;
           if($('.postLoader').html() != '<img class="loader" src="images/loading.gif">');
             postFunc();
+            load_shop();
             setTimeout(function(){
             $('.postLoader').empty();
-            $('.target').append("<div><h1>테스트창</h1></div>");
+            
       }, 2000);
       processScroll = true;
     }

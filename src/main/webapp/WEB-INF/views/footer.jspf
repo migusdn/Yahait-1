@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script>
+<!-- <script>
 var ysOffset = $('#ys').offset();
 $(window).scroll(function(){
   if($(document).scrollTop() > ysOffset.top){
@@ -11,7 +11,7 @@ $(window).scroll(function(){
   }else{
     $('#ys').removeClass('fixed');
   }
-})</script>
+})</script> -->
 <style>
         html, body{
           width : 100%;
@@ -98,6 +98,7 @@ $(window).scroll(function(){
           width:100%;
           background-color: white;
           text-align: center;
+              height: auto;
           }
           
         /*로딩*/
@@ -119,7 +120,7 @@ $(window).scroll(function(){
       	</style>
 </head>
 <body>
-<div class="bottom text-center d-flex justify-content-center pt-5 mb-3">
+<div class="bottom text-center d-flex justify-content-center pt-5 mb-3" id="footer-height">
 	    <footer class="page-footer font-small indigo"  >
 
 	       <div class="col-md-2">
@@ -153,5 +154,26 @@ $(window).scroll(function(){
    		 </footer>
     </div>
 </body>
+<script>
+var height = $('.bottom').height();
 
+document,container.style.marginBottom = height+'px';
+
+/* $(function () {
+    var prevHeight = $('#footer-height').height();
+    
+    $('#footer-height').attrchange({
+        callback: function (e) {
+            var curHeight = $(this).height();            
+            if (prevHeight !== curHeight) {
+               $('#logger').text('height changed from ' + prevHeight + ' to ' + curHeight);
+
+                prevHeight = curHeight;
+                document.getElementById("container").style.marginbottom = prevHeight;
+            }            
+        }
+    }).resizable();
+});
+ */
+</script>
 </html>

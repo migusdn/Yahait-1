@@ -113,6 +113,7 @@
 			"sns_id" : $("#sns_id").val().trim(),
 			"id" : $("#id").val().trim(),
 			"name" : $("#name").val().trim(),
+			
 			"pass" : $("#pw").val().trim(),
 			"mail" : $("#mail_id").val().trim(),
 			"cellPhone" : $("#cellPhone").val().trim(),

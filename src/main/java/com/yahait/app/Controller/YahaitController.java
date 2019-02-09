@@ -243,10 +243,24 @@ public class YahaitController {
 			throws ParseException {
 
 		System.out.println("메인 페치창 접속");
+		System.out.println("--------------------");
+		String gps_info = paramData;
+		System.out.println("서버 전송 gps_data"+gps_info);
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환 
+		Map map = new HashMap();
+		map.put("gps_x",jsonObj.get("gps_x").toString().trim());
+		map.put("gps_y",jsonObj.get("gps_y").toString().trim());
+		if(Integer.parseInt(jsonObj.get("request_ctn").toString().trim()) == 0)
+			map.put("request_ctn", Integer.parseInt(jsonObj.get("request_ctn").toString().trim()));
+		else
+			map.put("request_ctn", 2*Integer.parseInt(jsonObj.get("request_ctn").toString().trim()));
+		System.out.println(map.get("request_ctn"));
 		SDao dao = sqlSession.getMapper(SDao.class);
-		ArrayList<ShopDto> shoplist = dao.Shop_show();
+		ArrayList<ShopDto> shoplist = dao.Shop_show(map);
 		System.out.println("sql문 사이즈" + shoplist.size());
-
+		if(shoplist.size()==0)
+			return "end";
 		// 최종 완성될 JSONObject 선언(전체)
 		JSONObject jsonObject = new JSONObject();
 		// person의 JSON정보를 담을 Array 선언
@@ -255,18 +269,30 @@ public class YahaitController {
 
 		for (int i = 0; i < shoplist.size(); i++) {
 			JSONObject shopInfo = new JSONObject();
-			if(shoplist.get(i).getMember_num().equals(session.getAttribute("logincheck")))
+			if(shoplist.get(i).getMember_num().equals(session.getAttribute("logincheck"))){
 				shoplist.remove(i);
-				
+			}
+			if(shoplist.size()==0)
+				return "end";
+			else{
 			String shop_num = shoplist.get(i).getShop_num();
 			String shopname = shoplist.get(i).getShop_name();
+			String shopgps_x = shoplist.get(i).getGps_x();
+			String shopgps_y = shoplist.get(i).getGps_y();
 			String shoppic = shoplist.get(i).getShop_pic();
+			String dist = shoplist.get(i).getDist();
+			System.out.println(dist);
 			System.out.println("상점아이디(" + i + "):" + shopname + "상점이미지경로(" + i + "):" + shoppic);
 			shopInfo.put("shop_num", shop_num);
 			shopInfo.put("shopname", shopname);
 			shopInfo.put("shoppic", shoppic);
+			shopInfo.put("shopgps_x", shopgps_x);
+			shopInfo.put("shopgps_y", shopgps_y);
+			shopInfo.put("dist", dist);
+			
 			shopArray.add(shopInfo);
 			jsonObject.put("shop", shopArray);
+			}
 		}
 
 		String jsonInfo = jsonObject.toJSONString();
@@ -398,13 +424,23 @@ public class YahaitController {
 		ArrayList<MemberDto> memberinfo = dao.Show_member_info(logincheckstring);
 		String mail1 = memberinfo.get(0).getMail1();
 		String mail2 = memberinfo.get(0).getMail2();
-		String mailinfo = mail1 + "@" + mail2;
 		String phone = memberinfo.get(0).getPhone1();
-		String name = memberinfo.get(0).getmember_name();
-
-		model.addAttribute("mailinfo", mailinfo);
-		model.addAttribute("phone", phone);
-		model.addAttribute("name", name);
+		String member_name = memberinfo.get(0).getmember_name();
+		String birth_y = memberinfo.get(0).getBirth_y();
+		String birth_m = memberinfo.get(0).getBirth_m();
+		String birth_d = memberinfo.get(0).getBirth_d();
+		String member_id = memberinfo.get(0).getMember_id();
+		Map map = new HashMap();
+		map.put("mail1", mail1);
+		map.put("mail2", mail2);
+		map.put("phone", phone);
+		map.put("member_name", member_name);
+		map.put("member_id", member_id);
+		map.put("birth_y", birth_y);
+		map.put("birth_m", birth_m);
+		map.put("birth_d", birth_d);
+		model.addAllAttributes(map);
+		
 		return "MemberinfoUpdata";
 	}
 

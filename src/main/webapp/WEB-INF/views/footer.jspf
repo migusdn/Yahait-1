@@ -1,0 +1,157 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script>
+var ysOffset = $('#ys').offset();
+$(window).scroll(function(){
+  if($(document).scrollTop() > ysOffset.top){
+    $('#ys').addClass('fixed');
+  }else{
+    $('#ys').removeClass('fixed');
+  }
+})</script>
+<style>
+        html, body{
+          width : 100%;
+          height: 100%;
+        }
+        /*슬라이드 css*/
+      body {
+        font-family: "Lato", sans-serif;
+        transition: background-color .5s;
+      }
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      #main {
+        transition: margin-left .5s;
+       padding: 16px;
+      }
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      
+        /*상단바 css*/
+        #ys{
+          text-align: center;
+          width: 100%;
+        }
+        .fixed{
+          position: fixed;
+          top: 0px;
+        }
+        .rec{
+          border: 1px solid black;
+          margin: 20px;
+        }
+        /* 포토슬라이드 css */
+        .ps{
+          display: block;
+          margin: 0px auto;
+        }
+        .slide{
+          height: 20%;
+        }
+        .carousel-inner, .item{
+          height: 100%;
+        }
+        .carousel-caption{
+          color: black;
+        }
+        .carousel-control.left, .carousel-control.right{
+          background-image: none;
+        }
+        /*하단 고정 메뉴바*/
+        .bottom{
+          position:fixed;
+          bottom:0px;
+          width:100%;
+          background-color: white;
+          text-align: center;
+          }
+          
+        /*로딩*/
+        .postLoader{
+          text-align: center;
+          margin-bottom: 200px;
+        }
+        
+        /*템플릿*/
+      	.media {
+	  	background-color: #fffafa;
+      	border-style: solid;
+      	border-color: #dcdcdc 	;
+      	}
+      	.media-object{
+      	margin: 20px;
+ 
+      	}
+      	</style>
+</head>
+<body>
+<div class="bottom text-center d-flex justify-content-center pt-5 mb-3">
+	    <footer class="page-footer font-small indigo"  >
+
+	       <div class="col-md-2">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="Main"><h2>홈</h2></a>
+          		</h6>
+        	</div>
+        	
+	         <div class="col-md-2">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>즐겨찾기</h2><a>
+          	</h6>
+        	</div>
+        	
+	       <div class="col-md-2">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="OrderList"><h2>주문알림</h2></a>
+          		</h6>
+        	</div>
+        	
+	       <div class="col-md-2">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="#"><h2>지도</h2></a>
+          		</h6>
+        	</div>
+     		<div class="col-md-2">
+          	<h6 class="text-uppercase font-weight-bold">
+            <a href="Basket"><h2>장바구니</h2></a>
+          		</h6>
+        	</div>
+   		 </footer>
+    </div>
+</body>
+
+</html>

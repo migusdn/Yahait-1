@@ -119,24 +119,8 @@
   </head>
   <body>
   
-<div id="main">
-     <!-- 슬라이드 버튼 -->
-     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;메뉴</span>
-     <!--  버튼부분 -->
-    <div id="ys">
-    <h1>YOUSELL</h1>
-</div>
-
-    
-    <!-- 슬라이드 부분 -->
-   <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-     <a href="MemberinfoUpdata">내정보 수정</a>
-     <a href="Sell">판매하기</a>
-     <a href="Manager">내 상점 관리</a>
-     <a href="#">문의</a>
-     <a href="loginout">로그아웃</a>
-   </div>
+<div id="container">
+     
    
         <h1>랭킹순위</h1>
     <div id="carousel-example-generic" class="carousel slide" data-interval="false" data-ride="carousel">
@@ -194,39 +178,11 @@
 </div>
 
 
-    <div class="bottom text-center d-flex justify-content-center pt-5 mb-3">
-	    <footer class="page-footer font-small indigo"  >
-
-	       <div class="col-md-2">
-          	<h6 class="text-uppercase font-weight-bold">
-            <a href="#"><h2>홈</h2></a>
-          		</h6>
-        	</div>
-        	
-	         <div class="col-md-2">
-          	<h6 class="text-uppercase font-weight-bold">
-            <a href="#"><h2>즐겨찾기</h2><a>
-          	</h6>
-        	</div>
-        	
-	       <div class="col-md-2">
-          	<h6 class="text-uppercase font-weight-bold">
-            <a href="#"><h2>주문알림</h2></a>
-          		</h6>
-        	</div>
-        	
-	       <div class="col-md-2">
-          	<h6 class="text-uppercase font-weight-bold">
-            <a href="#"><h2>지도</h2></a>
-          		</h6>
-        	</div>
-     
-   		 </footer>
-    </div>
+    
     
 </div>
   </body>
-</html>
+
 
 <script>
 
@@ -298,29 +254,6 @@ $(document).ready(function() {
 function postFunc(){
     $('.postLoader').html('<img class="loader" src="images/loading.gif">');
   }
-
-//김민섭 1.10슬라이드 메뉴 -> 오경환 다시 수정
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-}
- 
-  //김민섭 1.15 상단바 고정
-  var ysOffset = $('#ys').offset();
-  $(window).scroll(function(){
-    if($(document).scrollTop() > ysOffset.top){
-      $('#ys').addClass('fixed');
-    }else{
-      $('#ys').removeClass('fixed');
-    }
-  })
-
       
   
   
@@ -345,3 +278,4 @@ function closeNav() {
   
   
 </script>
+</html>

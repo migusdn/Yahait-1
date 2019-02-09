@@ -49,7 +49,7 @@ public class ItemController {
 			HttpServletResponse response) throws IOException, ParseException {
 		String shop_num = (String) request.getParameter("shop_num");
 
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");
@@ -76,7 +76,7 @@ public class ItemController {
 	public String Item(Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
 		String shop_num = (String) request.getParameter("shop_num");
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");

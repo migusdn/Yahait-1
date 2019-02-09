@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div id="container" class="container">
 		<form class="form-horizontal" name="multiform" id="multiform"
 			action="SellAct" method="POST" enctype="multipart/form-data">
 			<h2>SELL</h2>

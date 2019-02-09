@@ -46,6 +46,7 @@ import com.yahait.app.Dto.OrderDto;
 import com.yahait.app.Dto.ShopDto;
 
 import com.yahait.app.Dao.MemberDao;
+import com.yahait.app.Dao.ODao;
 
 @Controller
 public class OrderController {
@@ -190,5 +191,74 @@ public class OrderController {
 		session.setAttribute("basket", Order_list);
 		return total;
 	}
-
+	
+	@RequestMapping("/OrderAct")
+	@ResponseBody
+	public void OrderAct(HttpSession session , HttpServletResponse response) throws IOException{
+		String member_num = SessionCheck(session, response);
+		System.out.println("Order Act Controller 접속");
+		System.out.println("-----------------------------");
+		System.out.println("member_num"+member_num);
+		
+		ArrayList<OrderDto> Order_list = (ArrayList<OrderDto>)session.getAttribute("basket");
+		if(Order_list!=null){
+			Order_list.get(0).setMember_num(Integer.parseInt(member_num));
+			ODao dao = sqlSession.getMapper(ODao.class);
+			dao.ordered_add(Order_list.get(0));
+			int ordered_num = Order_list.get(0).getOrdered_num();
+			System.out.println("오더넘버"+ordered_num);
+			for(int i=0;i<Order_list.size(); i++){
+				Order_list.get(i).setOrdered_num(ordered_num);
+				dao.ordered_detail_add(Order_list.get(i));
+			}
+			session.removeAttribute("Order_list");
+			System.out.println("장바구니 세션 삭제 완료");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('주문 완료!'); window.location.href='OrderList';</script>");
+			out.flush();
+		}
+	}
+	@RequestMapping("/OrderList")
+	public String OrderList(Model model, HttpSession session, HttpServletResponse response) throws IOException{
+		String member_num = SessionCheck(session,response);
+		ODao dao = sqlSession.getMapper(ODao.class);
+		
+		ArrayList<OrderDto> dto = dao.ordered_show(member_num);
+		System.out.println(dto.size());
+		model.addAttribute("list", dto);
+		
+		
+		return "OrderList";
+	}
+	@RequestMapping("/Order_detail")
+	public String Order_detail(Model model, HttpServletRequest request){
+		String ordered_num = request.getParameter("ordered_num");
+		System.out.println("주문번호"+ordered_num);
+		model.addAttribute("ordered_num", ordered_num);
+		ODao dao = sqlSession.getMapper(ODao.class);
+		
+		
+		ArrayList<OrderDto> dto = dao.ordered_detail_show(ordered_num);
+		model.addAttribute("detail_list",dto);
+		
+		
+		
+		return "Order_detail";
+	}
+	
+	public String SessionCheck(HttpSession session,HttpServletResponse response) throws IOException{
+		String logincheckstring = (String) session.getAttribute("logincheck");
+		if (logincheckstring == null) {
+			System.out.println("로그인세션 없음");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근'); window.location.href = \"Login\";</script>");
+			out.flush();
+		} else {
+			System.out.println("세션ID :" + logincheckstring);
+		}
+		return logincheckstring;
+	}
+	
 }

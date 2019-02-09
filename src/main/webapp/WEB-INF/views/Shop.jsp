@@ -1,5 +1,6 @@
 <!--김민섭 1.9 -->
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="com.yahait.app.Dto.ItemDto"%>
 <%@ page import="java.util.ArrayList"%>
 
@@ -68,6 +69,7 @@ html, body {
 	bottom: 0px;
 	width: 100%;
 	background-color: white
+	margin : 30px
 }
 
 li {
@@ -95,6 +97,7 @@ a {
 </style>
 </head>
 <body>
+<div id="container">
 	<div class="store">
 		<h1>${shop_name}</h1>
 	</div>
@@ -190,5 +193,6 @@ a {
 			document.test.submit();
 		})
 	</script>
+	</div>
 </body>
 </html>

@@ -10,7 +10,7 @@
 	</select>
 
 	<select id="logincehck" resultType="com.yahait.app.Dto.MemberDto">
-		SELECT member_id,member_password FROM member where member_id = #{id}
+		SELECT member_id,member_password,member_num FROM member where member_id = #{id}
 	</select>
 	<select id="id_duplication_check"
 		resultType="com.yahait.app.Dto.MemberDto">

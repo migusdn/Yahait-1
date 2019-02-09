@@ -4,5 +4,18 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yahait.app.Dao.ODao">
-	
+	<insert id="ordered_add" useGeneratedKeys="true" keyProperty="ordered_num" parameterType="com.yahait.app.Dto.OrderDto">
+		INSERT INTO ordered (member_num,shop_num,ordered_time,ordered_state)
+		VALUES(#{member_num}, #{shop_num}, now(), 0 )
+	</insert>
+	<insert id="ordered_detail_add" parameterType="com.yahait.app.Dto.OrderDto">
+		INSERT INTO ordered_detail (ordered_num, item_num, item_name, item_price, item_count)
+		VALUES(#{ordered_num}, #{item_num}, #{item_name}, #{item_price}, #{item_count})
+	</insert>
+	<select id="ordered_show" parameterType="String" resultType="com.yahait.app.Dto.OrderDto">
+		SELECT * FROM ordered WHERE member_num =#{member_num}
+	</select>
+	<select id="ordered_detail_show" parameterType="String" resultType="com.yahait.app.Dto.OrderDto">
+		SELECT * FROM ordered_detail WHERE ordered_num = #{ordered_num}
+	</select>
 </mapper>

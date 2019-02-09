@@ -1,14 +1,29 @@
 package com.yahait.app.Dto;
 
 public class OrderDto {
+	private int ordered_num;
 	private int member_num;
 	private int shop_num;
 	private int item_num;
 	private String item_name;
 	private int item_price;
 	private int item_count;
+	private String ordered_time;
+	private String ordered_state;
 	
 	
+	public String getOrdered_time() {
+		return ordered_time;
+	}
+	public void setOrdered_time(String ordered_time) {
+		this.ordered_time = ordered_time;
+	}
+	public String getOrdered_state() {
+		return ordered_state;
+	}
+	public void setOrdered_state(String ordered_state) {
+		this.ordered_state = ordered_state;
+	}
 	public OrderDto(){
 		
 	}
@@ -55,5 +70,11 @@ public class OrderDto {
 	}
 	public void setItem_count(int item_count) {
 		this.item_count = item_count;
+	}
+	public int getOrdered_num() {
+		return ordered_num;
+	}
+	public void setOrdered_num(int ordered_num) {
+		this.ordered_num = ordered_num;
 	}
 }

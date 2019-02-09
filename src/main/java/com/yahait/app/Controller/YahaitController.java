@@ -75,9 +75,9 @@ public class YahaitController {
 
 		// SQL문 불러오기
 		MDao dao = sqlSession.getMapper(MDao.class);
-		ArrayList<MemberDto> logincehck = dao.logincehck(userid);
+		ArrayList<MemberDto> logincheck = dao.logincehck(userid);
 		// 경고창 response 객체를 이용하여 PrintWriter 하여 쏴주기
-		if (logincehck.isEmpty()) {
+		if (logincheck.isEmpty()) {
 			System.out.println("아이디가 없습니다");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -91,16 +91,16 @@ public class YahaitController {
 			System.out.println("입력결과 DB에 아이디존재");
 
 			// DB에 아이디가 존재하면 로그인 SQL문 실행(userid값을 넣어서 아이디값 확인)
-			MemberDto passwordcheck = logincehck.get(0);
+			MemberDto passwordcheck = logincheck.get(0);
 			System.out.println("로그인입력 패스워드:" + userpassword);
 			System.out.println("DB저장된 패스워드:" + passwordcheck.getMember_password().trim());
 			// 클라이언트 입력값과 데이터베이스에 입력값 일치확인
 			if (passwordcheck.getMember_password().trim().equals(userpassword)) {
 				System.out.println("완벽한로그인");
 
-				session.setAttribute("iogincheck", userid);
-				String iogincheckstring = (String) session.getAttribute("iogincheck");
-				System.out.println("로그인 전달 세션확인-----:" + iogincheckstring);
+				session.setAttribute("logincheck", logincheck.get(0).getMember_num());
+				String logincheckstring = (String) session.getAttribute("logincheck");
+				System.out.println("로그인 전달 세션확인-----:" + logincheckstring);
 
 				return "redirect:/Main";
 			} else {
@@ -120,7 +120,7 @@ public class YahaitController {
 	@RequestMapping("/loginout")
 	public String Signup(Model model, HttpSession session) {
 
-		System.out.println("메인창세션값확인-----:" + (String) session.getAttribute("iogincheck"));
+		System.out.println("메인창세션값확인-----:" + (String) session.getAttribute("logincheck"));
 		session.invalidate();
 		return "redirect:/Login";
 	}
@@ -233,8 +233,8 @@ public class YahaitController {
 
 	@RequestMapping("/Main")
 	public String Main(Model model, HttpSession session) {
-		String iogincheckstring = (String) session.getAttribute("iogincheck");
-		System.out.println("로그인 전달 세션확인-----:" + iogincheckstring);
+		String logincheckstring = (String) session.getAttribute("logincheck");
+		System.out.println("로그인 전달 세션확인-----:" + logincheckstring);
 		return "Main";
 	}
 
@@ -255,6 +255,9 @@ public class YahaitController {
 
 		for (int i = 0; i < shoplist.size(); i++) {
 			JSONObject shopInfo = new JSONObject();
+			if(shoplist.get(i).getMember_num().equals(session.getAttribute("logincheck")))
+				shoplist.remove(i);
+				
 			String shop_num = shoplist.get(i).getShop_num();
 			String shopname = shoplist.get(i).getShop_name();
 			String shoppic = shoplist.get(i).getShop_pic();
@@ -276,7 +279,7 @@ public class YahaitController {
 	@RequestMapping("/sessioncheck")
 	public @ResponseBody String sessioncheck(Model model, HttpSession session, HttpServletResponse response)
 			throws IOException {
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		System.out.println("메인세션체크창-----:" + logincheckstring);
 		if (logincheckstring == null) {
 			return "NO";
@@ -389,7 +392,7 @@ public class YahaitController {
 
 	@RequestMapping("MemberinfoUpdata")
 	public String MemberinfoUpdata(Model model, HttpSession session) {
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		System.out.println("세션체크창-----:" + logincheckstring);
 		MDao dao = sqlSession.getMapper(MDao.class);
 		ArrayList<MemberDto> memberinfo = dao.Show_member_info(logincheckstring);
@@ -409,7 +412,7 @@ public class YahaitController {
 	@ResponseBody
 	public String MemberinfoUpdataAct(Model model, HttpSession session, @RequestBody String paramData)
 			throws IOException, ParseException {
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		System.out.println("회원정보 수정  컨트롤러 접속");
 		System.out.println("-------------------------");
 		System.out.println("Session_ID :" + logincheckstring);
@@ -474,7 +477,7 @@ public class YahaitController {
 
 		System.out.println(name + id);
 		if (member_id != null) {
-			session.setAttribute("iogincheck", member_id);
+			session.setAttribute("logincheck", member_id);
 			return "Already";
 		} else {
 			Cookie info = new Cookie("info", URLEncoder.encode(jsonObj.toJSONString(),"UTF-8"));

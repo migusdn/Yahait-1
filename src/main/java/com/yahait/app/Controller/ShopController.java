@@ -48,7 +48,7 @@ public class ShopController {
 
 	@RequestMapping("/Sell")
 	public String Sell(Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");
@@ -109,7 +109,7 @@ public class ShopController {
 		System.out.println("상점 등록 컨트롤러 접속");
 		System.out.println("------------------------------");
 		// 클라이언트측에서 날라온 데이터확인
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");
@@ -147,10 +147,8 @@ public class ShopController {
 			}
 			// item 테이블에 들어갈 map객체 작성
 
-			SDao dao1 = sqlSession.getMapper(SDao.class);
-			ShopDto dto = dao1.Shop_admin(logincheckstring);
-			System.out.println(dto.getMember_num());
-			map.put("member_num", dto.getMember_num());
+		
+			map.put("member_num", logincheckstring);
 			map.put("shop_name", (String) request.getParameter("shop_name").trim());
 			map.put("category_name1", (String) request.getParameter("category_name1").trim());
 			map.put("category_name2", (String) request.getParameter("category_name2").trim());
@@ -196,7 +194,7 @@ public class ShopController {
 	 * public String SellAct(Model model, HttpSession session, HttpServletResponse
 	 * response, @RequestBody String paramData) throws IOException, ParseException {
 	 * System.out.println("상품등록 컨트롤러 접속"); // 클라이언트측에서 날라온 데이터확인 String
-	 * logincheckstring = (String) session.getAttribute("iogincheck"); if
+	 * logincheckstring = (String) session.getAttribute("logincheck"); if
 	 * (logincheckstring == null) { System.out.println("로그인세션 없음");
 	 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
 	 * response.getWriter(); out.
@@ -224,7 +222,7 @@ public class ShopController {
 
 	@RequestMapping("/Manager")
 	public String Manager(Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");
@@ -235,8 +233,8 @@ public class ShopController {
 			System.out.println("Login Session : " + logincheckstring);
 		}
 		SDao dao = sqlSession.getMapper(SDao.class);
-		ShopDto dto = dao.Shop_admin(logincheckstring);
-		String member_num = dto.getMember_num();
+		
+		String member_num =logincheckstring;
 		SDao dao1 = sqlSession.getMapper(SDao.class);
 		ArrayList<ShopDto> list = dao1.Shop_list(member_num);
 
@@ -315,7 +313,7 @@ public class ShopController {
 		System.out.println("상점 정보 수정 컨트롤러 접속");
 		System.out.println("------------------------------");
 		// 클라이언트측에서 날라온 데이터확인
-		String logincheckstring = (String) session.getAttribute("iogincheck");
+		String logincheckstring = (String) session.getAttribute("logincheck");
 		if (logincheckstring == null) {
 			System.out.println("로그인세션 없음");
 			response.setContentType("text/html; charset=UTF-8");

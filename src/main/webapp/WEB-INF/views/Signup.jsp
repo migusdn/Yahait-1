@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div id = "container" class="container">
 		<form class="form-horizontal">
 			<h2>회원가입</h2>
 			<input type="hidden" name="sns_id" id="sns_id" value="${id}">

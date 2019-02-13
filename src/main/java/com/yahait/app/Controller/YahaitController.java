@@ -254,7 +254,7 @@ public class YahaitController {
 		if(Integer.parseInt(jsonObj.get("request_ctn").toString().trim()) == 0)
 			map.put("request_ctn", Integer.parseInt(jsonObj.get("request_ctn").toString().trim()));
 		else
-			map.put("request_ctn", 2*Integer.parseInt(jsonObj.get("request_ctn").toString().trim()));
+			map.put("request_ctn", 5 *Integer.parseInt(jsonObj.get("request_ctn").toString().trim()));
 		System.out.println(map.get("request_ctn"));
 		SDao dao = sqlSession.getMapper(SDao.class);
 		ArrayList<ShopDto> shoplist = dao.Shop_show(map);
@@ -522,5 +522,66 @@ public class YahaitController {
 			response.addCookie(info);
 			return "sign_up";
 		}
+	}
+	@RequestMapping("/MapAct")
+	@ResponseBody
+	public String MapAct(Model model, HttpSession session, @RequestBody String paramData)
+			throws ParseException {
+
+		System.out.println("메인 페치창 접속");
+		System.out.println("--------------------");
+		String gps_info = paramData;
+		System.out.println("서버 전송 gps_data"+gps_info);
+		JSONParser parser = new JSONParser(); // –JSON Parser 생성
+		JSONObject jsonObj = (JSONObject) parser.parse(paramData); // – 넘어온 문자열을 JSON 객체로 변환 
+		Map map = new HashMap();
+		map.put("gps_x",jsonObj.get("gps_x").toString().trim());
+		map.put("gps_y",jsonObj.get("gps_y").toString().trim());
+		SDao dao = sqlSession.getMapper(SDao.class);
+		ArrayList<ShopDto> shoplist = dao.Map_show(map);
+		System.out.println("sql문 사이즈" + shoplist.size());
+		if(shoplist.size()==0)
+			return "end";
+		// 최종 완성될 JSONObject 선언(전체)
+		JSONObject jsonObject = new JSONObject();
+		// person의 JSON정보를 담을 Array 선언
+		JSONArray shopArray = new JSONArray();
+		// shop의 한명 정보가 들어갈 JSONObject 선언
+
+		for (int i = 0; i < shoplist.size(); i++) {
+			JSONObject shopInfo = new JSONObject();
+			/*if(shoplist.get(i).getMember_num().equals(session.getAttribute("logincheck"))){
+				shoplist.remove(i);
+			}
+			if(shoplist.size()==0)
+				return "end";
+			else{*/
+			String shop_num = shoplist.get(i).getShop_num();
+			String shopname = shoplist.get(i).getShop_name();
+			String shopgps_x = shoplist.get(i).getGps_x();
+			String shopgps_y = shoplist.get(i).getGps_y();
+			String shop_info = shoplist.get(i).getShop_info();
+			String category = shoplist.get(i).getCategory_name1();
+			System.out.println("shop_x,shop_y : "+shopgps_x+shopgps_y);
+			shopInfo.put("shop_num", shop_num);
+			shopInfo.put("shopname", shopname);
+			shopInfo.put("category", category);
+			shopInfo.put("shopgps_x", shopgps_x);
+			shopInfo.put("shopgps_y", shopgps_y);
+			shopInfo.put("shop_info", shop_info);
+			shopArray.add(shopInfo);
+			jsonObject.put("shop", shopArray);
+			//}
+		}
+
+		String jsonInfo = jsonObject.toJSONString();
+		System.out.println(jsonInfo);
+
+		return jsonInfo;
+
+	}
+	@RequestMapping("/Map")
+	public String Map(Model model){
+		return "Map";
 	}
 }

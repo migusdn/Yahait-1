@@ -143,7 +143,7 @@ $(window).scroll(function(){
         	
 	       <div class="col-md-2">
           	<h6 class="text-uppercase font-weight-bold">
-            <a href="#"><h2>지도</h2></a>
+            <a href="Map"><h2>지도</h2></a>
           		</h6>
         	</div>
      		<div class="col-md-2">

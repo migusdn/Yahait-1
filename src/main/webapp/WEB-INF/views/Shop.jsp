@@ -175,6 +175,18 @@ a {
 	</div>
 </body>
 <script>
+
+$("#info").click(function() {
+	var height = $('.bottom').height();
+
+	document,container.style.marginBottom = height+'px';
+		
+}
+		);
+function map_load(){
+	
+}
+
 var container = document.getElementById('map');
 				var options = {
 					center: new daum.maps.LatLng(${gps_x}, ${gps_y}),

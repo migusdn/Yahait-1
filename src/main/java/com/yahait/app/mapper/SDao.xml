@@ -38,7 +38,16 @@
 		WHERE ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) <![CDATA[<]]>5000
 		AND state =1
 		ORDER BY dist
-		LIMIT #{request_ctn},2 
+		LIMIT #{request_ctn},5 
+	</select>
+	<select id="Map_show" parameterType="map" resultType="com.yahait.app.Dto.ShopDto">
+		SELECT *, 
+		ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) AS dist
+		FROM shop 
+		WHERE ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) <![CDATA[<]]>5000
+		AND state =1
+		ORDER BY dist
+		LIMIT 15	
 	</select>
 	
 	<select id="name_duplication_check" parameterType="String"

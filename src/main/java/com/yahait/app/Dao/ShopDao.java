@@ -77,4 +77,11 @@ public class ShopDao implements SDao {
 		return null;
 	}
 
+	@Override
+	public ArrayList<ShopDto> Map_show(Map map) {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
 }

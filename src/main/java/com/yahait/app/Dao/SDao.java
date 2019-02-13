@@ -19,4 +19,5 @@ public interface SDao {
 	public void Shop_info_Update(Map map);
 	public void Shop_delete(String shop_num);
 	public ShopDto point(String shop_num);
+	public ArrayList<ShopDto> Map_show(Map map);
 }

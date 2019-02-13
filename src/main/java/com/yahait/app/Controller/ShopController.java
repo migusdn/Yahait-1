@@ -399,7 +399,7 @@ public class ShopController {
 		dao.Shop_delete(shop_num);
 		}catch(Exception e) {
 			System.out.println("삭제에 실패하였습니다");
-			return "fail";
+			return "fail"; 
 			
 		}
 		return "OK";

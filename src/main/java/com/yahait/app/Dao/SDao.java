@@ -13,10 +13,11 @@ public interface SDao {
 	public ShopDto Shop_admin(String member_id);
 	public ArrayList<ShopDto> Shop_list(String member_id);
 	public void StateUpdate(Map map);
-	public ArrayList<ShopDto> Shop_show();
+	public ArrayList<ShopDto> Shop_show(Map map);
 
 	public ShopDto name_duplication_check(String parameter);
 	public void Shop_info_Update(Map map);
 	public void Shop_delete(String shop_num);
 	public ShopDto point(String shop_num);
+	public ArrayList<ShopDto> Map_show(Map map);
 }

@@ -11,7 +11,7 @@
 	<update id="StateUpdate" parameterType="map">
 		UPDATE item SET item_state = #{state} WHERE item_num =#{item_num}
 	</update>
-	<insert id="Item_add" parameterType="map">
+	<insert id="Item_add" parameterType="com.yahait.app.Dto.ItemDto">
 		INSERT INTO item (shop_num, item_name, item_price, item_contents, item_pic)
 		VALUES(#{shop_num}, #{item_name}, #{item_price}, #{item_contents},
 		#{item_pic})
@@ -24,4 +24,7 @@
 	<delete id="item_delete" parameterType="String">
 		DELETE FROM item WHERE item_num=#{item_num}
 	</delete>
+	<select id="item_show" parameterType="String" resultType="com.yahait.app.Dto.ItemDto">
+		SELECT * FROM item WHERE item_num = #{item_num}
+	</select>
 </mapper>

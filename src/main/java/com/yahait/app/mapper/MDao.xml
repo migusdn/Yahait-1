@@ -10,7 +10,7 @@
 	</select>
 
 	<select id="logincehck" resultType="com.yahait.app.Dto.MemberDto">
-		SELECT member_id,member_password FROM member where member_id = #{id}
+		SELECT member_id,member_password,member_num FROM member where member_id = #{id}
 	</select>
 	<select id="id_duplication_check"
 		resultType="com.yahait.app.Dto.MemberDto">
@@ -23,9 +23,9 @@
 
 	<insert id="signup" parameterType="hashMap">
 		INSERT INTO member (member_id, member_password, member_name, gender, mail1,
-		mail2, phone1,birth_y,birth_m,birth_d)
+		mail2, phone1,birth_y,birth_m,birth_d,sns_id)
 		VALUES
-		(#{id},#{password},#{name},#{gender},#{mail1},#{mail2},#{phone1},#{birth_y},#{birth_m},#{birth_d})
+		(#{id},#{password},#{name},#{gender},#{mail1},#{mail2},#{phone1},#{birth_y},#{birth_m},#{birth_d},#{sns_id})
 	</insert>
 
 	<select id="findPW" parameterType="hashMap"
@@ -38,11 +38,13 @@
 	
 	<select id="Show_member_info" resultType="com.yahait.app.Dto.MemberDto">
 	select member_id, member_password, member_name, gender, mail1,
-		mail2, phone1,birth_y,birth_m,birth_d from member where member_id = #{id}	
+		mail2, phone1,birth_y,birth_m,birth_d from member where member_num = #{id}	
 	</select>
 	<update id="member_info_Update" parameterType="map">
 	UPDATE member SET member_password = #{member_password} WHERE member_id =#{member_id}
 	</update>
-	
+	<select id="Sns_Login" parameterType="HashMap" resultType="String">
+	SELECT member_id FROM member WHERE sns_id = #{id}
+	</select>
 
 </mapper>

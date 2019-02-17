@@ -83,7 +83,7 @@ p {
 %>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="container">
 		
 			<h2>Shop Manager</h2>
 			<%

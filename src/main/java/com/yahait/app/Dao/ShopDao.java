@@ -22,7 +22,7 @@ public class ShopDao implements SDao {
 	}
 
 	@Override
-	public ArrayList<ShopDto> Shop_show() {
+	public ArrayList<ShopDto> Shop_show(Map map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -75,6 +75,13 @@ public class ShopDao implements SDao {
 	public ShopDto point(String shop_num) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<ShopDto> Map_show(Map map) {
+		return null;
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -11,63 +11,99 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <title>Sell</title>
+
 </head>
 <body>
-	<div class="container">
-		<form class="form-horizontal" name="multiform" id="multiform" action="Item_addAct" method="POST" enctype="multipart/form-data">
+
+	<div class="container" id="container" style="margin-bottom = 0px;">
+	<form class="form-horizontal" name="multiform" id="multiform" action="Item_addAct" method="POST" enctype="multipart/form-data">
+		
 			<h2>SELL</h2>
 
-			<!-- <div class="form-group">
-				<label for="id" class="col-sm-3 control-label">카테고리*</label>
-				<div class="col-sm-9">
-					<input type="text" name="id" id="category" placeholder="아이디"
-						class="form-control" autofocus>
-				</div>
-			</div> -->
-
+			
+			<hr>
 			<div class="form-group">
 				<label for="password" class="col-sm-3 control-label">상품 이름*</label>
 				<div class="col-sm-9">
-					<input type="text" name="item_name" id="item_name"
+					<input type="text" name="item_name1" id="item_name"
 						placeholder="상품 이름" class="form-control">
 				</div>
 			</div>
-			<hr>
+			
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">상품 가격*</label>
 				<div class="col-sm-9">
-					<input type="text" name="item_price" id="item_price"
+					<input type="text" name="item_price1" id="item_price1"
 						class="form-control" placeholder="상품 가격" required="required">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">상품 설명*</label>
 				<div class="col-sm-9">
-					<input type="text" name="item_contents" id="item_contents"
+					<input type="text" name="item_contents1" id="item_contents1"
 						class="form-control" placeholder="상품 설명" required="required">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="id" class="col-sm-3 control-label">상품 이미지*</label>
 				<div class="col-sm-9">
-					<input type="file" name="file" id="item_pic"
+					<input type="file" name="file1" id="item_pic1"
 						class="form-control" placeholder="상품 이미지" required="required">
 				</div>
 			</div>
+			
+			
+			<div class="target"></div>
 			<div class="form-group">
 				<div class="col-sm-9 col-sm-offset-3">
 					<span class="help-block">*필수 기입</span>
 				</div>
 			</div>
 			<input type="hidden" name="shop_num" value="<%=request.getParameter("shop_num") %>">
-			<input type="submit" class="btn btn-primary btn-block" value="개설">
-		</form>
+			<input type="hidden" id="count" name="count" value="1">
+			
+		
+			
 <!-- 		<button class="btn btn-primary btn-block" onclick="sellact()">개설</button>
  -->
+	
+		<div class="form-group">
+				<div class="col-sm-9 col-sm-offset-3">
+					<button type="button" onclick="add()"class="btn btn">상품 추가</button>
+				</div>
+			</div>
+			<input type="submit" class="btn btn-primary btn-block" value="개설">
+	</form>
 	</div>
 </body>
 
 <script>
+var count = 1;
+function add(){
+	count++;
+
+	var str = '<hr><div class="form-group">'
+		str += '<label for="password" class="col-sm-3 control-label">상품 이름*</label>'
+		str += '<div class="col-sm-9">'
+		str += '<input type="text" name="item_name'+count+'" id="item_name" placeholder="상품 이름" class="form-control">'
+		str += '</div></div>'
+		str += '<div class="form-group"><label for="id" class="col-sm-3 control-label">상품 가격*</label>'
+		str += '<div class="col-sm-9">'
+		str += '<input type="text" name="item_price'+count+'" id="item_price1" class="form-control" placeholder="상품 가격" required="required">'
+		str += '</div></div>'
+		str += '<div class="form-group"><label for="id" class="col-sm-3 control-label">상품 설명*</label>'
+		str += '<div class="col-sm-9">'
+		str += '<input type="text" name="item_contents'+count+'" id="item_contents1" class="form-control" placeholder="상품 설명" required="required">'
+		str += '</div></div>'
+		str += '<div class="form-group">'
+		str += '<label for="id" class="col-sm-3 control-label">상품 이미지*</label><div class="col-sm-9">'
+		str += '<input type="file" name="file'+count+'" id="item_pic1" class="form-control" placeholder="상품 이미지" required="required">'
+		str += '</div></div>'
+		$('.target').append(str);
+	$('#count').val(count);
+	
+	
+}
  $(function(){
 	    
 		//폼전송 : 해당폼의 submit 이벤트가 발생했을경우 실행  
@@ -97,6 +133,7 @@
 	       }                               
 		});
 	});
+ 
 </script>
 
 </html>

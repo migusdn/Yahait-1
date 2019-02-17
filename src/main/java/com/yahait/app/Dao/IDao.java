@@ -13,9 +13,11 @@ public interface IDao {
 
 	public void StateUpdate(Map map);
 	
-	public void Item_add(Map map);
+	public void Item_add(ItemDto dto);
 	
 	public ItemDto item_duplication_check(Map map);
 	
 	public void item_delete(String item_num);
+	
+	public ItemDto item_show(String item_num);
 } 

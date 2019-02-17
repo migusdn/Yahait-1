@@ -4,35 +4,59 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yahait.app.Dao.SDao">
-	<select id="Shop_info" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
-	SELECT * FROM shop WHERE shop_num =#{shop_num}
+	<select id="Shop_info" parameterType="String"
+		resultType="com.yahait.app.Dto.ShopDto">
+		SELECT * FROM shop WHERE shop_num =#{shop_num}
 	</select>
-	<select id="Shop_admin" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
-	SELECT member_num FROM member WHERE member_id=#{member_id}
+	<select id="Shop_admin" parameterType="String"
+		resultType="com.yahait.app.Dto.ShopDto">
+		SELECT member_num FROM member WHERE member_id=#{member_id}
 	</select>
 	<insert id="Shop_add" parameterType="map">
-	INSERT INTO shop (member_num,shop_name, category_name1, category_name2,state, shop_info, shop_pic,gps_y,gps_x)
-	VALUES(#{member_num},#{shop_name},#{category_name1},#{category_name2},1, #{shop_info}, #{shop_pic}, #{gps_y}, #{gps_x})
+		INSERT INTO shop (member_num,shop_name, category_name1,
+		category_name2,state, shop_info, shop_pic,gps_y,gps_x)
+		VALUES(#{member_num},#{shop_name},#{category_name1},#{category_name2},1,
+		#{shop_info}, #{shop_pic}, #{gps_y}, #{gps_x})
 	</insert>
-	<select id="Shop_list" parameterType="String" resultType="com.yahait.app.Dto.ShopDto">
-	SELECT * FROM shop WHERE member_num=#{member_num}
+	<select id="Shop_list" parameterType="String"
+		resultType="com.yahait.app.Dto.ShopDto">
+		SELECT * FROM shop WHERE member_num=#{member_num}
 	</select>
 	<update id="StateUpdate" parameterType="map">
-	UPDATE shop SET state = #{state} WHERE shop_name =#{shop_name}
+		UPDATE shop SET state = #{state} WHERE shop_name =#{shop_name}
 	</update>
 	<update id="Shop_info_Update" parameterType="map">
-	UPDATE shop SET shop_name = #{shop_name}, category_name1 = #{category_name1}, category_name2=#{category_name2}, shop_info = #{shop_info}, shop_pic = #{shop_pic}
-	WHERE shop_num =#{shop_num}
+		UPDATE shop SET shop_name = #{shop_name}, category_name1 =
+		#{category_name1}, category_name2=#{category_name2}, shop_info =
+		#{shop_info}, shop_pic = #{shop_pic}
+		WHERE shop_num =#{shop_num}
 	</update>
-	<select id="Shop_show" resultType="com.yahait.app.Dto.ShopDto">
-	select shop_name , shop_pic, shop_num from shop
+	<select id="Shop_show" parameterType="map" resultType="com.yahait.app.Dto.ShopDto">
+		SELECT *, 
+		ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) AS dist
+		FROM shop 
+		WHERE ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) <![CDATA[<]]>5000
+		AND state =1
+		ORDER BY dist
+		LIMIT #{request_ctn},5 
 	</select>
+	<select id="Map_show" parameterType="map" resultType="com.yahait.app.Dto.ShopDto">
+		SELECT *, 
+		ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) AS dist
+		FROM shop 
+		WHERE ST_DISTANCE_SPHERE(POINT(#{gps_y},#{gps_x}), POINT(gps_y,gps_x) ) <![CDATA[<]]>5000
+		AND state =1
+		ORDER BY dist
+		LIMIT 15	
+	</select>
+	
 	<select id="name_duplication_check" parameterType="String"
 		resultType="com.yahait.app.Dto.ShopDto">
 		SELECT shop_name FROM shop where shop_name = #{shop_name}
 	</select>
 	<delete id="Shop_delete" parameterType="String">
-		DELETE FROM shop WHERE shop_num=#{shop_num}
+		DELETE FROM shop WHERE
+		shop_num=#{shop_num}
 	</delete>
-	
+
 </mapper>

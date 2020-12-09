@@ -52,7 +52,7 @@
 			<script type="text/javascript">
 				var naverLogin = new naver.LoginWithNaverId({
 					clientId : "q4HUZwPH_Ov0K9t4moiE",
-					callbackUrl : "http://localhost:8080/app/SNS_naver",
+					callbackUrl : "http://localhost:8080/SNS_naver",
 					isPopup : false, /* 팝업을 통한 연동처리 여부 */
 					loginButton : {
 						color : "green",

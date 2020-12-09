@@ -21,6 +21,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,7 @@ import com.yahait.app.Dto.ShopDto;
 
 @Controller
 public class YahaitController {
-
+	private static final Logger logger = LoggerFactory.getLogger(YahaitController.class);
 	MemberDao memberdao;
 
 	@Autowired
@@ -66,7 +68,7 @@ public class YahaitController {
 	@RequestMapping("/LoginAct")
 	public String LoginAct(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
-
+		logger.info("test");
 		// request.getParameter 파라미터로 직접값을 받아오는 형태
 		String userid = request.getParameter("id").toString();
 		String userpassword = request.getParameter("password").toString();
@@ -425,7 +427,7 @@ public class YahaitController {
 		String mail1 = memberinfo.get(0).getMail1();
 		String mail2 = memberinfo.get(0).getMail2();
 		String phone = memberinfo.get(0).getPhone1();
-		String member_name = memberinfo.get(0).getmember_name();
+		String member_name = memberinfo.get(0).getMember_name();
 		String birth_y = memberinfo.get(0).getBirth_y();
 		String birth_m = memberinfo.get(0).getBirth_m();
 		String birth_d = memberinfo.get(0).getBirth_d();
@@ -550,12 +552,6 @@ public class YahaitController {
 
 		for (int i = 0; i < shoplist.size(); i++) {
 			JSONObject shopInfo = new JSONObject();
-			/*if(shoplist.get(i).getMember_num().equals(session.getAttribute("logincheck"))){
-				shoplist.remove(i);
-			}
-			if(shoplist.size()==0)
-				return "end";
-			else{*/
 			String shop_num = shoplist.get(i).getShop_num();
 			String shopname = shoplist.get(i).getShop_name();
 			String shopgps_x = shoplist.get(i).getGps_x();
@@ -571,7 +567,6 @@ public class YahaitController {
 			shopInfo.put("shop_info", shop_info);
 			shopArray.add(shopInfo);
 			jsonObject.put("shop", shopArray);
-			//}
 		}
 
 		String jsonInfo = jsonObject.toJSONString();

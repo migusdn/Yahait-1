@@ -12,7 +12,7 @@
 	
 	<div class="container">
 		<form class="form-horizontal" name="Login" method="post" action="FindPWAct">
-		<h2>비밀번호 찾기</h1>
+		<h2>비밀번호 찾기</h2>
 			<div class="form-group">
 					<label for="lastName" class="col-sm-3 control-label">ID</label>
 					<div class="col-sm-9">
